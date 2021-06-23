@@ -207,7 +207,7 @@ export default defineComponent({
     )
     return {
       active,
-      time: computed(() => new Date("2021-07-01 00:00").valueOf() - Date.now()),
+      time: computed(() => new Date("2021-07-18 00:00").valueOf() - Date.now()),
       handleCountdownEnd: () => {
         counting.value = false
       },

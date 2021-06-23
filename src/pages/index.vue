@@ -177,18 +177,18 @@ export default defineComponent({
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
+    console.log( Math.pow(10,15), 'new BigNumber(v)');
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
       Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;
         let v = rewardInfo[key];
         if (key !== "rentRate" && typeof v !== "undefined") {
-          // if(v.length > 14){
-          //   console.log(v.slice(0, v.length-7) ,'v.slice(0, v.length-7)');
-          //   v = new BigNumber(v.slice(0, v.length-7)).toFormat()+'M'
-          // }else{
-          v = new BigNumber(v).toFormat();
-          // }
+          if( key === 'totalStake' || key === 'totalStakeAll'){
+            v = new BigNumber(Number(v)/ Math.pow(10,15)).toFormat();
+          }else{
+            v = new BigNumber(v).toFormat();
+          }
         }
         itemsData[key] = typeof v !== "undefined" ? v : "-";
       });

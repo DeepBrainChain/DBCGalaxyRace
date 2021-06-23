@@ -1,26 +1,36 @@
 <template lang="pug">
 nav.navigator
   router-link.navigator-item(to='/',:class='{active:  active === 0}')
-    | 银河竞赛
+    | {{t('header_menu1')}}
     div.navigator-active
-  router-link.navigator-item(to='/rule',:class='{active: active === 1}')
-    | 规则说明
+  router-link.navigator-item(to='/rule',:class='{active: active === 1}',v-if="lan == 'zh'")
+    | {{t('header_menu2')}}
     div.navigator-active
+  router-link.navigator-item(to='/rule_En',:class='{active: active === 2}',v-else)
+    | {{t('header_menu2')}}
+    div.navigator-active
+  div.select-wrapper
+    Arrow.down-arrow
+    div.select-box.border-1px
+      select(@change="handleSelect", :value="lan")
+        option(value="zh") 简体中文
+        option(value="en") ENGLISH
+
 div.logger-wrapper
   img(src='./assets/logo.gif')
   div.name
     span DeepBrain
     | Chain
-h1.title 银河算力竞赛
+h1.title {{t('title')}}
 div.time-wrapper
-  div.time-title 比赛开始倒计时
+  div.time-title {{t('countDown')}}
   div.time
     vue-countdown(v-if="counting",@end="handleCountdownEnd" ,:time="time", v-slot="{ days, hours, minutes, seconds }")
-      span {{days}}天
-      span {{hours}}时
-      span {{minutes}}分
-      span {{seconds}}秒
-    span(v-else) 已结束
+      span {{days}}{{t('Day')}}
+      span {{hours}}{{t('Hour')}}
+      span {{minutes}}{{t('Minute')}}
+      span {{seconds}}{{t('Second')}}
+    span(v-else) {{t('TheEnd')}}
 router-view
 Background
 </template>
@@ -87,6 +97,7 @@ Background
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   .navigator-item {
     font-size: 16px;
     color: #051174;
@@ -114,6 +125,45 @@ Background
     transition: width 0.2s ease;
     margin-top: 8px;
   }
+
+  .select-wrapper {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    display: flex;
+    .down-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      margin-top: -5px;
+      transform: rotate(0deg);
+      z-index: 2;
+    }
+    .select-box {
+      margin-left: 16px;
+    }
+    select {
+      cursor: pointer;
+      display: block;
+      appearance: none;
+      box-sizing: border-box;
+      border: 1px solid #e0e0e0; /* px-to-viewport-ignore */
+      font-family: PingFang SC, sans-serif;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 20px;
+      color: #333333;
+      width: 89px;
+      height: 26px;
+      padding-left: 12px;
+      outline: none;
+      &:focus-visible,
+      &:focus {
+        outline: none;
+        border-color: #338aff;
+      }
+    }
+  }
 }
 
 .logger-wrapper {
@@ -129,26 +179,53 @@ Background
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { useRoute } from "vue-router";
+import { computed, defineComponent, ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Background from "./components/background.vue";
-
+import { useI18n } from "vue-i18n";
+import Arrow from "./components/arrow.vue";
 export default defineComponent({
   name: "App",
   components: {
     Background,
+    Arrow
   },
   setup() {
+    const { t , locale } = useI18n();
     const route = useRoute();
-    const active = computed(() => ["/", "/rule"].indexOf(route.path));
+    const router = useRouter();
+    const active = computed(() => ["/", "/rule", "/rule_En"].indexOf(route.path));
     const counting = ref(true);
+    let lan = ref(localStorage.getItem('lan') || 'zh')
+    watch(
+      () => lan.value,
+      (value, pervalue) => {
+        lan.value = value
+      }
+    )
     return {
       active,
       time: computed(() => new Date("2021-07-01 00:00").valueOf() - Date.now()),
       handleCountdownEnd: () => {
         counting.value = false
       },
-      counting
+      counting,
+      t,
+      lan,
+      options: [ { i:'zh', val:'简体中文'}, { i:'en', val:'ENGLISH'} ],
+      handleSelect: (e: any) => {
+        lan.value = e.target.value
+        localStorage.setItem('lan', e.target.value)
+        locale._setter( e.target.value )
+        let path = ["/rule", "/rule_En"].indexOf(route.path)
+        if(path >= 0){
+          if(e.target.value == 'zh'){
+            router.push('./rule')
+          }else{
+            router.push('./rule_En')
+          }
+        }
+      },
     };
   },
 });

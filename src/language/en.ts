@@ -1,0 +1,28 @@
+export default {
+    // 头部菜单
+    header_menu1: 'Galaxy race',
+    header_menu2: 'Rule description',
+    title:'Galaxy Computing Power Competition Open Beta One',
+    countDown:'Countdown to the game',
+    Day:'days',
+    Hour:'hour',
+    Minute:'minute',
+    Second:'second',
+    TheEnd:'The End',
+    desc:'The competition lasts for 30 days. All miners share a total of 100 million DBC rewards. When the total number of GPUs exceeds 10,000, the top 5 miners with computing power can receive an additional 30 million DBC rewards!',
+    lable_one1:'Total computing power',
+    lable_one2:'Total number of GPUs',
+    lable_one3:'Total number of miners',
+    lable_one4:'Occupancy rate',
+    lable_one5:'Mining machine DBC pledge number',
+    lable_one6:'Total number of miner DBC pledges',
+    lable_two1:'Competition ranking',
+    lable_two2:'Miner name',
+    lable_two3:'Computing power',
+    lable_two4:'GPU quantity',
+    lable_two5:'Occupancy rate',
+    lable_two6:'Total rewards',
+    Jumpto:'jump to',
+    page:'page',
+    ap:'Article/Page'
+}

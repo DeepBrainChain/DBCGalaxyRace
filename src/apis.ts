@@ -68,6 +68,7 @@ class DBCRequest {
       if (this.wsOpened) {
         this._send<T>(method, params).then(resolve);
       } else {
+        this.ws = new WebSocket(this.url);
         this.ws.onopen = () => {
           this.wsOpened = true;
           this._send<T>(method, params).then(resolve);
@@ -152,10 +153,10 @@ export type ItemType = {
   rentRate: string;
 };
 
-export const getList = async (currentPage: number = 1, numOfEachPage: number = 20) => {
+export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
   const hash = await request.send<string>("chain_getBlockHash");
   const [list, total] = await Promise.all([
-    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [hash, 1, 10]),
+    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [hash, currentPage == 0 ? 0: currentPage-1, numOfEachPage]),
     request.sendUnique<number>("onlineProfile_getStakerNum"),
   ]);
   return {

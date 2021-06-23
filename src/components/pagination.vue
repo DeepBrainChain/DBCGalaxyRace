@@ -14,15 +14,15 @@ div.pagination-wrapper
   div.item.border-1px.next(@click="next")
     Arrow.arrow(right, :disabled="currentPage === lastPage")
   div.input-wrapper
-    span 跳至
+    span {{t('Jumpto')}}
     div.input-box.border-1px
       input.input(@keypress="handleKeypress")
-    span 页
+    span {{t('page')}}
   div.select-wrapper
     Arrow.down-arrow
     div.select-box.border-1px
-      select(@change="handleSelect", :value="pageSize")
-        option(v-for="n in options" :value="n") {{n}}条/页
+      select(@change="handleSelect", :value="pageSize",:class='{newwidth: lan === "en"}')
+        option(v-for="n in options" :value="n") {{n}}{{t('ap')}}
 </template>
 
 <style lang="less" scoped>
@@ -59,6 +59,9 @@ div.pagination-wrapper
     &:focus {
       outline: none;
       border-color: #338aff;
+    }
+    &.newwidth{
+      width: 125px;
     }
   }
 }
@@ -143,7 +146,7 @@ import { defineComponent, ref, computed } from "vue";
 import { usePagination } from "../hooks/usePagination";
 import Arrow from "./arrow.vue";
 import DoubleArrow from "./double-arrow.vue";
-
+import { useI18n } from "vue-i18n";
 export default defineComponent({
   name: "pagination",
   props: {
@@ -157,15 +160,17 @@ export default defineComponent({
     DoubleArrow,
   },
   setup(props) {
+    const { t } = useI18n();
     const { pageSize, total, currentPage, offset, lastPage, prev, next, first, last } = usePagination({
       currentPage: 1,
-      pageSize: 50,
-      total: 10,
+      pageSize: 20,
+      total: 0,
     });
     const all = computed(() => {
-      total.value = props.total || 10;
-      return props.total || 10;
+      total.value = props.total || 0;
+      return props.total || 0;
     });
+    const lan = ref(localStorage.getItem('lan') || 'zh')
     const totalPage = computed(() => Math.ceil(all.value / pageSize.value));
     const result = computed(() => {
       const array = Array(totalPage.value)
@@ -191,12 +196,14 @@ export default defineComponent({
       offset,
       lastPage,
       result,
+      t,
+      lan,
       prev: () => {
         currentPage.value -= 1;
         jump(currentPage.value);
       },
       next: () => {
-        currentPage.value -= 1;
+        currentPage.value += 1;
         jump(currentPage.value);
       },
       first: () => {

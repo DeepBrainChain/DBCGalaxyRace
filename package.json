@@ -16,6 +16,7 @@
     "bignumber.js": "^9.0.1",
     "modern-normalize": "^1.1.0",
     "vue": "^3.0.5",
+    "vue-i18n": "^9.1.6",
     "vue-router": "^4.0.6",
     "vue-select": "^3.11.2"
   },

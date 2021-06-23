@@ -110,7 +110,7 @@ div.pagination-container
   color: #666666;
 }
 </style>
-<script lang="ts"> 
+<script lang="ts">
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
@@ -118,49 +118,52 @@ import { getRewardInfo, getList, RewardInfoType, ItemType } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
-    Pagination,
+    Pagination
   },
   setup() {
     const { t } = useI18n();
     const rewardsItems: Array<{ key: keyof RewardInfoType; label: string }> = [
-      { key: "totalCalcPoints", label: '总算力值' },
+      { key: "totalCalcPoints", label: "总算力值" },
       { key: "totalGpuNum", label: "GPU总数" },
-      { key: "totalStaker", label: "矿工总数" },
+      { key: "totalStaker", label: "算工总数" },
       { key: "rentRate", label: "租用率" },
-      { key: "totalStake", label: "矿机DBC质押数" },
-      { key: "totalStakeAll", label: "矿机DBC质押总数" },
+      { key: "totalStake", label: "算机DBC质押数" },
+      { key: "totalStakeAll", label: "算机DBC质押总数" }
     ];
 
     const columns: Array<{ key: keyof ItemType; label: string }> = [
       {
         key: "gpuRentRate",
-        label: "竞赛排名",
+        label: "竞赛排名"
       },
       {
         key: "name",
-        label: "矿工名称",
+        label: "算工名称"
       },
       {
         key: "calcPoints",
-        label: "算力值",
+        label: "算力值"
       },
       {
         key: "gpuNum",
-        label: "GPU数量",
+        label: "GPU数量"
       },
       {
         key: "rentRate",
-        label: "租用率",
+        label: "租用率"
       },
       {
         key: "totalReward",
-        label: "奖励总数",
-      },
+        label: "奖励总数"
+      }
     ];
-    const set = (serverList: Array<ItemType>, reactiveList: Array<ItemType>) => {
+    const set = (
+      serverList: Array<ItemType>,
+      reactiveList: Array<ItemType>
+    ) => {
       reactiveList.splice(0, reactiveList.length);
       // todo
-      serverList.forEach((item) => {
+      serverList.forEach(item => {
         reactiveList.push(item);
       });
     };
@@ -170,13 +173,13 @@ export default defineComponent({
       totalStake: "loading",
       totalStaker: "loading",
       totalStakeAll: "loading",
-      rentRate: "loading",
+      rentRate: "loading"
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
-      Object.keys(itemsData).forEach((k) => {
+      Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;
         let v = rewardInfo[key];
         if (key !== "rentRate" && typeof v !== "undefined") {
@@ -184,7 +187,7 @@ export default defineComponent({
           //   console.log(v.slice(0, v.length-7) ,'v.slice(0, v.length-7)');
           //   v = new BigNumber(v.slice(0, v.length-7)).toFormat()+'M'
           // }else{
-            v = new BigNumber(v).toFormat();
+          v = new BigNumber(v).toFormat();
           // }
         }
         itemsData[key] = typeof v !== "undefined" ? v : "-";
@@ -209,8 +212,8 @@ export default defineComponent({
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
-      },
+      }
     };
-  },
+  }
 });
 </script>

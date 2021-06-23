@@ -24,7 +24,7 @@ function byteToStr(arr: Array<number>) {
 
 /**
  * chain_getBlockHash： 高度hash
- * onlineProfile_getStakerNum: 矿工数量
+ * onlineProfile_getStakerNum: 算工数量
  * onlineProfile_getStakerListInfo: 分页获取数据
  * onlineProfile_getOpInfo: 获取奖励信息
  */
@@ -47,15 +47,15 @@ class DBCRequest {
     };
   }
   _send<T>(method: Methods, params: Array<any> = []) {
-    return new Promise<T>((resolve) => {
+    return new Promise<T>(resolve => {
       const sendParam = {
         jsonrpc: "2.0",
         id: 1,
         method,
-        params,
+        params
       };
       this.ws.send(JSON.stringify(sendParam));
-      this.ws.onmessage = (evt) => {
+      this.ws.onmessage = evt => {
         resolve(JSON.parse(evt.data).result);
         if (!this.keepAlive) {
           this.ws.close();
@@ -64,7 +64,7 @@ class DBCRequest {
     });
   }
   send<T = any>(method: Methods, params: Array<any> = []) {
-    return new Promise<T>((resolve) => {
+    return new Promise<T>(resolve => {
       if (this.wsOpened) {
         this._send<T>(method, params).then(resolve);
       } else {
@@ -98,11 +98,11 @@ export type RewardInfoType = {
    */
   totalGpuNum: string;
   /**
-   * 矿机DBC质押数
+   * 算机DBC质押数
    */
   totalStake: string;
   /**
-   * 矿工总数
+   * 算工总数
    */
   totalStaker: string;
   /**
@@ -136,11 +136,11 @@ export type ItemType = {
    */
   gpuRentRate: number;
   /**
-   * 矿工名称的byte数组
+   * 算工名称的byte数组
    */
   stakerName: Array<number>;
   /**
-   * 矿工名称转换后的string;
+   * 算工名称转换后的string;
    */
   name: string;
   /**
@@ -156,11 +156,15 @@ export type ItemType = {
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
   const hash = await request.send<string>("chain_getBlockHash");
   const [list, total] = await Promise.all([
-    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [hash, currentPage == 0 ? 0: currentPage-1, numOfEachPage]),
-    request.sendUnique<number>("onlineProfile_getStakerNum"),
+    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
+      hash,
+      currentPage == 0 ? 0 : currentPage - 1,
+      numOfEachPage
+    ]),
+    request.sendUnique<number>("onlineProfile_getStakerNum")
   ]);
   return {
-    list: list.map((s) => ({ ...s, name: byteToStr(s.stakerName), rentRate: '-' })),
-    total,
+    list: list.map(s => ({ ...s, name: byteToStr(s.stakerName), rentRate: "-" })),
+    total
   };
 };

@@ -184,6 +184,7 @@ import { useRouter, useRoute } from "vue-router";
 import Background from "./components/background.vue";
 import { useI18n } from "vue-i18n";
 import Arrow from "./components/arrow.vue";
+import { changeLan } from '../src/language'
 export default defineComponent({
   name: "App",
   components: {
@@ -191,7 +192,8 @@ export default defineComponent({
     Arrow
   },
   setup() {
-    const { t , locale } = useI18n();
+    const { t } = useI18n();
+    console.log(useI18n(),'useI18n()');
     const route = useRoute();
     const router = useRouter();
     const active = computed(() => ["/", "/rule", "/rule_En"].indexOf(route.path));
@@ -216,7 +218,7 @@ export default defineComponent({
       handleSelect: (e: any) => {
         lan.value = e.target.value
         localStorage.setItem('lan', e.target.value)
-        locale._setter( e.target.value )
+        changeLan( e.target.value )
         let path = ["/rule", "/rule_En"].indexOf(route.path)
         if(path >= 0){
           if(e.target.value == 'zh'){

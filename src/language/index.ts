@@ -2,16 +2,20 @@
 import { createI18n } from 'vue-i18n'		//引入vue-i18n组件
 import ZH from './zh'
 import EN from './en'
-
+// 识别浏览器默认语言
+const language = window.navigator.language.slice(0, 2);
+localStorage.setItem('lan', language)
 //注册i8n实例并引入语言文件
 const i18n = createI18n({
     silentTranslationWarn: true,
-    locale: localStorage.getItem('lan') || 'zh',	//默认显示的语言 
+    locale: localStorage.getItem('lan') || language,	//默认显示的语言 
     messages: {
         'zh': ZH,
         'en': EN
     }
 })
-
+export const changeLan = (lan: string)=>{
+    i18n.global.locale = lan
+}
 
 export default i18n; //将i18n暴露出去，在main.js中引入挂载

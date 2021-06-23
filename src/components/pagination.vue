@@ -142,7 +142,7 @@ div.pagination-wrapper
 </style>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed, watch } from "vue";
 import { usePagination } from "../hooks/usePagination";
 import Arrow from "./arrow.vue";
 import DoubleArrow from "./double-arrow.vue";

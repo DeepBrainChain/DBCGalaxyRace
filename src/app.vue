@@ -50,7 +50,7 @@ Background
 
 .time-wrapper {
   box-sizing: border-box;
-  width: 500px;
+  width: 550px;
   height: 120px;
   background: url("./assets/button.png");
   background-size: cover;
@@ -72,7 +72,7 @@ Background
   .time {
     font-family: PingFang SC, sans-serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 22px;
     line-height: 34px;
     color: #ffffff;
     span {
@@ -154,7 +154,7 @@ Background
       font-size: 12px;
       line-height: 20px;
       color: #333333;
-      width: 89px;
+      padding: 0 25px; 
       height: 26px;
       padding-left: 12px;
       outline: none;
@@ -196,9 +196,13 @@ export default defineComponent({
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
+    const formateIOS = (time: string) => {
+      const myDate = new Date((time.replace(/-/g, "/")));
+      return myDate;
+    };
     const active = computed(() => ["/", "/rule", "/rule_En"].indexOf(route.path));
     const counting = ref(true);
-    const countDownactive = computed(() => (new Date("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
+    const countDownactive = computed(() => (formateIOS("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
     watch(
       () => lan.value,
@@ -209,11 +213,12 @@ export default defineComponent({
     return {
       active,
       time: computed(() => {
-        const times = new Date("2021-07-18 00:00").valueOf() - Date.now();
+        const times = formateIOS("2021-07-18 00:00").valueOf() - Date.now()
+        console.log(times, 'times');
         if(times >= 0){
           return times
         }else{
-          return new Date("2021-08-17 00:00").valueOf() - Date.now()
+          return formateIOS("2021-08-17 00:00").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {

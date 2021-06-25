@@ -34,7 +34,7 @@ div.rule-wrapper
       | taking into account the stability of machine use and online reward stability, and there is a pledge, it is recommended to use the manufacturer brand machines, assembly machines not recommended.
     li 
       span GPU server deployment for Galaxy Race document: 
-      | https://github.com/DeepBrainChain/DBC-DOC
+      a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title II. Computing power value calculation rules: 
   div.rule-content
     div A single GPU's computing power value has two impact indicators: the number of GPU Cuda Core and video memory size, the number of GPU Cuda Core accounts for 70%, and video memory accounts for 30%. 3080ti is the reference standard. GPU computing power value calculation formula: Base computing power value = 13 + 0.7 x √(number of cuda) + 0.3 x  memory/24 x √(number of cuda) In the above formula, √ indicates the square root, and some of the graphics card base computing power value reference is as follows:
@@ -47,7 +47,7 @@ div.rule-wrapper
     //- div 3090算力点数：12977=10496*80%+10496*24/11*20%
     div.table
       div.table_con
-        div Graphics card type
+        div GPU type
         div Cuda core
         div Video memory
         div Computing Power Value

@@ -21,7 +21,7 @@ div.pagination-wrapper
   div.select-wrapper
     Arrow.down-arrow
     div.select-box.border-1px
-      select(@change="handleSelect", :value="pageSize",:class='{newwidth: lan === "en"}')
+      select(@change="handleSelect", :value="pageSize")
         option(v-for="n in options" :value="n") {{n}}{{t('ap')}}
 </template>
 
@@ -51,9 +51,9 @@ div.pagination-wrapper
     font-size: 12px;
     line-height: 20px;
     color: #333333;
-    width: 89px;
+    // width: 89px;
     height: 26px;
-    padding-left: 12px;
+    padding:0 25px 0 15px;
     outline: none;
     &:focus-visible,
     &:focus {
@@ -170,7 +170,6 @@ export default defineComponent({
       total.value = props.total || 0;
       return props.total || 0;
     });
-    const lan = ref(localStorage.getItem('lan') || 'zh')
     const totalPage = computed(() => Math.ceil(all.value / pageSize.value));
     const result = computed(() => {
       const array = Array(totalPage.value)
@@ -197,7 +196,6 @@ export default defineComponent({
       lastPage,
       result,
       t,
-      lan,
       prev: () => {
         currentPage.value -= 1;
         jump(currentPage.value);

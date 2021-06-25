@@ -51,6 +51,7 @@ div.pagination-container
   }
   .td {
     max-width: 250px;
+    word-wrap: break-word;
     font-size: 14px;
     line-height: 1.41;
     color: #666666;

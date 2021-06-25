@@ -31,7 +31,7 @@ div.rule-wrapper
       | 考虑到机器使用稳定性、在线收益稳定性以及惩罚机制，建议使用厂商品牌机，不推荐组装机。
     li 
       span GPU服务器参与银河竞赛部署文档：
-      | https://github.com/DeepBrainChain/DBC-DOC
+      a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 二.算力值计算规则
   div.rule-content
     div 单个GPU算力值有两个影响指标：GPU Cuda Core数量 和显存大小，GPU Cuda Core数量影响占比70%，显存影响占比30%，3080ti是参考标准，GPU算力值计算公式：基础算力值=13+0.7×√(cuda数量)+0.3×显存/24×√(cuda数量)上述公式中，√ 表示平方根，部分显卡基础算力值参考如下：

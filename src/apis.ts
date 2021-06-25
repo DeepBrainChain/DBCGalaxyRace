@@ -1,3 +1,5 @@
+import BigNumber from "bignumber.js";
+
 function byteToStr(arr: Array<number>) {
   if (typeof arr === "string") {
     return arr;
@@ -98,6 +100,10 @@ export type RewardInfoType = {
    */
   totalGpuNum: string;
   /**
+   * 租用gpu总数
+   */
+  totalRentedGpu?: string;
+  /**
    * 算机DBC质押数
    */
   totalStake: string;
@@ -108,7 +114,15 @@ export type RewardInfoType = {
   /**
    * 租用率
    */
-  rentRate?: string; // 这里随意写的目前没有这个key
+  Rent: string;
+  /**
+   * 租金数
+   */
+  totalRentFee: string; 
+  /**
+   * 销毁数
+   */
+  totalBurnFee?: string; 
   /**
    * 全网质押总数
    */
@@ -123,6 +137,10 @@ export const getRewardInfo = async () => {
 };
 
 export type ItemType = {
+   /**
+   * 竞赛排名
+   */
+  index: number | number;
   /**
    * 算力值
    */
@@ -130,15 +148,19 @@ export type ItemType = {
   /**
    * gpu数量
    */
-  gpuNum: string;
+  totalGpuNum: string;
   /**
-   * 竞赛排名
+   * 租用gpu数量
    */
-  gpuRentRate: number;
+  totalRentedGpu: string;
   /**
    * 算工名称的byte数组
    */
   stakerName: Array<number>;
+  /**
+   * 算工钱包地址
+   */
+  stakerAccount: string;
   /**
    * 算工名称转换后的string;
    */
@@ -150,21 +172,61 @@ export type ItemType = {
   /**
    * 租用率
    */
-  rentRate: string;
+  rentRate: string | number;
+  /**
+   * 租金数
+   */
+  totalRentFee: string;
+  /**
+   * 销毁数
+   */
+  totalBurnFee: string;
 };
+// calcPoints: 0      算力值
+// stakerAccount: "5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc"      钱包地址
+// stakerName: [98, 111, 98, 95, 115, 116, 97, 115, 104]       线上身份
+// totalBurnFee: "0" 
+// totalGpuNum: 0       gpu总数
+// totalRentFee: "0"     租金数
+// totalRentedGpu: 0   租用Gpu个数
+// totalReward: "0"     奖励总数
 
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
-  const hash = await request.send<string>("chain_getBlockHash");
+  // const hash = await request.send<string>("chain_getBlockHash");
   const [list, total] = await Promise.all([
     request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
-      hash,
+      // hash,
       currentPage == 0 ? 0 : currentPage - 1,
       numOfEachPage
     ]),
     request.sendUnique<number>("onlineProfile_getStakerNum")
   ]);
   return {
-    list: list.map(s => ({ ...s, name: byteToStr(s.stakerName), rentRate: "-" })),
+    list: list.map(
+      (s,i) => ({
+          ...s, 
+          totalReward: new BigNumber(Number(s.totalReward)/ Math.pow(10,15)).toFormat(),
+          index: s.index?s.index:i+1,
+          name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount , 
+          rentRate: Number(s.totalRentedGpu) != 0 ?((Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+        })
+      ),
     total
   };
 };
+
+// 可根据算力值排序
+// var arr = [
+//   {name:'zopp',age:0},
+//   {name:'gpp',age:18},
+//   {name:'yjj',age:8}
+// ];
+
+// function compare(property){
+//   return function(a,b){
+//       var value1 = a[property];
+//       var value2 = b[property];
+//       return value1 - value2;
+//   }
+// }
+// console.log(arr.sort(compare('age')))

@@ -23,7 +23,8 @@ div.logger-wrapper
     | Chain
 h1.title {{t('title')}}
 div.time-wrapper
-  div.time-title {{t('countDown')}}
+  div.time-title(v-if='countDownactive') {{t('countDown')}}
+  div.time-title(v-else) {{t('countDown1')}}
   div.time
     vue-countdown(v-if="counting",@end="handleCountdownEnd" ,:time="time", v-slot="{ days, hours, minutes, seconds }")
       span {{days}}{{t('Day')}}
@@ -193,11 +194,11 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n();
-    console.log(useI18n(),'useI18n()');
     const route = useRoute();
     const router = useRouter();
     const active = computed(() => ["/", "/rule", "/rule_En"].indexOf(route.path));
     const counting = ref(true);
+    const countDownactive = computed(() => (new Date("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
     watch(
       () => lan.value,
@@ -207,11 +208,19 @@ export default defineComponent({
     )
     return {
       active,
-      time: computed(() => new Date("2021-07-18 00:00").valueOf() - Date.now()),
+      time: computed(() => {
+        const times = new Date("2021-07-18 00:00").valueOf() - Date.now();
+        if(times >= 0){
+          return times
+        }else{
+          return new Date("2021-08-17 00:00").valueOf() - Date.now()
+        }
+      }),
       handleCountdownEnd: () => {
         counting.value = false
       },
       counting,
+      countDownactive,
       t,
       lan,
       options: [ { i:'zh', val:'简体中文'}, { i:'en', val:'ENGLISH'} ],

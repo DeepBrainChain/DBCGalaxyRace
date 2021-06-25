@@ -1,40 +1,43 @@
 <template lang="pug">
 div.description
-  | 深脑链银河算力竞赛激励计划是一项协作竞赛，目的是对该网络进行压力测试，鼓励全世界的算工参与，并帮助算工为运营世界上最大的高性能算力网络做好准备。
+  | The DeepBrain Chain Galaxy Computing Power Race Incentive Program is a collaborative race to stress test the network, it encourages participation from miners around the world, and help prepare miners to operate the world's largest high-performance computing network.
 div.rule-wrapper
-  div.rule-title 竞赛规则
-  div.rule-content 银河算力竞赛公测一从北京时间2021年7月18号-2021年8月17号，银河算力竞赛公测二从北京时间2021年8月18号-2021年9月17号，银河算力竞赛主网部署上线北京时间2021年9月18号，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有矿工共同瓜分1.33亿DBC奖励，算力前5名矿工可以额外获得3000万DBC奖励。在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每月在线奖励总数3333万DBC，激活后租金100%销毁！
-  div.rule-title 一、GPU服务器参数最低要求：算力服务器各项参数只有满足最低要求，才可以通过上线审核，否则无法获得收益
+  div.rule-title Rules of the Race
+  div.rule-content Galaxy Computing Power Race public test phase 1 is from July 18th, 2021 Beijing time - August 17th, 2021; public test phase 2 is from August 18th, 2021 Beijing time - September 17th, 2021. Galaxy Computing Power Race mainnet deployment online is Beijing time September 18th, 2021, when the whole network reaches 5,000 GPU the race is automatically activated, after the activation the race will continue for 2 months, during the race period all miners together will divide 133 million DBC rewards,  the top 5 miners can get an additional 30 million DBC rewards!Before the official activation of the Galaxy Race, the miners enjoy the double income of rental income and online rewards, with a total monthly online reward of 33.33 million DBC, and 100% destruction/burning of the rent after activation!
+  div.rule-title I. Computing power server configuration requirements. Computing server parameters: only when a machine meets the minimum requirements will it pass the online audit, otherwise it can not obtain node revenue.
+
+  div.rule-content(style='font-size:16px') Computing server configuration requirements for each parameter:
   ul.rule-content
     li 
-      span GPU：
-      | 最低1卡，建议2卡或者4卡；英伟达Nvidia系列显卡，最低要求8G显存；考虑到出租率，显卡类型推荐3080ti、3080、3090、3070ti、2080ti、3070等；如果是新配置机器，每个GPU配置一个显卡欺骗器；
+      span GPU: 
+      | minimum 1 card, recommended 2 or 4 cards. Nvidia's Nvidia series graphics cards, with a minimum requirement of 8G video memory. Considering the rental rate, the type of graphics card recommended are: 3080ti, 3080, 3090, 3070ti, 2080ti, 3070, etc. Notes on the configuration of DBC Computing Server:In case of newly configured machines, one graphics deceiver per GPU is required.
     li 
-      span 内存：
-      | 最低1卡需要224g，2卡-224g，3卡336g，4卡-448g，以此类推；
+      span Memory: 
+      | Minimally 1 graphic card needs 224g, 2 cards - 224g, 3 cards 336g, 4 cards - 448g, and so on.
     li 
-      span CPU：
-      | Intel/AMD，主频2.0Ghz及其以上，单颗CPU 8核及其以上，平均每个GPU配8核以上；特别注意：考虑到中长期出租率，以及出租状态下30%的算力值加成，建议新机器的CPU按照如下配置：Intel，V3以上，主频2.5Ghz、睿频3.0Ghz及其以上，单颗CPU 10核以上，平均每颗GPU分配5核10线程以上，4卡GPU服务器推荐双CPU；
+      span CPU: Intel/AMD: 
+      | Main frequency 2.0Ghz and above, single CPU 8 cores and above, with an average of 8 or more cores per GPU. Important Notes: Considering the medium and long-term rental rate, as well as the 30% bonus of computing power value in the rental state, it is recommended that the CPU of the new machine be configured as follows:
+      | Intel, V3 or above, main frequency 2.5Ghz, core frequency 3.0Ghz and above, single CPU 10 cores or above, average each GPU allocated 5 cores 10 threads or above, 4 cards GPU server recommended dual CPU.
     li 
-      span 硬盘：
-      | 4卡GPU及4卡以下数量GPU机器，系统盘480G及以上(SSD)，数据盘2T及以上（机械硬盘也可以）；4卡以上系统盘1T SSD、数据盘4T（机械硬盘也可以）；
+      span Hard disk: 
+      | GPU machine with 4 graphic cards and below: system disk 480G and above (SSD), data disk 2T and above (mechanical hard disk is also acceptable). GPU machine with 4 graphic cards and/or above: system disk 1T ssd, data disk 4T (mechanical hard disk is also acceptable).
     li 
-      span 网络带宽：
-      | 4卡GPU机器上下行20M带宽以上，2卡GPU机器上下行10M带宽以上，平均每个GPU 5M带宽以上；特别注意，考虑中长期出租率，建议机器托管机房可以支持三线带宽（移动、联通、电信），可以根据用户需求灵活调整；
+      span Network bandwidth: 
+      | GPU machine with 4 graphic cards: uplink and downlink bandwidth 20M or more; GPU machine with 2 cards: uplink and downlink bandwidth 10M or more, an average of 5M bandwidth per GPU or more. ＊Important Notes: considering the medium and long-term rental rate, it is recommended that the machine is hosted somewhere that supports three-line bandwidth (see Chinese telecom companies: CMCC, CUCC, CTCC), which can be flexibly adjusted according to user needs.
     li 
-      span 有独立固定IP；
+      span Each machine has an independent fixed IP 
     li 
-      span 托管IDC：
-      | 机器放在标准数据中心T3以上，考虑到中长期出租率，建议机器托管在长江沿线城市、沿海城市，或者这些城市周边地区，优先推荐华东、华南，西南、华中、华北适量放置；
+      span Hosting IDC: 
+      | the machine is placed in a standard data center T3 or higher, taking into account the rental occupancy rate, it is recommended that the machine be hosted in cities along the Yangtze River, coastal cities, or the surrounding areas of these cities, with priority recommended for East China, South China; Southwest, Central China, North China placed in moderation;
     li 
-      span 特别注意：
-      | 考虑到机器使用稳定性、在线收益稳定性以及惩罚机制，建议使用厂商品牌机，不推荐组装机。
+      span Note: 
+      | taking into account the stability of machine use and online reward stability, and there is a pledge, it is recommended to use the manufacturer brand machines, assembly machines not recommended.
     li 
-      span GPU服务器参与银河竞赛部署文档：
+      span GPU server deployment for Galaxy Race document: 
       | https://github.com/DeepBrainChain/DBC-DOC
-  div.rule-title 二.算力值计算规则
+  div.rule-title II. Computing power value calculation rules: 
   div.rule-content
-    div 单个GPU算力值有两个影响指标：GPU Cuda Core数量 和显存大小，GPU Cuda Core数量影响占比70%，显存影响占比30%，3080ti是参考标准，GPU算力值计算公式：基础算力值=13+0.7×√(cuda数量)+0.3×显存/24×√(cuda数量)上述公式中，√ 表示平方根，部分显卡基础算力值参考如下：
+    div A single GPU's computing power value has two impact indicators: the number of GPU Cuda Core and video memory size, the number of GPU Cuda Core accounts for 70%, and video memory accounts for 30%. 3080ti is the reference standard. GPU computing power value calculation formula: Base computing power value = 13 + 0.7 x √(number of cuda) + 0.3 x  memory/24 x √(number of cuda) In the above formula, √ indicates the square root, and some of the graphics card base computing power value reference is as follows:
     //- div 2080ti算力点数：4352=4352*80%+4352*11/11*20%
     //- div 3070算力点数：5302=5608*80%+5608*8/11*20%
     //- div 3070Ti 8G显存版本算力点数：5734=6144*80%+6144*8/11*20%
@@ -44,10 +47,10 @@ div.rule-wrapper
     //- div 3090算力点数：12977=10496*80%+10496*24/11*20%
     div.table
       div.table_con
-        div 显卡类型
+        div Graphics card type
         div Cuda core
-        div 显存
-        div 算力值
+        div Video memory
+        div Computing Power Value
       div.table_li
         div 2080ti
         div 4352
@@ -83,23 +86,22 @@ div.rule-wrapper
         div 10496
         div 24
         div 115.45
-  div.rule-title 三、比赛奖励计算规则
+  div.rule-title Galaxy Race reward calculation rules:
   div.rule-content
-    div 影响算工DBC奖励的几个因素：
+    div Several factors affect the miners' DBC rewards.
     ul
-      li 每个GPU的算力值
-      li 拥有的GPU数量
-      li 单个钱包拥有的GPU数量，单个钱包每多拥有一个GPU，所有机器点数增加0.01%，一直到增加10%为止
-      li GPU是否被租用，被租用的GPU算力值增加30%
-      li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*333万DBC，其中25%立马获得，75%释放150天，每天释放0.5% 。
-  div.rule-title 举一个例子
+      li 1) The computing power value of each GPU
+      li 2) The number of GPUs owned
+      li 3) The number of GPUs owned by a single wallet, for each additional GPU owned by a single wallet, the value of all machines increases by 0.01%, until it increases by 10%
+      li 3) Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
+      li Miner's daily reward = the proportion of the miner's computing power value of the whole network * 3.33 million DBC, of which 25% is immediately released, 75% is released in the next 150 days, 0.5% is released every day
+  div.rule-title(style='font-size:16px') Example:
   div.rule-content
-    div 假设DBC每天产出3,333,333个；全网总算力值是80万，算力供给者A用同一个钱包在DBC网络中加入了500个GPU，每个算力值都为99，其中450卡处于被租用状态，50卡闲置状态，则A算工24小时可以获得的DBC奖励为：
-    div A算工总算力值：450*99*(1+5%)*130%+50*99*(1+5%)=66,008.25
-    div 全网总算力值：800,000
-    div A算工获得的24小时奖励为：66,008.25 /800,000*3,333,333= 275,034.3个DBC
-  div.rule-title 声明
-  div.rule-content 如果在比赛中发现了严重的BUG, 深脑链团队可能会提前结束比赛。在发现BUG之前的一段时间内仍然会得到奖励。如果将这样的BUG向深脑链团队披露，报告该BUG的团队将有资格获得最高达300万 DBC的奖励，具体取决于BUG的严重程度，由深脑链团队决定。
+    div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
+    div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
+    div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
+  div.rule-title Disclaimer:
+  div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
 </template>
 <style lang="less">
 .li-style {

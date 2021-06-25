@@ -30,7 +30,7 @@ div.pagination-container
 .table {
   width: 1281px;
   margin: 40px auto 0;
-  min-height: 200px;
+  min-height: 100px;
   border: 0;
   border-spacing: 0 4px;
   font-family: PingFang SC, sans-serif;
@@ -126,14 +126,15 @@ export default defineComponent({
       { key: "totalCalcPoints", label: "总算力值" },
       { key: "totalGpuNum", label: "GPU总数" },
       { key: "totalStaker", label: "算工总数" },
-      { key: "rentRate", label: "租用率" },
+      { key: "Rent", label: "租用率" },
+      { key: "totalRentFee", label: "DBC租金数" },
       { key: "totalStake", label: "算机DBC质押数" },
-      { key: "totalStakeAll", label: "算机DBC质押总数" }
+      // { key: "totalStakeAll", label: "算机DBC质押总数" }
     ];
 
     const columns: Array<{ key: keyof ItemType; label: string }> = [
       {
-        key: "gpuRentRate",
+        key: "index",
         label: "竞赛排名"
       },
       {
@@ -145,12 +146,16 @@ export default defineComponent({
         label: "算力值"
       },
       {
-        key: "gpuNum",
+        key: "totalGpuNum",
         label: "GPU数量"
       },
       {
         key: "rentRate",
         label: "租用率"
+      },
+      {
+        key: "totalRentFee",
+        label: "租金数"
       },
       {
         key: "totalReward",
@@ -172,25 +177,28 @@ export default defineComponent({
       totalGpuNum: "loading",
       totalStake: "loading",
       totalStaker: "loading",
-      totalStakeAll: "loading",
-      rentRate: "loading"
+      Rent: "loading",
+      // totalStakeAll: "loading",
+      totalRentFee: "loading"
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
-    console.log( Math.pow(10,15), 'new BigNumber(v)');
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
       Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;
         let v = rewardInfo[key];
-        if (key !== "rentRate" && typeof v !== "undefined") {
+        if (typeof v !== "undefined") {
+          if(key === 'Rent'){
+            v = Number(rewardInfo['totalRentedGpu']) != 0 ?((Number(rewardInfo['totalRentedGpu'])/Number(rewardInfo['totalGpuNum'])*100)+'%') : '0'
+          }
           if( key === 'totalStake' || key === 'totalStakeAll'){
             v = new BigNumber(Number(v)/ Math.pow(10,15)).toFormat();
           }else{
             v = new BigNumber(v).toFormat();
           }
         }
-        itemsData[key] = typeof v !== "undefined" ? v : "-";
+        itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
       const { list, total: remoteTotal } = await getList();
       set(list, tableData);

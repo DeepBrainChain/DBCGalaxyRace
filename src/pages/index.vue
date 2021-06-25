@@ -174,13 +174,13 @@ export default defineComponent({
       });
     };
     let itemsData = reactive<RewardInfoType>({
-      totalCalcPoints: "loading",
-      totalGpuNum: "loading",
-      totalStake: "loading",
-      totalStaker: "loading",
-      Rent: "loading",
+      totalCalcPoints: "0",
+      totalGpuNum: "0",
+      totalStake: "0",
+      totalStaker: "0",
+      Rent: "0",
       // totalStakeAll: "loading",
-      totalRentFee: "loading"
+      totalRentFee: "0"
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);

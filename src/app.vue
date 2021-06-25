@@ -214,7 +214,6 @@ export default defineComponent({
       active,
       time: computed(() => {
         const times = formateIOS("2021-07-18 00:00").valueOf() - Date.now()
-        console.log(times, 'times');
         if(times >= 0){
           return times
         }else{

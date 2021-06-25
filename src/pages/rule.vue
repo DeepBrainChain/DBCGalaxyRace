@@ -1,35 +1,35 @@
 <template lang="pug">
 div.description
-  | 深脑链银河算力竞赛激励计划是一项协作竞赛，目的是对该网络进行压力测试，鼓励全世界的矿工参与，并帮助矿工为运营世界上最大的高性能算力网络做好准备。
+  | 深脑链银河算力竞赛激励计划是一项协作竞赛，目的是对该网络进行压力测试，鼓励全世界的算工参与，并帮助算工为运营世界上最大的高性能算力网络做好准备。
 div.rule-wrapper
   div.rule-title 竞赛规则
-  div.rule-content 银河算力竞赛公测一从北京时间2021年7月18号-2021年8月17号，银河算力竞赛公测二从北京时间2021年8月18号-2021年9月17号，银河算力竞赛主网部署上线北京时间2021年9月18号，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有矿工共同瓜分1.33亿DBC奖励，算力前5名矿工可以额外获得3000万DBC奖励。在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每月在线奖励总数3333万DBC,激活后租金100%销毁！
+  div.rule-content 银河算力竞赛公测一从北京时间2021年7月18号-2021年8月17号，银河算力竞赛公测二从北京时间2021年8月18号-2021年9月17号，银河算力竞赛主网部署上线北京时间2021年9月18号，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励。在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每月在线奖励总数3333万DBC,激活后租金100%销毁！
   div.rule-title 一、GPU服务器参数最低要求：算力服务器各项参数只有满足最低要求，才可以通过上线审核，否则无法获得收益
   ul.rule-content
-    li 
+    li
       span GPU：
       | 最低1卡，建议2卡或者4卡；英伟达Nvidia系列显卡，最低要求8G显存；考虑到出租率，显卡类型推荐3080ti、3080、3090、3070ti、2080ti、3070等；如果是新配置机器，每个GPU配置一个显卡欺骗器；
-    li 
+    li
       span 内存：
       | 最低1卡需要224g，2卡-224g，3卡336g，4卡-448g，以此类推；
-    li 
+    li
       span CPU：
       | Intel/AMD，主频2.0Ghz及其以上，单颗CPU 8核及其以上，平均每个GPU配8核以上；特别注意：考虑到中长期出租率，以及出租状态下30%的算力值加成，建议新机器的CPU按照如下配置：Intel，V3以上，主频2.5Ghz、睿频3.0Ghz及其以上，单颗CPU 10核以上，平均每颗GPU分配5核10线程以上，4卡GPU服务器推荐双CPU；
-    li 
+    li
       span 硬盘：
       | 4卡GPU及4卡以下数量GPU机器，系统盘480G及以上(SSD)，数据盘2T及以上（机械硬盘也可以）；4卡以上系统盘1T SSD、数据盘4T（机械硬盘也可以）；
-    li 
+    li
       span 网络带宽：
       | 4卡GPU机器上下行20M带宽以上，2卡GPU机器上下行10M带宽以上，平均每个GPU 5M带宽以上；特别注意，考虑中长期出租率，建议机器托管机房可以支持三线带宽（移动、联通、电信），可以根据用户需求灵活调整；
-    li 
+    li
       span 有独立固定IP；
-    li 
+    li
       span 托管IDC：
       | 机器放在标准数据中心T3以上，考虑到中长期出租率，建议机器托管在长江沿线城市、沿海城市，或者这些城市周边地区，优先推荐华东、华南，西南、华中、华北适量放置；
-    li 
+    li
       span 特别注意：
       | 考虑到机器使用稳定性、在线收益稳定性以及惩罚机制，建议使用厂商品牌机，不推荐组装机。
-    li 
+    li
       span GPU服务器参与银河竞赛部署文档：
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 二.算力值计算规则
@@ -121,7 +121,7 @@ div.rule-wrapper
       border-radius: 100%;
       transform: scale(0.5);
     }
-    span{
+    span {
       font-weight: bold;
     }
   }
@@ -137,11 +137,11 @@ div.rule-wrapper
   ul {
     .li-style;
   }
-  .table{
+  .table {
     width: 800px;
     margin: 10px 0;
     border: 1px solid #333;
-    .table_con{
+    .table_con {
       width: 100%;
       height: 30px;
       display: flex;
@@ -149,36 +149,36 @@ div.rule-wrapper
       font-weight: bold;
       justify-content: space-between;
       border-bottom: 1px solid #333;
-      div{
+      div {
         width: 200px;
         height: 30px;
         text-align: center;
         line-height: 30px;
         box-sizing: border-box;
         border-right: 1px solid #333;
-        &:last-child{
+        &:last-child {
           border: none;
         }
       }
     }
-    .table_li{
+    .table_li {
       width: 100%;
       height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #333;
-      &:last-child{
+      &:last-child {
         border: none;
       }
-      div{
+      div {
         width: 200px;
         height: 30px;
         text-align: center;
         line-height: 30px;
         box-sizing: border-box;
         border-right: 1px solid #333;
-        &:last-child{
+        &:last-child {
           border: none;
         }
       }

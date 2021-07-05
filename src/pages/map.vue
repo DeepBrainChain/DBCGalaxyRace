@@ -36,31 +36,36 @@ div#map
 <script>
 import { computed, defineComponent, ref, watch, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { Scene, PointLayer, LineLayer, Popup } from '@antv/l7';
+import { Scene, PointLayer, LineLayer, Popup } from '@antv/l7/lib/index';
 import { Mapbox } from '@antv/l7-maps';
-import { earth, data } from '../assets/data/earthquake.js'
 import { worldgeo } from '../assets/data/worldgeo.js'
+
+import { getPosGpuInfo } from "../apis";
 export default{
     name: "maps",
     setup() {
-        const { t, locale } = useI18n();
+        const { t } = useI18n();
         const maxDecimal = (number) => {
             return String(number).replace(/^(.*\..{4}).*$/, "$1")
         }
-        onMounted(()=>{
+        onMounted(async ()=>{
+            const { list } = await getPosGpuInfo();
             let data1 = []
-            data.result.map((el,index)=>{
+            list.map((el,index)=>{
                 data1[index] = {}
                 data1[index].lng = el[0]/Math.pow(10,4)
                 data1[index].lat = el[1]/Math.pow(10,4)
-                data1[index].RentalRate = (el[2].rented_gpu != 0 ? maxDecimal(el[2].rented_gpu/el[2].online_gpu*100)+ '%':'0%')
+                data1[index].RentalRate = (el[2].rentedGpu != 0 ? maxDecimal(el[2].rentedGpu/el[2].onlineGpu*100)+ '%':'0%')
                 data1[index] = { ...data1[index], ...el[2] };
             })
+            console.log(data1, 'data1');
             const scene = new Scene({
                 id: 'map',
                 map: new Mapbox({
                     style: 'blank',
                     zoom: 1,
+                    minZoom: 0.5,
+                    maxZoom: 1.2,
                     center: [ 3.438, 45.16797 ],
                     interactive: false
                 }),
@@ -88,22 +93,12 @@ export default{
                 .shape('circle')
                 .active(true)
                 .animate(true)
-                .size('online_gpu_calc_points', (xVal) => {
-                    if (xVal <= '100' && xVal > 0) {
-                        return 15
-                    } else if (xVal > '100'){
-                        return 20
-                    } else {
-                        return 10
-                    }
-                })
-                .color('online_gpu_calc_points', (xVal) => {
-                    if (xVal <= '100' && xVal > 0) {
-                        return '#FB8B67';
-                    } else if (xVal > '100'){
-                        return '#FF0909';
-                    } else {
+                .size('onlineGpu', [15,30])
+                .color('offlineGpu', (xVal) => {
+                    if ( xVal > 0) {
                         return '#555C9D';
+                    } else {
+                        return '#FF0909';
                     }
                 })
                 .style({
@@ -113,28 +108,32 @@ export default{
                     let str = ''
                     let lan = localStorage.getItem('lan');
                     if(lan == 'zh'){
-                        if(e.feature.GpuNumber > 100){
+                        if(e.feature.offlineGpu <= 0){
                             str = `
-                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.online_gpu}</span></div>
+                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>算力值：<span>${e.feature.onlineGpuCalcPoints}</span></div>
                             <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
                             `
                         }else{
                             str = `
-                            <div class='l7-popup-p'>离线GPU数量：<span>${e.feature.offline_gpu}</span></div>
-                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.online_gpu}</span></div>
+                            <div class='l7-popup-p'>离线GPU数量：<span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>算力值：<span>${e.feature.onlineGpuCalcPoints}</span></div>
                             <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
                             `
                         }
                     }else{
-                        if(e.feature.GpuNumber > 100){
+                        if(e.feature.offlineGpu <= 0){
                             str = `
-                            <div class='l7-popup-p'>Number of online GPUs: <span>${e.feature.online_gpu}</span></div>
+                            <div class='l7-popup-p'>Number of online GPUs: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>Computing Power Value: <span>${e.feature.onlineGpuCalcPoints}</span></div>
                             <div class='l7-popup-p'>Occupancy rate: <span>${e.feature.RentalRate}</span></div>
                             `
                         }else{
                             str = `
-                            <div class='l7-popup-p'>Number of offline GPU(s): <span>${e.feature.offline_gpu}</span></div>
-                            <div class='l7-popup-p'>Number of online GPU(s): <span>${e.feature.online_gpu}</span></div>
+                            <div class='l7-popup-p'>Number of offline GPU(s): <span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>Number of online GPU(s): <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>Computing Power Value: <span>${e.feature.onlineGpuCalcPoints}</span></div>
                             <div class='l7-popup-p'>Rental Rate: <span>${e.feature.RentalRate}</span></div>
                             `
                         }
@@ -150,6 +149,17 @@ export default{
                 });
                 scene.addLayer(worldLine)
                 scene.addLayer(pointLayer)
+
+                let size = scene.getSize();
+                if( size[0] > 1080 ){
+                    scene.setZoomAndCenter(1.1);
+                }else if( size[0] <= 1080 && size[0] > 900 ){
+                    scene.setZoomAndCenter(0.9);
+                }else if( size[0] <= 900 && size[0] > 700 ){
+                    scene.setZoomAndCenter(0.7);
+                }else if( size[0] <= 700){
+                    scene.setZoomAndCenter(0.5);
+                }
             });
         })
         return {

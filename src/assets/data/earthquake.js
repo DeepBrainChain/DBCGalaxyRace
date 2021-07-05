@@ -70,7 +70,7 @@ export const data = {
           345678,
           {
              "offline_gpu": 0,
-             "online_gpu": 345234,
+             "online_gpu": 345,
              "online_gpu_calc_points": 6825,
              "rented_gpu": 123
           }
@@ -89,7 +89,7 @@ export const data = {
             1217896,
             395678,
             {
-               "offline_gpu": 0,
+               "offline_gpu": 10,
                "online_gpu": 100,
                "online_gpu_calc_points": 300,
                "rented_gpu": 33
@@ -100,7 +100,7 @@ export const data = {
             395678,
             {
             "offline_gpu": 0,
-            "online_gpu": 33333,
+            "online_gpu": 3333,
             "online_gpu_calc_points": 7000,
             "rented_gpu": 2
             }

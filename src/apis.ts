@@ -29,11 +29,13 @@ function byteToStr(arr: Array<number>) {
  * onlineProfile_getStakerNum: 算工数量
  * onlineProfile_getStakerListInfo: 分页获取数据
  * onlineProfile_getOpInfo: 获取奖励信息
+ * onlineProfile_getPosGpuInfo: 获取地图算力节点
  */
 type Methods =
   | "chain_getBlockHash"
   | "onlineProfile_getOpInfo"
   | "onlineProfile_getStakerNum"
+  | "onlineProfile_getPosGpuInfo"
   | "onlineProfile_getStakerListInfo";
 
 class DBCRequest {
@@ -220,6 +222,16 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
   };
 };
 
+
+export const getPosGpuInfo = async (currentPage: number = 0, numOfEachPage: number = 20) => {
+  // const hash = await request.send<string>("chain_getBlockHash");
+  const [list] = await Promise.all([
+    request.send<Array<any>>("onlineProfile_getPosGpuInfo"),
+  ]);
+  return {
+    list: list
+  };
+};
 // 可根据算力值排序
 // var arr = [
 //   {name:'zopp',age:0},

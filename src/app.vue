@@ -9,6 +9,9 @@ nav.navigator
   router-link.navigator-item(to='/rule_En',:class='{active: active === 2}',v-else)
     | {{t('header_menu2')}}
     div.navigator-active
+  router-link.navigator-item(to='/map',:class='{active: active === 3}')
+    | {{t('header_menu3')}}
+    div.navigator-active
   div.select-wrapper
     Arrow.down-arrow
     div.select-box.border-1px
@@ -109,8 +112,9 @@ Background
     display: flex;
     flex-direction: column;
     align-items: center;
-    &:first-child {
-      margin-right: 40px;
+    margin-right: 40px;
+    &:last-child {
+      margin-right: 0;
     }
     &.active {
       .navigator-active {
@@ -200,7 +204,7 @@ export default defineComponent({
       const myDate = new Date((time.replace(/-/g, "/")));
       return myDate;
     };
-    const active = computed(() => ["/", "/rule", "/rule_En"].indexOf(route.path));
+    const active = computed(() => ["/", "/rule", "/rule_En", "/map"].indexOf(route.path));
     const counting = ref(true);
     const countDownactive = computed(() => (formateIOS("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')

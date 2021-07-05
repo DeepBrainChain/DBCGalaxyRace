@@ -70,7 +70,7 @@ class DBCRequest {
       if (this.wsOpened) {
         this._send<T>(method, params).then(resolve);
       } else {
-        this.ws = new WebSocket(this.url);
+        // this.ws = new WebSocket(this.url);
         this.ws.onopen = () => {
           this.wsOpened = true;
           this._send<T>(method, params).then(resolve);

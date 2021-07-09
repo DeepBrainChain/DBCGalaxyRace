@@ -86,7 +86,7 @@ div.rule-wrapper
         div 10496
         div 24
         div 115.45
-  div.rule-title Galaxy Race reward calculation rules:
+  div.rule-title III. Galaxy Race reward calculation rules:
   div.rule-content
     div Several factors affect the miners' DBC rewards.
     ul
@@ -100,6 +100,67 @@ div.rule-wrapper
     div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
     div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
     div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
+  
+  div.rule-title IV、惩罚机制
+  div.rule-content
+    div No matter if the machine is online or offline, it needs to send the on-chain notification by itself. If the machine has problems and does not send the on-chain notification proactively, the penalty will be more serious. Once a machine is officially launched on the chain successfully, it cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified.
+  div.rule-title(style='font-size:16px') 1. In the case that the machine provider takes the initiative to send offline notification:
+  div.rule-content
+    div 1). If the machine is in the leased state
+      ul
+        li If the machine is offline, there will be no new online bonus, and 2 days worth of bonus will be deducted from the remaining bonus. 100% of the bonus will go to the treasury.
+        li If the machine is offline for more than 7 minutes, 4 days of remaining rewards will be deducted. 100% of the rewards will go to the treasury.
+        li If the machine is offline for more than 48h, all remaining rewards will be deducted. 50% of the reward will be given to the user and 50% will go to the treasury.
+        li If the machine is offline for more than 120h, all the remaining rewards will be deducted and 50% of the deposit will be taken away. 50% of the rewards will be given to the user, 50% will go to the treasury, and all deposits will go to the treasury.
+    div 2). If the machine is in idle state
+      ul
+        li When the machine is idle for more than 10 days, it will be removed from online, there will be no new online rewards but the old rewards are still released linearly.(After the machine is offline, if the machine has been online for more than 365 days since the first time it was launched online, the machine provider can apply for a refund of the deposit.)
+        li If the machine is in the idle state for less than 10 days, at this time we will remove the machine from online, there will be no new online rewards, deduct 2 days bonus out of the remaining rewards. All rewards will go into the treasury
+        li If the machine is in the idle state of less than 10 days, and the machine has been offline for more than 7 minutes, 4 days of remaining rewards will be deducted. All rewards will go into the treasury
+        li If the machine is idle for less than 10 days, and the machine is offline for more than 48h, all the remaining rewards will be deducted. All rewards will go to the treasury
+        li If the machine is idle for less than 10 days, and the machine is offline for more than 240h, all the remaining rewards will be deducted and 50% of the deposit will be deducted. All rewards will go to the treasury and all deposits will go to the treasury. If the machine has been online for more than 365 days since the first time it was launched online, the remaining 50% of the deposit can be returned.
+  div.rule-title(style='font-size:16px') 2. If the machine provider does not send an offline notification proactively and is reported instead:
+  div.rule-content
+    div If there is a problem with the machine, but the machine provider does not send an offline notification, instead is reported by a reporter. After the report, the verifier grabs the order and verifies whether there is a problem with the machine. If the machine is in rental status, only an user can report the machine.
+  div.rule-content
+    div 1). When the machine is in a rented state, the machine is not accessible at this time:
+      ul
+        li If the machine is offline for more than 3 minutes, there will be no new online rewards, 4 days of remaining rewards will be deducted. 100% goes into the treasury;
+        li If the machine is offline for more than 7 minutes, the remaining 8 days of rewards will be deducted. 100% of the rewards will go into the treasury;
+        li If the machine is offline for more than 48h, all remaining rewards will be deducted. 30% of the reward will be given to the user, 20% to the verifier, and 50% will go to the treasury.
+        li If the machine is offline for more than 120h, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go to the treasury, and all deposits will go to the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be returned
+    div 2). When the machine is in a rented state, and at this time it has been  determined that the machine has hardware failure:
+      ul
+        li If the machine is offline no more than 4 hours, there will be no new online rewards, and 8 days' reward out of the remaining rewards will be deducted.  30% of the reward goes to the user, 20% to the verifier, 50% into the treasury
+        li If you are offline for more than 4 hours, then 12 days of remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
+        li If you are offline for more than 24 hours, 16 days of remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
+        li If you are offline for more than 48 hours, all remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
+        li If the machine is offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% of the rewards will go to the treasury, and all of the deposit will go to the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be returned.
+    div 3). When the machine is in a rented state, and at this time it has been determined that there is a case of hardware parameters configuration fraud (bandwidth actual value is less than 30%, latitude and longitude error in a circle of 100 km away, hardware parameters are not consistent)
+      ul
+        li If the machine is offline no more than 4 hours, there will be no new online rewards, 8 days out of the remaining rewards will be deducted and 1% deposit will be deducted. 30% of the reward goes to the user, 20% of the reward goes to the verifier, 50% into the treasury
+        li If you are offline for more than 4 hours, then 12 days remaining rewards and 1% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If you are offline for more than 24 hours, 16 days remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If you are offline for more than 48 hours, all remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If the machine has been offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go into the treasury and all of the deposit will go into the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be applied for a refund
+    div 4). When the machine is in an idle state, and it is determined that the machine can not be rented
+      ul
+        li If the machine is offline for no more than 4 hours, there will be no new online rewards, then 8 days of rewards out of the remaining rewards and  1% deposit will be deducted. 30% of the reward to the user, 20% of the reward to the verifier, 50% into the treasury
+        li If you are offline for more than 4 hours, then 12 days remaining rewards and 1% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If you are offline for more than 24 hours, 16 days remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If you are offline for more than 48 hours, all remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
+        li If the machine has been offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go into the treasury and all of the deposit will go into the treasury.  If the machine has been online for more than 365 days since the first time it was launched online, the remaining 50% of the deposit can be returned.
+    div.rule-title V、Grievance rules
+  div.rule-content
+    div 1. If the machine is maliciously reported, the machine provider can appeal within 48 hours, otherwise it is invalid. If the complaint is passed, the network will cancel any penalties. If the complaint is not passed, all penalties are doubled.
+    div 2. If it is confirmed that the reporter has reported the machine maliciously, 100 RMB equivalent of DBC deposit will be deducted from the reporter. The reporter can also appeal within 48 hours
+    div 3. If the verifier is a minority verifier or verified the report out of malicious intent, the network will deduct 100 RMB equivalent of DBC deposit from the verifier. The verifier can also appeal within 48 hours
+    div 4. In any given report, out of the three parties, machine provider, reporter and validator, as long as one of them has appealed, the other can not appeal again
+  div.rule-title Ⅵ、Mechanism of unlocking the pledged DBCs
+  div.rule-content
+    div 1. When the machine is online for the first time for 365 days, it can be re-pledged, and the re-pledging will be based on the current number of GPU of the whole network and token price, and if the new pledged tokens are lower than the original pledged tokens, the difference will be ''un-pledged''. The operation can be performed once every 365 days.
+    div 2. When the machine has been online for 365 days for the first time, and the machine has been idle for more than 10 days, the machine can be taken offline and all tokens can be released.
+  
   div.rule-title Disclaimer:
   div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
 </template>
@@ -189,7 +250,7 @@ div.rule-wrapper
 }
 .rule-title {
   font-family: PingFang SC, sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   line-height: 25px;
   color: #333333;

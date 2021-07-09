@@ -34,21 +34,21 @@ div#map
 }
 </style>        
 <script>
-import { computed, defineComponent, ref, watch, onMounted } from "vue";
+import { computed, defineComponent, ref, watch, onBeforeMount } from "vue";
 import { useI18n } from "vue-i18n";
 import { Scene, PointLayer, LineLayer, Popup } from '@antv/l7/lib/index';
 import { Mapbox } from '@antv/l7-maps';
 import { worldgeo } from '../assets/data/worldgeo.js'
 
 import { getPosGpuInfo } from "../apis";
-export default{
+export default defineComponent({
     name: "maps",
     setup() {
         const { t } = useI18n();
         const maxDecimal = (number) => {
             return String(number).replace(/^(.*\..{4}).*$/, "$1")
         }
-        onMounted(async ()=>{
+        onBeforeMount(async ()=>{
             const { list } = await getPosGpuInfo();
             let data1 = []
             list.map((el,index)=>{
@@ -166,5 +166,5 @@ export default{
             t,
         };
     },
-}
+})
 </script>

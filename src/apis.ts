@@ -223,14 +223,15 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
 };
 
 
-export const getPosGpuInfo = async (currentPage: number = 0, numOfEachPage: number = 20) => {
+export const getPosGpuInfo = async () => {
   // const hash = await request.send<string>("chain_getBlockHash");
-  const [list] = await Promise.all([
-    request.send<Array<any>>("onlineProfile_getPosGpuInfo"),
-  ]);
-  return {
-    list: list
-  };
+  // const [list] = await Promise.all([
+  //   request.send<Array<any>>("onlineProfile_getPosGpuInfo"),
+  // ]);
+  // return {
+  //   list: list
+  // };
+  return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 // 可根据算力值排序
 // var arr = [

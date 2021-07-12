@@ -49,7 +49,7 @@ export default defineComponent({
             return String(number).replace(/^(.*\..{4}).*$/, "$1")
         }
         onBeforeMount(async ()=>{
-            const { list } = await getPosGpuInfo();
+            const list = await getPosGpuInfo();
             let data1 = []
             list.map((el,index)=>{
                 data1[index] = {}
@@ -166,5 +166,8 @@ export default defineComponent({
             t,
         };
     },
+    mounted(){
+
+    }
 })
 </script>

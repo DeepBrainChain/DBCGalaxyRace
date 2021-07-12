@@ -101,7 +101,7 @@ div.rule-wrapper
     div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
     div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   
-  div.rule-title IV、惩罚机制
+  div.rule-title IV、Penalty rules
   div.rule-content
     div No matter if the machine is online or offline, it needs to send the on-chain notification by itself. If the machine has problems and does not send the on-chain notification proactively, the penalty will be more serious. Once a machine is officially launched on the chain successfully, it cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified.
   div.rule-title(style='font-size:16px') 1. In the case that the machine provider takes the initiative to send offline notification:

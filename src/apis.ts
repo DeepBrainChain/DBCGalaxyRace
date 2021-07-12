@@ -42,7 +42,7 @@ class DBCRequest {
   ws: WebSocket;
   keepAlive: boolean = true;
   wsOpened: boolean = false;
-  url: string = "wss://innertest.dbcwallet.io";
+  url: string = "wss://infotest.dbcwallet.io";
   constructor(keepAlive: boolean = true) {
     this.ws = new WebSocket(this.url);
     this.keepAlive = keepAlive;
@@ -120,11 +120,11 @@ export type RewardInfoType = {
   /**
    * 租金数
    */
-  totalRentFee: string; 
+  totalRentFee: string;
   /**
    * 销毁数
    */
-  totalBurnFee?: string; 
+  totalBurnFee?: string;
   /**
    * 全网质押总数
    */
@@ -187,15 +187,15 @@ export type ItemType = {
 // calcPoints: 0      算力值
 // stakerAccount: "5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc"      钱包地址
 // stakerName: [98, 111, 98, 95, 115, 116, 97, 115, 104]       线上身份
-// totalBurnFee: "0" 
+// totalBurnFee: "0"
 // totalGpuNum: 0       gpu总数
 // totalRentFee: "0"     租金数
 // totalRentedGpu: 0   租用Gpu个数
 // totalReward: "0"     奖励总数
 
-const getnum = (num: string):string => { 
+const getnum = (num: string):string => {
   const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
-  return num1.substring(0,num1.indexOf(".")+5); 
+  return num1.substring(0,num1.indexOf(".")+5);
 }
 
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
@@ -211,10 +211,10 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
   return {
     list: list.map(
       (s,i) => ({
-          ...s, 
+          ...s,
           totalReward: getnum(s.totalReward),
           index: s.index?s.index:i+1,
-          name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount , 
+          name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
           rentRate: Number(s.totalRentedGpu) != 0 ?((Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
         })
       ),
@@ -250,8 +250,8 @@ export const getPosGpuInfo = async () => {
 // console.log(arr.sort(compare('age')))
 
 // 截取后四位
-// (function getnum() { 
-//   var num = '22.123456'; 
-//   var result = num.substring(0,num.indexOf(".")+3); 
+// (function getnum() {
+//   var num = '22.123456';
+//   var result = num.substring(0,num.indexOf(".")+3);
 //   console.log(result);
 // })()

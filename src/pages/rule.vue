@@ -92,7 +92,7 @@ div.rule-wrapper
       li 单个钱包拥有的GPU数量，单个钱包每多拥有一个GPU，所有机器点数增加0.01%，一直到增加10%为止
       li GPU是否被租用，被租用的GPU算力值增加30%
       li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*333万DBC，其中25%立马获得，75%释放150天，每天释放0.5% 。
-  div.rule-title(style='font-size:16px') 举一个例子
+  div.rule-title.fs16 举一个例子
   div.rule-content
     div 假设DBC每天产出3,333,333个；全网总算力值是80万，算力供给者A用同一个钱包在DBC网络中加入了500个GPU，每个算力值都为99，其中450卡处于被租用状态，50卡闲置状态，则A算工24小时可以获得的DBC奖励为：
     div A算工总算力值：450*99*(1+5%)*130%+50*99*(1+5%)=66,008.25
@@ -101,7 +101,7 @@ div.rule-wrapper
   div.rule-title 四、惩罚机制
   div.rule-content
     div 无论上线机器后者下线机器都需要算工自己主动发送链上通知，如果机器出现问题，不主动发送链上通知，惩罚将会更加严重。机器一旦正式上链成功，则以后不能修改任何硬件配置信息。当机器闲置且同时处于下线状态，可以修改带宽和经纬度信息。
-  div.rule-title(style='font-size:16px') 1.算工主动发送下线通知的情况下：
+  div.rule-title.fs16 1.算工主动发送下线通知的情况下：
   div.rule-content
     div 1). 机器在被租用状态
       ul
@@ -116,7 +116,7 @@ div.rule-wrapper
         li 处于空闲状态不到10天，此时下线机器超过7分钟，扣除4天剩余奖励，奖励全部进入国库。
         li 处于空闲状态不到10天，此时下线机器超过48h，扣除所有剩余奖励，奖励全部进入国库。
         li 处于空闲状态不到10天，此时下线机器超过240h，扣除剩余所有奖励和扣除50%押金。奖励全部进入国库，押金全部进入国库。如果机器从首次上线时间起超过365天，剩下50%押金可以申请退回。
-  div.rule-title(style='font-size:16px') 2.算工没有主动发送下线通知，被举报的情况下：
+  div.rule-title.fs16 2.算工没有主动发送下线通知，被举报的情况下：
   div.rule-content
     div 如果机器出问题，但是算工并没有发下线通知，而是被报告人被举报了。举报后，验证人抢单，并且验证机器是否有问题。机器处于租用状态，只有用户可以举报。
   div.rule-content
@@ -246,7 +246,7 @@ div.rule-wrapper
 }
 .rule-title {
   font-family: PingFang SC, sans-serif;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 18px;
   line-height: 25px;
   color: #333333;

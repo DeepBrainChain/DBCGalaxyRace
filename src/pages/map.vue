@@ -31,6 +31,9 @@ div#map
       justify-content: space-between;
     }
   }
+  .l7-scene{
+    top: 0;
+  }
 }
 </style>
 <script>
@@ -39,7 +42,6 @@ import { useI18n } from "vue-i18n";
 import { Scene, PointLayer, LineLayer, Popup } from "@antv/l7/lib/index";
 import { Mapbox } from "@antv/l7-maps";
 import { worldgeo } from "../assets/data/worldgeo.js";
-
 import { getPosGpuInfo } from "../apis";
 export default defineComponent({
   name: "maps",
@@ -48,32 +50,40 @@ export default defineComponent({
     const maxDecimal = number => {
       return String(number).replace(/^(.*\..{4}).*$/, "$1");
     };
+    const isWin = computed(()=>{
+        if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+          return false
+        }else{
+          return true
+        }
+    })
     onBeforeMount(async () => {
-      const list = await getPosGpuInfo();
-      console.log(list, "list");
-      let data1 = [];
-      if (list) {
-        list.map((el, index) => {
-          data1[index] = {};
-          data1[index].lng = el[0] / Math.pow(10, 4);
-          data1[index].lat = el[1] / Math.pow(10, 4);
-          data1[index].RentalRate =
-            el[2].rentedGpu != 0
-              ? maxDecimal((el[2].rentedGpu / el[2].onlineGpu) * 100) + "%"
-              : "0%";
-          data1[index] = { ...data1[index], ...el[2] };
-        });
+      let list = []
+      let data1 = []
+      try {
+        list = await getPosGpuInfo()
+      } catch {
+        list = []
       }
-      console.log(data1, "data1");
+      list.map((el, index) => {
+        data1[index] = {};
+        data1[index].lng = el[0] / Math.pow(10, 4);
+        data1[index].lat = el[1] / Math.pow(10, 4);
+        data1[index].RentalRate =
+        el[2].rentedGpu != 0
+            ? maxDecimal((el[2].rentedGpu / el[2].onlineGpu) * 100) + "%"
+            : "0%";
+        data1[index] = { ...data1[index], ...el[2] };
+      });
       const scene = new Scene({
         id: "map",
         map: new Mapbox({
           style: "blank",
           zoom: 1,
-          minZoom: 0.5,
+          minZoom: 0,
           maxZoom: 1.2,
           center: [3.438, 45.16797],
-          interactive: false
+          interactive: isWin.value?false:true
         }),
         logoVisible: false
       });
@@ -153,18 +163,63 @@ export default defineComponent({
             .setHTML(str);
           scene.addPopup(popup);
         });
+        pointLayer.on("click", e => {
+          let str = "";
+          let lan = localStorage.getItem("lan");
+          if (lan == "zh") {
+            if (e.feature.offlineGpu <= 0) {
+              str = `
+                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>算力值：<span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
+                            `;
+            } else {
+              str = `
+                            <div class='l7-popup-p'>离线GPU数量：<span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>算力值：<span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
+                            `;
+            }
+          } else {
+            if (e.feature.offlineGpu <= 0) {
+              str = `
+                            <div class='l7-popup-p'>Number of online GPUs: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>Computing Power Value: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>Occupancy rate: <span>${e.feature.RentalRate}</span></div>
+                            `;
+            } else {
+              str = `
+                            <div class='l7-popup-p'>Number of offline GPU(s): <span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>Number of online GPU(s): <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>Computing Power Value: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>Rental Rate: <span>${e.feature.RentalRate}</span></div>
+                            `;
+            }
+          }
+
+          const popup = new Popup({
+            offsets: [0, 0],
+            closeButton: false
+          })
+            .setLnglat(e.lngLat)
+            .setHTML(str);
+          scene.addPopup(popup);
+        });
         scene.addLayer(worldLine);
         scene.addLayer(pointLayer);
 
         let size = scene.getSize();
-        if (size[0] > 1080) {
+        if (size[0] > 1100) {
           scene.setZoomAndCenter(1.1);
-        } else if (size[0] <= 1080 && size[0] > 900) {
-          scene.setZoomAndCenter(0.9);
+        } else if (size[0] <= 1100 && size[0] > 1000) {
+          scene.setZoomAndCenter(0.8);
+        } else if (size[0] <= 1000 && size[0] > 900) {
+          scene.setZoomAndCenter(0.6);
         } else if (size[0] <= 900 && size[0] > 700) {
-          scene.setZoomAndCenter(0.7);
+          scene.setZoomAndCenter(0.4);
         } else if (size[0] <= 700) {
-          scene.setZoomAndCenter(0.5);
+          scene.setZoomAndCenter(0);
         }
       });
     });

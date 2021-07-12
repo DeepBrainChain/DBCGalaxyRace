@@ -6,7 +6,7 @@ div.rule-wrapper
   div.rule-content Galaxy Computing Power Race public test phase 1 is from July 18th, 2021 Beijing time - August 17th, 2021; public test phase 2 is from August 18th, 2021 Beijing time - September 17th, 2021. Galaxy Computing Power Race mainnet deployment online is Beijing time September 18th, 2021, when the whole network reaches 5,000 GPU the race is automatically activated, after the activation the race will continue for 2 months, during the race period all miners together will divide 133 million DBC rewards,  the top 5 miners can get an additional 30 million DBC rewards!Before the official activation of the Galaxy Race, the miners enjoy the double income of rental income and online rewards, with a total monthly online reward of 33.33 million DBC, and 100% destruction/burning of the rent after activation!
   div.rule-title I. Computing power server configuration requirements. Computing server parameters: only when a machine meets the minimum requirements will it pass the online audit, otherwise it can not obtain node revenue.
 
-  div.rule-content(style='font-size:16px') Computing server configuration requirements for each parameter:
+  div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
     li 
       span GPU: 
@@ -95,7 +95,7 @@ div.rule-wrapper
       li 3) The number of GPUs owned by a single wallet, for each additional GPU owned by a single wallet, the value of all machines increases by 0.01%, until it increases by 10%
       li 3) Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
       li Miner's daily reward = the proportion of the miner's computing power value of the whole network * 3.33 million DBC, of which 25% is immediately released, 75% is released in the next 150 days, 0.5% is released every day
-  div.rule-title(style='font-size:16px') Example:
+  div.rule-title.fs16 Example:
   div.rule-content
     div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
     div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
@@ -104,7 +104,7 @@ div.rule-wrapper
   div.rule-title IV、Penalty rules
   div.rule-content
     div No matter if the machine is online or offline, it needs to send the on-chain notification by itself. If the machine has problems and does not send the on-chain notification proactively, the penalty will be more serious. Once a machine is officially launched on the chain successfully, it cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified.
-  div.rule-title(style='font-size:16px') 1. In the case that the machine provider takes the initiative to send offline notification:
+  div.rule-title.fs16 1. In the case that the machine provider takes the initiative to send offline notification:
   div.rule-content
     div 1). If the machine is in the leased state
       ul
@@ -119,7 +119,7 @@ div.rule-wrapper
         li If the machine is in the idle state of less than 10 days, and the machine has been offline for more than 7 minutes, 4 days of remaining rewards will be deducted. All rewards will go into the treasury
         li If the machine is idle for less than 10 days, and the machine is offline for more than 48h, all the remaining rewards will be deducted. All rewards will go to the treasury
         li If the machine is idle for less than 10 days, and the machine is offline for more than 240h, all the remaining rewards will be deducted and 50% of the deposit will be deducted. All rewards will go to the treasury and all deposits will go to the treasury. If the machine has been online for more than 365 days since the first time it was launched online, the remaining 50% of the deposit can be returned.
-  div.rule-title(style='font-size:16px') 2. If the machine provider does not send an offline notification proactively and is reported instead:
+  div.rule-title.fs16 2. If the machine provider does not send an offline notification proactively and is reported instead:
   div.rule-content
     div If there is a problem with the machine, but the machine provider does not send an offline notification, instead is reported by a reporter. After the report, the verifier grabs the order and verifies whether there is a problem with the machine. If the machine is in rental status, only an user can report the machine.
   div.rule-content
@@ -250,7 +250,7 @@ div.rule-wrapper
 }
 .rule-title {
   font-family: PingFang SC, sans-serif;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 18px;
   line-height: 25px;
   color: #333333;
@@ -258,6 +258,9 @@ div.rule-wrapper
   margin-top: 20px;
   &:first-child {
     margin-top: 0;
+  }
+  &fs16{
+    font-size: 16px;
   }
 }
 .rule-wrapper {

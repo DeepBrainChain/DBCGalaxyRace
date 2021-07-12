@@ -69,60 +69,60 @@ export const data = {
           1117896,
           345678,
           {
-             "offline_gpu": 0,
-             "online_gpu": 345,
-             "online_gpu_calc_points": 6825,
-             "rented_gpu": 123
+             "offlineGpu": 0,
+             "onlineGpu": 345,
+             "onlineGpuCalcPoints": 6825,
+             "rentedGpu": 123
           }
         ],
         [
             1017896,
             375678,
             {
-            "offline_gpu": 0,
-            "online_gpu": 690,
-            "online_gpu_calc_points": 100,
-            "rented_gpu": 123
+            "offlineGpu": 0,
+            "onlineGpu": 690,
+            "onlineGpuCalcPoints": 100,
+            "rentedGpu": 123
             }
         ],
         [
             1217896,
             395678,
             {
-               "offline_gpu": 10,
-               "online_gpu": 100,
-               "online_gpu_calc_points": 300,
-               "rented_gpu": 33
+               "offlineGpu": 10,
+               "onlineGpu": 100,
+               "onlineGpuCalcPoints": 300,
+               "rentedGpu": 33
             }
         ],
         [
             -907896,
             395678,
             {
-            "offline_gpu": 0,
-            "online_gpu": 3333,
-            "online_gpu_calc_points": 7000,
-            "rented_gpu": 2
+            "offlineGpu": 0,
+            "onlineGpu": 3333,
+            "onlineGpuCalcPoints": 7000,
+            "rentedGpu": 2
             }
         ],
         [
             707896,
             345678,
             {
-               "offline_gpu": 0,
-               "online_gpu": 100,
-               "online_gpu_calc_points": 6825,
-               "rented_gpu": 37
+               "offlineGpu": 0,
+               "onlineGpu": 100,
+               "onlineGpuCalcPoints": 6825,
+               "rentedGpu": 37
             }
         ],
         [
             307896,
             205678,
             {
-            "offline_gpu": 0,
-            "online_gpu": 40,
-            "online_gpu_calc_points": 50,
-            "rented_gpu": 13
+            "offlineGpu": 0,
+            "onlineGpu": 40,
+            "onlineGpuCalcPoints": 50,
+            "rentedGpu": 13
             }
         ],
     ],

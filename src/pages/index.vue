@@ -115,7 +115,7 @@ div.pagination-container
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { getRewardInfo, getList, RewardInfoType, ItemType } from "../apis";
+import { getRewardInfo, getList, RewardInfoType, ItemType, compare } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
@@ -202,7 +202,11 @@ export default defineComponent({
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
       const { list, total: remoteTotal } = await getList();
-      set(list, tableData);
+      let list1 = list.sort(compare('calcPoints'))
+      list1.map((el, i) => {
+        el.index = i+1
+      })
+      set(list1, tableData);
       total.value = remoteTotal;
     });
 

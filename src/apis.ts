@@ -234,20 +234,13 @@ export const getPosGpuInfo = async () => {
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 // 可根据算力值排序
-// var arr = [
-//   {name:'zopp',age:0},
-//   {name:'gpp',age:18},
-//   {name:'yjj',age:8}
-// ];
-
-// function compare(property){
-//   return function(a,b){
-//       var value1 = a[property];
-//       var value2 = b[property];
-//       return value1 - value2;
-//   }
-// }
-// console.log(arr.sort(compare('age')))
+export const compare = (property: any) => {
+  return function(a, b){
+      var value1 = a[property];
+      var value2 = b[property];
+      return value1 - value2;
+  }
+}
 
 // 截取后四位
 // (function getnum() {

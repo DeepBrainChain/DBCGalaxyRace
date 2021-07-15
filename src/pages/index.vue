@@ -202,11 +202,11 @@ export default defineComponent({
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
       const { list, total: remoteTotal } = await getList();
-      let list1 = list.sort(compare('calcPoints'))
-      list1.map((el, i) => {
-        el.index = i+1
-      })
-      set(list1, tableData);
+      // let list1 = list.sort(compare('calcPoints'))
+      // list1.map((el, i) => {
+      //   el.index = i+1
+      // })
+      set(list, tableData);
       total.value = remoteTotal;
     });
 

@@ -213,7 +213,7 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
       (s,i) => ({
           ...s,
           totalReward: getnum(s.totalReward),
-          index: s.index?s.index:i+1,
+          index: s.index >= 0?s.index+1:i+1,
           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
           rentRate: Number(s.totalRentedGpu) != 0 ?((Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
         })

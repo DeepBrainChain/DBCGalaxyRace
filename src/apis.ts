@@ -224,27 +224,13 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
 
 
 export const getPosGpuInfo = async () => {
-  // const hash = await request.send<string>("chain_getBlockHash");
-  // const [list] = await Promise.all([
-  //   request.send<Array<any>>("onlineProfile_getPosGpuInfo"),
-  // ]);
-  // return {
-  //   list: list
-  // };
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 // 可根据算力值排序
 export const compare = (property: any) => {
-  return function(a, b){
+  return function(a: any, b: any){
       var value1 = a[property];
       var value2 = b[property];
       return value1 - value2;
   }
 }
-
-// 截取后四位
-// (function getnum() {
-//   var num = '22.123456';
-//   var result = num.substring(0,num.indexOf(".")+3);
-//   console.log(result);
-// })()

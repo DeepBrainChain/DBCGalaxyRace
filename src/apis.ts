@@ -146,7 +146,7 @@ export type ItemType = {
   /**
    * 算力值
    */
-  calcPoints: string;
+  calcPoints: number;
   /**
    * gpu数量
    */

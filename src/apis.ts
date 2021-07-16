@@ -212,6 +212,7 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
     list: list.map(
       (s,i) => ({
           ...s,
+          calcPoints: Number(s.calcPoints)/100,
           totalReward: getnum(s.totalReward),
           index: s.index >= 0?s.index+1:i+1,
           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,

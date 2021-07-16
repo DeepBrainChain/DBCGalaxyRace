@@ -73,6 +73,7 @@ export default defineComponent({
         el[2].rentedGpu != 0
             ? maxDecimal((el[2].rentedGpu / el[2].onlineGpu) * 100) + "%"
             : "0%";
+        el[2].onlineGpuCalcPoints = el[2].onlineGpuCalcPoints/100;
         data1[index] = { ...data1[index], ...el[2] };
       });
       const scene = new Scene({

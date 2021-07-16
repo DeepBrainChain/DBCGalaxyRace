@@ -195,9 +195,12 @@ export default defineComponent({
           }
           if( key === 'totalStake' || key === 'totalStakeAll'){
             v = new BigNumber(Number(v)/ Math.pow(10,15)).toFormat();
+          }else if(key === "totalCalcPoints"){
+            v = new BigNumber(Number(v) / 100).toFormat();
           }else{
             v = new BigNumber(v).toFormat();
           }
+          
         }
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });

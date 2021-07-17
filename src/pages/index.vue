@@ -194,7 +194,7 @@ export default defineComponent({
             v = Number(rewardInfo['totalRentedGpu']) != 0 ?((Number(rewardInfo['totalRentedGpu'])/Number(rewardInfo['totalGpuNum'])*100)+'%') : '0'
           }
           if( key === 'totalStake' || key === 'totalStakeAll'){
-            v = new BigNumber(parseInt(String(Number(v)/ Math.pow(10,15)))).toFormat();
+            v = new BigNumber(Math.round(Number(v)/ Math.pow(10,15))).toFormat();
           }else if(key === "totalCalcPoints"){
             v = new BigNumber(Number(v) / 100).toFormat();
           }else{

@@ -17,6 +17,13 @@
           document.head.appendChild(style)
         }
       }
+
+      let tag = document.getElementsByTagName('script');
+      for(let i=0; i<tag.length; i++){
+        if(tag[i].getAttribute('src') && tag[i].getAttribute('src').indexOf('.js')){
+          tag[i].setAttribute('src', tag[i].getAttribute('src')+'?'+new Date().getTime());
+        }
+      }
     </script>
   </body>
 </html>

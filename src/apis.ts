@@ -178,7 +178,7 @@ export type ItemType = {
   /**
    * 租金数
    */
-  totalRentFee: string;
+  totalRentFee: string| number;
   /**
    * 销毁数
    */
@@ -197,7 +197,10 @@ const getnum = (num: string):string => {
   const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
   return num1.substring(0,num1.indexOf(".")+5);
 }
-
+const getRent = (num: number):string => {
+  let num1 = String(num);
+  return num1.substring(0,num1.indexOf(".")+3);
+}
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
   // const hash = await request.send<string>("chain_getBlockHash");
   const [list, total] = await Promise.all([
@@ -212,11 +215,12 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
     list: list.map(
       (s,i) => ({
           ...s,
+          totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
           calcPoints: Number(s.calcPoints)/100,
           totalReward: getnum(s.totalReward),
           index: s.index >= 0?s.index+1:i+1,
           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
-          rentRate: Number(s.totalRentedGpu) != 0 ?((Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+          rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
         })
       ),
     total

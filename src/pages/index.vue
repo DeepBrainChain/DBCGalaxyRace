@@ -184,23 +184,26 @@ export default defineComponent({
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
+    const getnum = (num: Number):string => {
+      let num1 = String(num);
+      return num1.substring(0,num1.indexOf(".")+3);
+    }
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
+      rewardInfo.Rent = '0'
       Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;
         let v = rewardInfo[key];
         if (typeof v !== "undefined") {
           if(key === 'Rent'){
-            v = Number(rewardInfo['totalRentedGpu']) != 0 ?((Number(rewardInfo['totalRentedGpu'])/Number(rewardInfo['totalGpuNum'])*100)+'%') : '0'
-          }
-          if( key === 'totalStake' || key === 'totalStakeAll'){
+            v = Number(rewardInfo['totalRentedGpu']) != 0 ?(getnum(Number(rewardInfo['totalRentedGpu'])/Number(rewardInfo['totalGpuNum'])*100)+'%') : '0'
+          }else if( key === 'totalStake' || key === 'totalStakeAll' || key === 'totalRentFee'){
             v = new BigNumber(Math.round(Number(v)/ Math.pow(10,15))).toFormat();
           }else if(key === "totalCalcPoints"){
             v = new BigNumber(Number(v) / 100).toFormat();
           }else{
             v = new BigNumber(v).toFormat();
           }
-          
         }
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });

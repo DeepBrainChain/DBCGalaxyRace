@@ -115,7 +115,7 @@ div.pagination-container
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { getRewardInfo, getList, RewardInfoType, ItemType, compare } from "../apis";
+import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
@@ -159,6 +159,10 @@ export default defineComponent({
         label: "租金数"
       },
       {
+        key: "unlockReward",
+        label: "已解锁奖励数"
+      },
+      {
         key: "totalReward",
         label: "奖励总数"
       }
@@ -185,6 +189,9 @@ export default defineComponent({
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
     const getnum = (num: Number):string => {
+      if( num>=100 ){
+        return '100'
+      }
       let num1 = String(num);
       return num1.substring(0,num1.indexOf(".")+3);
     }
@@ -208,10 +215,6 @@ export default defineComponent({
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
       const { list, total: remoteTotal } = await getList();
-      // let list1 = list.sort(compare('calcPoints'))
-      // list1.map((el, i) => {
-      //   el.index = i+1
-      // })
       set(list, tableData);
       total.value = remoteTotal;
     });

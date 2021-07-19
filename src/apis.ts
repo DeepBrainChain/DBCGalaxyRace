@@ -30,13 +30,15 @@ function byteToStr(arr: Array<number>) {
  * onlineProfile_getStakerListInfo: 分页获取数据
  * onlineProfile_getOpInfo: 获取奖励信息
  * onlineProfile_getPosGpuInfo: 获取地图算力节点
+ * onlineProfile_getStakerInfo: 获取总金额
  */
-type Methods =
-  | "chain_getBlockHash"
-  | "onlineProfile_getOpInfo"
-  | "onlineProfile_getStakerNum"
-  | "onlineProfile_getPosGpuInfo"
-  | "onlineProfile_getStakerListInfo";
+ type Methods =
+ | "chain_getBlockHash"
+ | "onlineProfile_getOpInfo"
+ | "onlineProfile_getStakerNum"
+ | "onlineProfile_getPosGpuInfo"
+ | "onlineProfile_getStakerListInfo"
+ | "onlineProfile_getStakerInfo";
 
 class DBCRequest {
   ws: WebSocket;
@@ -168,6 +170,10 @@ export type ItemType = {
    */
   name: string;
   /**
+   * 已解锁奖励
+   */
+  unlockReward: string;
+  /**
    * 奖励总数
    */
   totalReward: string;
@@ -198,6 +204,9 @@ const getnum = (num: string):string => {
   return num1.substring(0,num1.indexOf(".")+5);
 }
 const getRent = (num: number):string => {
+  if( num>=100 ){
+    return '100'
+  }
   let num1 = String(num);
   return num1.substring(0,num1.indexOf(".")+3);
 }
@@ -211,13 +220,16 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
     ]),
     request.sendUnique<number>("onlineProfile_getStakerNum")
   ]);
+  const data = await getStakerInfo(list)
+  console.log(data, 'data');
   return {
     list: list.map(
       (s,i) => ({
           ...s,
           totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
           calcPoints: Number(s.calcPoints)/100,
-          totalReward: getnum(s.totalReward),
+          unlockReward: getnum(s.totalReward),
+          totalReward: getnum(String(data[i]*3/4)),
           index: s.index >= 0?s.index+1:i+1,
           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
           rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
@@ -230,6 +242,22 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
 
 export const getPosGpuInfo = async () => {
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
+};
+
+export const getStakerInfo = async (list: any) => {
+  let bewArray:Array<any> = []
+  for(let i=0; i< list.length;i++){
+    await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+      res => {
+        let data = 0
+        res.stashStatistic.linearReleaseReward.map( (el: string) => {
+          data += Number(el)
+        })
+        bewArray.push(data)
+      }
+    )
+  }
+  return bewArray
 };
 // 可根据算力值排序
 export const compare = (property: any) => {

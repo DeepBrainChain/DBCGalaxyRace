@@ -27,7 +27,8 @@ export default {
   lable_two5: "租用率",
   lable_two6: "租金数",
   // lable_two7: "销毁数",
-  lable_two7: "奖励总数",
+  lable_two7: "已解锁奖励数",
+  lable_two8: "奖励总数",
   Jumpto: "跳至",
   page: "页",
   ap: "条/页"

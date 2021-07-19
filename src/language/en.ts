@@ -27,7 +27,8 @@ export default {
     lable_two5:'Rental Rate',
     lable_two6: "Number of rents",
     // lable_two7: "销毁数",
-    lable_two7: "Total Rewards",
+    lable_two7: "Unlocked Rewards",
+    lable_two8: "Total Rewards",
     Jumpto:'Go to',
     page:'Page',
     ap:'Article/page'

@@ -4,7 +4,7 @@ import legacy from '@vitejs/plugin-legacy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // base: "./",
+  // base: "/data/DBCGalaxyRace/dist",
   plugins: [vue(), legacy({
     targets: ['ie >= 10'],
     additionalLegacyPolyfills: ['regenerator-runtime/runtime']

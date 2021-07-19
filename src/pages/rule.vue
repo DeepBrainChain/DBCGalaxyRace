@@ -49,6 +49,11 @@ div.rule-wrapper
         div 显存
         div 算力值
       div.table_li
+        div 1660s
+        div 1408
+        div 6
+        div 42.08
+      div.table_li
         div 2080ti
         div 4352
         div 11
@@ -78,6 +83,11 @@ div.rule-wrapper
         div 10240
         div 12
         div 99.01
+      div.table_li
+        div A5000
+        div 8192
+        div 24
+        div 103.51
       div.table_li
         div 3090
         div 10496

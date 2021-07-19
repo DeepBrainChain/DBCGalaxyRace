@@ -229,7 +229,7 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 2
           totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
           calcPoints: Number(s.calcPoints)/100,
           unlockReward: getnum(s.totalReward),
-          totalReward: getnum(String(data[i]*3/4)),
+          totalReward: getnum(String(data[i]*4/3)),
           index: s.index >= 0?s.index+1:i+1,
           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
           rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0

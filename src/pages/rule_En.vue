@@ -86,7 +86,7 @@ div.rule-wrapper
         div 10240
         div 12
         div 99.01
-      div.table_li
+      div.table_li.hide
         div A5000
         div 8192
         div 24
@@ -255,6 +255,9 @@ div.rule-wrapper
           border: none;
         }
       }
+    }
+    .hide{
+      display: none;
     }
   }
 }

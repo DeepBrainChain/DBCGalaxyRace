@@ -170,7 +170,7 @@ div.rule-wrapper
   div.rule-title 声明
   div.rule-content 如果在比赛中发现了严重的BUG, 深脑链团队可能会提前结束比赛。在发现BUG之前的一段时间内仍然会得到奖励。如果将这样的BUG向深脑链团队披露，报告该BUG的团队将有资格获得最高达300万 DBC的奖励，具体取决于BUG的严重程度，由深脑链团队决定。
 </template>
-<style lang="less">
+<style lang="less" scoped >
 .li-style {
   margin-top: 0;
   padding-left: 20px;
@@ -212,7 +212,7 @@ div.rule-wrapper
     border: 1px solid #333;
     .table_con {
       width: 100%;
-      height: 30px;
+      height: 80px;
       display: flex;
       align-items: center;
       font-weight: bold;
@@ -220,7 +220,10 @@ div.rule-wrapper
       border-bottom: 1px solid #333;
       div {
         width: 200px;
-        height: 30px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         line-height: 30px;
         box-sizing: border-box;
@@ -232,7 +235,7 @@ div.rule-wrapper
     }
     .table_li {
       width: 100%;
-      height: 30px;
+      min-height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -242,7 +245,7 @@ div.rule-wrapper
       }
       div {
         width: 200px;
-        height: 30px;
+        min-height: 30px;
         text-align: center;
         line-height: 30px;
         box-sizing: border-box;
@@ -289,5 +292,30 @@ div.rule-wrapper
   margin: 24px auto 0;
 
   color: #666666;
+}
+@media screen and (max-width: 750px){
+  .description{
+    line-height: 1.5;
+  }
+  .rule-wrapper {
+    .rule-title{
+      line-height: 1.3;
+    }
+    .rule-content{
+      line-height: 1.2;
+      .table {
+        .table_con {
+          div {
+            line-height: 1.1;
+          }
+        }
+        .table_li {
+          div {
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

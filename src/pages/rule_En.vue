@@ -174,7 +174,7 @@ div.rule-wrapper
   div.rule-title Disclaimer:
   div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
 </template>
-<style lang="less">
+<style lang="less" scoped>
 .li-style {
   margin-top: 0;
   padding-left: 20px;
@@ -216,7 +216,7 @@ div.rule-wrapper
     border: 1px solid #333;
     .table_con{
       width: 100%;
-      height: 30px;
+      height: 60px;
       display: flex;
       align-items: center;
       font-weight: bold;
@@ -224,9 +224,11 @@ div.rule-wrapper
       border-bottom: 1px solid #333;
       div{
         width: 200px;
-        height: 30px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
-        line-height: 30px;
         box-sizing: border-box;
         border-right: 1px solid #333;
         &:last-child{
@@ -236,7 +238,7 @@ div.rule-wrapper
     }
     .table_li{
       width: 100%;
-      height: 30px;
+      min-height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -246,7 +248,7 @@ div.rule-wrapper
       }
       div{
         width: 200px;
-        height: 30px;
+        min-height: 30px;
         text-align: center;
         line-height: 30px;
         box-sizing: border-box;
@@ -296,5 +298,30 @@ div.rule-wrapper
   margin: 24px auto 0;
 
   color: #666666;
+}
+@media screen and (max-width: 750px){
+  .description{
+    line-height: 1.5;
+  }
+  .rule-wrapper {
+    .rule-title{
+      line-height: 1.3;
+    }
+    .rule-content{
+      line-height: 1.2;
+      .table {
+        .table_con {
+          div {
+            line-height: 1.2;
+          }
+        }
+        .table_li {
+          div {
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

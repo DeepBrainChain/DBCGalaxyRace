@@ -76,19 +76,22 @@ div.pagination-container
 }
 .item {
   width: 189px;
-  height: 110px;
+  min-height: 110px;
   background: white;
   border-radius: 12px;
   font-family: PingFang SC, sans-serif;
   text-align: center;
   color: #051174;
   padding: 20px 0 26px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   .label {
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
-    height: 40px;
+    min-height: 40px;
     opacity: 0.4;
     // margin-bottom: 6px;
   }
@@ -109,6 +112,30 @@ div.pagination-container
   text-align: center;
   margin: 24px auto 0;
   color: #666666;
+}
+@media screen and (max-width: 750px){
+  .description{
+    line-height: 1.5;
+  }
+  .item {
+    .label {
+      line-height: 1.1;
+      word-break: break-all;
+    }
+    .value{
+      line-height: 1.1;
+      word-break: break-all;
+    }
+  }
+  .table {
+    thead .td {
+      line-height: 1.2;
+      word-break: break-all;
+    }
+    .td {
+      line-height: 1.41;
+    }
+  }
 }
 </style>
 <script lang="ts">

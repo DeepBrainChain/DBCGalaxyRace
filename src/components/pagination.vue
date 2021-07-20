@@ -49,12 +49,13 @@ div.pagination-wrapper
     font-family: PingFang SC, sans-serif;
     border-radius: 4px;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 1.1;
     color: #333333;
     // width: 89px;
-    height: 26px;
+    min-height: 30px;
     padding:0 25px 0 15px;
     outline: none;
+    background: #fff;
     &:focus-visible,
     &:focus {
       outline: none;
@@ -137,6 +138,28 @@ div.pagination-wrapper
     border: 1px solid currentColor;
     color: #338aff;
     --border-color: currentColor;
+  }
+}
+@media screen and (max-width: 750px){
+  .item {
+    width: 2.80556vw;
+    height: 2.80556vw;
+  }
+  .input{
+    width: 2.5vw;
+    height: 2.5vw;
+  }
+  .arrow{
+    width: 1.3vw;
+    height: 1.3vw;
+  }
+  .select-wrapper {
+    .down-arrow {
+      margin-top: -.6vw;
+    }
+    select{
+      min-height: 3vw;
+    }
   }
 }
 </style>

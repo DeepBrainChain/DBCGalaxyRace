@@ -9,7 +9,7 @@ div#map
   font-family: PingFang SC, sans-serif;
   font-weight: 500;
   font-size: 16px;
-  line-height: 29px;
+  // line-height: 29px;
   text-align: center;
   margin: 24px auto 0;
   color: #666666;

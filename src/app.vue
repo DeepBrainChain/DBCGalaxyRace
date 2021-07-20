@@ -54,12 +54,12 @@ Background
 .time-wrapper {
   box-sizing: border-box;
   width: 550px;
-  height: 120px;
+  min-height: 120px;
   background: url("./assets/button.png");
   background-size: cover;
   border-radius: 20px;
   margin: 40px auto 0;
-  padding: 26px;
+  padding: 26px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +68,7 @@ Background
     font-family: PingFang SC, sans-serif;
     font-weight: 600;
     font-size: 18px;
-    line-height: 25px;
+    // line-height: 25px;
     color: #ffffff;
     opacity: 0.8;
   }
@@ -76,7 +76,7 @@ Background
     font-family: PingFang SC, sans-serif;
     font-weight: 600;
     font-size: 22px;
-    line-height: 34px;
+    // line-height: 34px;
     color: #ffffff;
     span {
       padding: 0 13px;
@@ -88,9 +88,9 @@ Background
   font-weight: bold;
   bottom: 0;
   left: 50%;
-  margin-left: -62.5px;
   font-size: 18px;
   color: #051174;
+  transform: translate(-50%, 0);
   span {
     margin-right: 4px;
   }
@@ -156,12 +156,13 @@ Background
       font-family: PingFang SC, sans-serif;
       border-radius: 4px;
       font-size: 12px;
-      line-height: 20px;
+      line-height: 1.1;
       color: #333333;
       padding: 0 25px; 
-      height: 26px;
+      min-height: 26px;
       padding-left: 12px;
       outline: none;
+      background: #fff;
       &:focus-visible,
       &:focus {
         outline: none;
@@ -179,6 +180,25 @@ Background
   img {
     width: 100%;
     height: 100%;
+  }
+}
+@media screen and (max-width: 750px){
+  .time-wrapper{
+    width: 230px;
+  }
+  .navigator{
+    .select-wrapper {
+      .arrow{
+        width: 1.3vw;
+        height: 1.3vw;
+      }
+      .down-arrow {
+        margin-top: -.6vw;
+      }
+      select{
+        min-height: 3vw;
+      }
+    }
   }
 }
 </style>

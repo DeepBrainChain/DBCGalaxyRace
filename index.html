@@ -8,6 +8,7 @@
   </head>
   <body>
     <div id="app"></div>
+    <!-- <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=jQc7i76SLm2k5j54z5y6ppjWjhb0nlhC"></script> -->
     <script type="module" src="./src/main.ts"></script>
     <script type="text/javascript">
       function require() {
@@ -18,5 +19,14 @@
         }
       }
     </script>
+    <!-- <script>
+      var point = new BMap.Point(118.4900,37.4600);
+      var gc = new BMap.Geocoder();
+      gc.getLocation(point, function(rs){
+        var addComp = rs.addressComponents;
+        console.log(addComp,'addComp');
+        console.log(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+      });
+    </script> -->
   </body>
 </html>

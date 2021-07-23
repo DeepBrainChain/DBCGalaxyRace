@@ -12,6 +12,9 @@ nav.navigator
   router-link.navigator-item(to='/map',:class='{active: active === 3}')
     | {{t('header_menu3')}}
     div.navigator-active
+  router-link.navigator-item(to='/table',:class='{active: active === 4}')
+    | {{t('header_menu4')}}
+    div.navigator-active
   div.select-wrapper
     Arrow.down-arrow
     div.select-box.border-1px
@@ -224,7 +227,7 @@ export default defineComponent({
       const myDate = new Date((time.replace(/-/g, "/")));
       return myDate;
     };
-    const active = computed(() => ["/", "/rule", "/rule_En", "/map"].indexOf(route.path));
+    const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
     const countDownactive = computed(() => (formateIOS("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
@@ -251,7 +254,6 @@ export default defineComponent({
       countDownactive,
       t,
       lan,
-      options: [ { i:'zh', val:'简体中文'}, { i:'en', val:'ENGLISH'} ],
       handleSelect: (e: any) => {
         lan.value = e.target.value
         localStorage.setItem('lan', e.target.value)

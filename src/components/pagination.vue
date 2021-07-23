@@ -165,7 +165,7 @@ div.pagination-wrapper
 </style>
 
 <script lang="ts">
-import { defineComponent, ref, computed, watch } from "vue";
+import { defineComponent, ref, computed, watch, onMounted } from "vue";
 import { usePagination } from "../hooks/usePagination";
 import Arrow from "./arrow.vue";
 import DoubleArrow from "./double-arrow.vue";
@@ -220,18 +220,29 @@ export default defineComponent({
       result,
       t,
       prev: () => {
-        currentPage.value -= 1;
-        jump(currentPage.value);
+        if(currentPage.value != 1){
+          currentPage.value -= 1;
+          jump(currentPage.value);
+        }else{
+          console.log('prev no change');
+        }
       },
       next: () => {
+        let oldcurrentPage = currentPage.value;
         currentPage.value += 1;
-        jump(currentPage.value);
+        if(oldcurrentPage != currentPage.value){
+          jump(currentPage.value);
+        }else{
+          console.log('next no change');
+        }
       },
       first: () => {
+        console.log('first');
         currentPage.value = 1;
         jump(1);
       },
       last: () => {
+        console.log('last');
         currentPage.value = lastPage.value;
         jump(lastPage.value);
       },
@@ -240,15 +251,18 @@ export default defineComponent({
       showLast: computed(() => currentPage.value < totalPage.value - 2 && totalPage.value >= 7),
       showRightMore: computed(() => currentPage.value < totalPage.value - 3 && totalPage.value >= 7),
       handleKeypress: (e: any) => {
+        console.log(e,'eee');
         const isEnter = (e.which || e.keyCode) === 13;
         const v = Number(e.target.value);
-        if (isEnter) {
-          if (!Number.isNaN(v)) {
+        if (isEnter && !Number.isNaN(v)) {
+          if(currentPage.value != v && v !=0 ){
             currentPage.value = v > totalPage.value ? totalPage.value : v < 1 ? 1 : v;
             jump(currentPage.value)
+          }else{
+            console.log('Keypress no change');
           }
-          e.target.value = "";
         }
+        e.target.value = "";
       },
       options: [5, 10, 20, 30, 50],
       handleSelect: (e: any) => {
@@ -259,8 +273,12 @@ export default defineComponent({
         }
       },
       handleJump: (n: number) => {
-        currentPage.value = n;
-        jump(n);
+        if(currentPage.value != n){
+          currentPage.value = n;
+          jump(n);
+        }else{
+          console.log('no change');
+        }
       },
     };
   },

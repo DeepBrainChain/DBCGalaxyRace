@@ -13,7 +13,7 @@ div.rule-wrapper
       | minimum 1 card, recommended 2 or 4 cards. Nvidia's Nvidia series graphics cards, with a minimum requirement of 8G video memory. Considering the rental rate, the type of graphics card recommended are: 3080ti, 3080, 3090, 3070ti, 2080ti, 3070, etc. Notes on the configuration of DBC Computing Server:In case of newly configured machines, one graphics deceiver per GPU is required.
     li 
       span Memory: 
-      | Minimally 1 graphic card needs 224g, 2 cards - 224g, 3 cards 336g, 4 cards - 448g, and so on.
+      | Minimally 1 graphic card needs 224g, 2 cards - 384g, 4 cards - 768g, and so on.
     li 
       span CPU: Intel/AMD: 
       | Main frequency 2.0Ghz and above, single CPU 8 cores and above, with an average of 8 or more cores per GPU. Important Notes: Considering the medium and long-term rental rate, as well as the 30% bonus of computing power value in the rental state, it is recommended that the CPU of the new machine be configured as follows:

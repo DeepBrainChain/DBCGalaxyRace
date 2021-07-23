@@ -222,6 +222,10 @@ export default defineComponent({
       let num1 = String(num);
       return num1.substring(0,num1.indexOf(".")+3);
     }
+    const getnum1 = (num: string):string => {
+      const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
+      return num1.substring(0,num1.indexOf(".")+5);
+    }
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
       rewardInfo.Rent = '0'
@@ -244,6 +248,16 @@ export default defineComponent({
       const { list, total: remoteTotal } = await getList();
       set(list, tableData);
       total.value = remoteTotal;
+      setTimeout( async()=>{
+        const data = await getStakerInfo(list)
+        console.log(data, 'data');
+        list.map(
+          (s,i) => {
+            s.totalReward = getnum1(String(data[i]*4/3))
+          }
+        )
+        set(list, tableData);
+      }, 2000)
     });
 
     return {
@@ -257,10 +271,30 @@ export default defineComponent({
         const { list, total: remoteTotal } = await getList(1, num);
         set(list, tableData);
         total.value = remoteTotal;
+        setTimeout( async()=>{
+          const data = await getStakerInfo(list)
+          console.log(data, 'data');
+          list.map(
+            (s,i) => {
+              s.totalReward = getnum1(String(data[i]*4/3))
+            }
+          )
+          set(list, tableData);
+        }, 2000)
       },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
+        setTimeout( async()=>{
+          const data = await getStakerInfo(list)
+          console.log(data, 'data');
+          list.map(
+            (s,i) => {
+              s.totalReward = getnum1(String(data[i]*4/3))
+            }
+          )
+          set(list, tableData);
+        }, 2000)
       }
     };
   }

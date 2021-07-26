@@ -201,14 +201,18 @@ export type ItemType = {
 
 const getnum = (num: string):string => {
   const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
-  return num1.substring(0,num1.indexOf(".")+5);
+  let hasPoint;
+  num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
+  return hasPoint ? num1.substring(0,num1.indexOf(".")+5) : num1
 }
 const getRent = (num: number):string => {
   if( num>=100 ){
     return '100'
   }
   let num1 = String(num);
-  return num1.substring(0,num1.indexOf(".")+3);
+  let hasPoint;
+  num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
+  return hasPoint ? num1.substring(0,num1.indexOf(".")+3) : num1
 }
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
   // const hash = await request.send<string>("chain_getBlockHash");

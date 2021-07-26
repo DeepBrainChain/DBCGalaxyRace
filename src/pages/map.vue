@@ -65,6 +65,7 @@ export default defineComponent({
       } catch {
         list = []
       }
+      list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
       list.map((el, index) => {
         data1[index] = {};
         data1[index].lng = el[0] / Math.pow(10, 4);
@@ -76,6 +77,7 @@ export default defineComponent({
         el[2].onlineGpuCalcPoints = el[2].onlineGpuCalcPoints/100;
         data1[index] = { ...data1[index], ...el[2] };
       });
+      console.log(list, 'list')
       const scene = new Scene({
         id: "map",
         map: new Mapbox({

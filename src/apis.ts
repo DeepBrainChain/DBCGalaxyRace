@@ -210,54 +210,84 @@ const getRent = (num: number):string => {
   let num1 = String(num);
   return num1.substring(0,num1.indexOf(".")+3);
 }
+
+export const getNumber =  async () => {
+  return request.sendUnique<number>("onlineProfile_getStakerNum")
+};
+
+// export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
+//   // const hash = await request.send<string>("chain_getBlockHash");
+//   const [list, total] = await Promise.all([
+//     request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
+//       // hash,
+//       currentPage == 0 ? 0 : currentPage - 1,
+//       numOfEachPage
+//     ]),
+//     request.sendUnique<number>("onlineProfile_getStakerNum")
+//   ]);
+//   // const data = await getStakerInfo(list)
+//   // console.log(data, 'data');
+//   return {
+//     list: list.map(
+//       (s,i) => ({
+//           ...s,
+//           totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
+//           calcPoints: Number(s.calcPoints)/100,
+//           unlockReward: getnum(s.totalReward),
+//           // totalReward: getnum(String(data[i]*4/3)),
+//           totalReward: '···',
+//           index: s.index >= 0?s.index+1:i+1,
+//           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
+//           rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+//         })
+//       ),
+//     total
+//   };
+// };
+
 export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
-  // const hash = await request.send<string>("chain_getBlockHash");
-  const [list, total] = await Promise.all([
-    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
-      // hash,
-      currentPage == 0 ? 0 : currentPage - 1,
-      numOfEachPage
-    ]),
-    request.sendUnique<number>("onlineProfile_getStakerNum")
-  ]);
-  // const data = await getStakerInfo(list)
-  // console.log(data, 'data');
+  let list:Array<any> = []
+  await request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
+    // hash,
+    currentPage == 0 ? 0 : currentPage - 1,
+    numOfEachPage
+  ]).then(res => {
+    list = res
+  })
   return {
     list: list.map(
       (s,i) => ({
-          ...s,
-          totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
-          calcPoints: Number(s.calcPoints)/100,
-          unlockReward: getnum(s.totalReward),
-          // totalReward: getnum(String(data[i]*4/3)),
-          totalReward: '···',
-          index: s.index >= 0?s.index+1:i+1,
-          name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
-          rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
-        })
-      ),
-    total
+        ...s,
+        totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
+        calcPoints: Number(s.calcPoints)/100,
+        unlockReward: getnum(s.totalReward),
+        // totalReward: getnum(String(data[i]*4/3)),
+        totalReward: '···',
+        index: s.index >= 0?s.index+1:i+1,
+        name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
+        rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+      })
+    )
   };
 };
-
 
 export const getPosGpuInfo = async () => {
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 
 export const getStakerInfo = async (list: any) => {
-  let bewArray:Array<any> = []
-  for(let i=0; i< list.length;i++){
-    await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
-      res => {
-        let data = 0
-        res.stashStatistic.linearReleaseReward.map( (el: string) => {
-          data += Number(el)
-        })
-        bewArray.push(data)
-      }
-    )
-  }
+    let bewArray:Array<any> = []
+    for(let i=0; i< list.length;i++){
+      await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+        res => {
+          let data = 0
+          res.stashStatistic.linearReleaseReward.map( (el: string) => {
+            data += Number(el)
+          })
+          bewArray[i] = data
+        }
+      )
+    }
   return bewArray
 };
 // 可根据算力值排序

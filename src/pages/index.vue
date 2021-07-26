@@ -152,7 +152,7 @@ div.pagination-container
 import { defineComponent, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare } from "../apis";
+import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare, getNumber } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
@@ -257,9 +257,14 @@ export default defineComponent({
         }
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
-      const { list, total: remoteTotal } = await getList();
+      
+      await getNumber().then( res => {
+        total.value = res
+      })
+      
+      const { list } = await getList();
       set(list, tableData);
-      total.value = remoteTotal;
+      // total.value = remoteTotal;
       setTimeout( async()=>{
         const data = await getStakerInfo(list)
         console.log(data, 'data');
@@ -298,10 +303,13 @@ export default defineComponent({
       //   }, 2000)
       // },
       handleChangePageSize: async (num: number) => {
-        const { list, total: remoteTotal } = await getList(1, num);
+        await getNumber().then( res => {
+          total.value = res
+        })
+        const { list } = await getList(1, num);
         set(list, tableData);
-        total.value = remoteTotal;
         setTimeout( async()=>{
+          console.log(list, 'handleChangePageSize')
           const data = await getStakerInfo(list)
           console.log(data, 'data');
           list.map(
@@ -312,25 +320,26 @@ export default defineComponent({
           set(list, tableData);
         }, 2000)
       },
-      handleCurrentChange: async (num: number) => {
-        currentPage.value = num
-        const { list } = await getList(currentPage.value, PageSize.value);
-        set(list, tableData);
-        setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          console.log(data, 'data');
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
-            }
-          )
-          set(list, tableData);
-        }, 2000)
-      },
+      // handleCurrentChange: async (num: number) => {
+      //   currentPage.value = num
+      //   const { list } = await getList(currentPage.value, PageSize.value);
+      //   set(list, tableData);
+      //   setTimeout( async()=>{
+      //     const data = await getStakerInfo(list)
+      //     console.log(data, 'data');
+      //     list.map(
+      //       (s,i) => {
+      //         s.totalReward = getnum1(String(data[i]*4/3))
+      //       }
+      //     )
+      //     set(list, tableData);
+      //   }, 2000)
+      // },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
         setTimeout( async()=>{
+          console.log(list, 'handleJump')
           const data = await getStakerInfo(list)
           console.log(data, 'data');
           list.map(

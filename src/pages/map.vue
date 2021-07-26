@@ -46,7 +46,7 @@ import { getPosGpuInfo } from "../apis";
 export default defineComponent({
   name: "maps",
   setup() {
-    const { t } = useI18n();
+    const { t, locale } = useI18n();
     const maxDecimal = number => {
       return String(number).replace(/^(.*\..{4}).*$/, "$1");
     };
@@ -62,6 +62,7 @@ export default defineComponent({
       let data1 = []
       try {
         list = await getPosGpuInfo()
+        list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
       } catch {
         list = []
       }
@@ -123,8 +124,7 @@ export default defineComponent({
           });
         pointLayer.on("mousemove", e => {
           let str = "";
-          let lan = localStorage.getItem("lan");
-          if (lan == "zh") {
+          if (locale.value == "zh") {
             if (e.feature.offlineGpu <= 0) {
               str = `
                             <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
@@ -166,8 +166,7 @@ export default defineComponent({
         });
         pointLayer.on("click", e => {
           let str = "";
-          let lan = localStorage.getItem("lan");
-          if (lan == "zh") {
+          if (locale.value == "zh") {
             if (e.feature.offlineGpu <= 0) {
               str = `
                             <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>

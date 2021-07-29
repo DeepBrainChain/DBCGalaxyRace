@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
-    "build": "vue-tsc --noEmit && vite build --base=./ && npm run cp:bash && npm run exec:scripts",
+    "build": "vite build --base=./ && npm run cp:bash && npm run eexc:scripts",
     "serve": "vite preview",
     "cp:bash": "cp scripts/* dist/assets/",
     "exec:scripts": "cd dist/assets && bash br.bash && bash gzip.bash && bash svg.bash"
@@ -20,7 +20,6 @@
     "modern-normalize": "^1.1.0",
     "vue": "^3.0.5",
     "vue-i18n": "^9.1.6",
-    "vue-jsonp": "^2.0.0",
     "vue-router": "^4.0.6"
   },
   "devDependencies": {

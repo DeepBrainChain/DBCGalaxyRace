@@ -277,6 +277,7 @@ export const getPosGpuInfo = async () => {
 
 export const getStakerInfo = async (list: any) => {
     let bewArray:Array<any> = []
+    console.log(list, 'getStakerInfo');
     for(let i=0; i< list.length;i++){
       await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
         res => {

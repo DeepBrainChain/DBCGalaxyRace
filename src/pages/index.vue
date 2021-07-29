@@ -15,17 +15,20 @@ table.table(ce)
       td.td(v-for="column in tableColumns")
         | {{row[column.key]}}
 div.pagination-container
-  Pagination(:total="total", :onChangePageSize="handleChangePageSize",:onJumpPage="handleJump")
-  //- el-pagination.pagination(
-  //-   @size-change="handleChangePageSize1", 
-  //-   @current-change="handleCurrentChange", 
-  //-   :currentPage="currentPage", 
-  //-   :page-sizes="[5, 10, 20, 50]",
-  //-   :page-size="PageSize",
-  //-   small
-  //-   layout="sizes, prev, pager, next",
-  //-   :total="total"
-  //- )
+  Pagination(v-if='!isWin' :total="total", :onChangePageSize="handleChangePageSize",:onJumpPage="handleJump")
+  el-pagination.pagination(
+    v-else
+    @size-change="handleChangePageSize1", 
+    @current-change="handleCurrentChange", 
+    :currentPage="currentPage", 
+    :page-sizes="[5, 10, 20, 30, 50]",
+    :page-size="PageSize",
+    small
+    popper-class='pagination'
+    :disabled = 'PaDisabled'
+    layout="total, sizes, prev, pager, next, jumper",
+    :total="total"
+  )
 </template>
 <style lang="less" scoped>
 .pagination-container {
@@ -149,7 +152,7 @@ div.pagination-container
 }
 </style>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from "vue";
+import { defineComponent, computed, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
 import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare, getNumber } from "../apis";
@@ -161,7 +164,15 @@ export default defineComponent({
   setup() {
     const { t } = useI18n();
     const currentPage = ref(1)
-    const PageSize = ref(20)
+    const PageSize = ref(50)
+    const PaDisabled = ref(true)
+    const isWin = computed(()=>{
+      if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+        return false
+      }else{
+        return true
+      }
+    })
     const rewardsItems: Array<{ key: keyof RewardInfoType; label: string }> = [
       { key: "totalCalcPoints", label: "总算力值" },
       { key: "totalGpuNum", label: "GPU总数" },
@@ -206,10 +217,7 @@ export default defineComponent({
         label: "奖励总数"
       }
     ];
-    const set = (
-      serverList: Array<ItemType>,
-      reactiveList: Array<ItemType>
-    ) => {
+    const set = ( serverList: Array<ItemType>, reactiveList: Array<ItemType> ) => {
       reactiveList.splice(0, reactiveList.length);
       // todo
       serverList.forEach(item => {
@@ -274,6 +282,7 @@ export default defineComponent({
           }
         )
         set(list, tableData);
+        PaDisabled.value = false
       }, 2000)
     });
 
@@ -286,22 +295,30 @@ export default defineComponent({
       currentPage,
       PageSize,
       t,
-      // handleChangePageSize1: async (num: number) => {
-      //   PageSize.value = num
-      //   const { list, total: remoteTotal } = await getList(currentPage.value, PageSize.value);
-      //   set(list, tableData);
-      //   total.value = remoteTotal;
-      //   setTimeout( async()=>{
-      //     const data = await getStakerInfo(list)
-      //     console.log(data, 'data');
-      //     list.map(
-      //       (s,i) => {
-      //         s.totalReward = getnum1(String(data[i]*4/3))
-      //       }
-      //     )
-      //     set(list, tableData);
-      //   }, 2000)
-      // },
+      isWin,
+      PaDisabled,
+      handleChangePageSize1: async (num: number) => {
+        PaDisabled.value = true
+        PageSize.value = num
+        // await getNumber().then( res => {
+        //   total.value = res
+        // })
+        if(Math.ceil(total.value / num) > currentPage.value ){
+          const { list } = await getList(currentPage.value, PageSize.value);
+          set(list, tableData);
+          // setTimeout( async()=>{
+          const data = await getStakerInfo(list)
+          console.log(data, 'data');
+          list.map(
+            (s,i) => {
+              s.totalReward = getnum1(String(data[i]*4/3))
+            }
+          )
+          set(list, tableData);
+          PaDisabled.value = false
+          // }, 2000)
+        }
+      },
       handleChangePageSize: async (num: number) => {
         await getNumber().then( res => {
           total.value = res
@@ -309,7 +326,6 @@ export default defineComponent({
         const { list } = await getList(1, num);
         set(list, tableData);
         setTimeout( async()=>{
-          console.log(list, 'handleChangePageSize')
           const data = await getStakerInfo(list)
           console.log(data, 'data');
           list.map(
@@ -320,26 +336,27 @@ export default defineComponent({
           set(list, tableData);
         }, 2000)
       },
-      // handleCurrentChange: async (num: number) => {
-      //   currentPage.value = num
-      //   const { list } = await getList(currentPage.value, PageSize.value);
-      //   set(list, tableData);
-      //   setTimeout( async()=>{
-      //     const data = await getStakerInfo(list)
-      //     console.log(data, 'data');
-      //     list.map(
-      //       (s,i) => {
-      //         s.totalReward = getnum1(String(data[i]*4/3))
-      //       }
-      //     )
-      //     set(list, tableData);
-      //   }, 2000)
-      // },
+      handleCurrentChange: async (num: number) => {
+        PaDisabled.value = true
+        currentPage.value = num
+        const { list } = await getList(currentPage.value, PageSize.value);
+        set(list, tableData);
+        // setTimeout( async()=>{
+          const data = await getStakerInfo(list)
+          console.log(data, 'data');
+          list.map(
+            (s,i) => {
+              s.totalReward = getnum1(String(data[i]*4/3))
+            }
+          )
+          set(list, tableData);
+          PaDisabled.value = false
+        // }, 2000)
+      },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
         setTimeout( async()=>{
-          console.log(list, 'handleJump')
           const data = await getStakerInfo(list)
           console.log(data, 'data');
           list.map(

@@ -135,7 +135,7 @@ export function usePagination(options: PaginationOptions): PaginationResult {
     },
   });
 
-  const lastPage = computed(() => Math.ceil(total.value / pageSize.value));
+  const lastPage = computed(() => Math.ceil(total.value / pageSize.value) || 1);
   // make sure the current page is the correct value
   currentPage.value = _currentPage.value;
 
@@ -198,7 +198,7 @@ export function useArrayPagination<T extends Array<any>>(
     if (!Array.isArray(array)) return [];
     return array.slice(pagination.offset.value, pagination.offset.value + pagination.pageSize.value);
   }) as ComputedRef<T>;
-
+  console.log(pagination, result, 'resultresultresult');
   return {
     ...pagination,
     result,

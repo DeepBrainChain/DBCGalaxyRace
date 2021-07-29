@@ -1,4 +1,6 @@
+import enLocale from 'element-plus/lib/locale/lang/en'
 export default {
+    el: enLocale.el,
     // 头部菜单
     header_menu1: 'Galaxy Race',
     header_menu2: 'Rules of the Race',
@@ -14,7 +16,7 @@ export default {
     TheEnd:'Times Up',
     desc:'Galaxy Computing Power Race public test phase 1 is from July 18th, 2021 Beijing time - August 17th, 2021; public test phase 2 is from August 18th, 2021 Beijing time - September 17th, 2021. Galaxy Computing Power Race mainnet deployment online is Beijing time September 18th, 2021, when the whole network reaches 5,000 GPU the race is automatically activated, after the activation the race will continue for 2 months, during the race period all miners together will divide 133 million DBC rewards,  the top 5 miners can get an additional 30 million DBC rewards!',
     desc1: "By viewing the hashrate map, you can see the hashrate location information from the world, the number of GPUs, the GPU rental rate, and whether any machines are offline.",
-    desc2: "View the number of machines, machine status, and detailed machine information of different models of GPUs. GPU rental document: xxxxx",
+    desc2: "View the number of machines, machine status, and detailed machine information of different models of GPUs.",
     lable_one1:'Total Computing Power Value',
     lable_one2:'Total Number of GPUs',
     lable_one3:'Total Number of Miners',

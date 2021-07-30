@@ -9,6 +9,7 @@ import Table from './pages/table.vue';
 import App from './app.vue';
 import VueI18n from './language'
 import { ElOption, ElSelect, ElIcon, ElPagination } from 'element-plus';
+import 'element-plus/packages/theme-chalk/src/base.scss'
 
 const routes = [
   { path: '/', component: Index },

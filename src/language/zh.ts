@@ -44,6 +44,8 @@ export default {
   GPU_Num:'GPU数量',
   All_Machine:'机器总数',
   Idle_Machine:'空闲机器数',
+  All_Gpu:'GPU总数',
+  Idle_Gpu: '空闲GPU数',
   Machine_ID:'机器ID',
   Room_number:'机房编号',
   Machine_sta:'机器状态',

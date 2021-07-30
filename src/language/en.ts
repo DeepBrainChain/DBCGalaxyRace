@@ -41,6 +41,8 @@ export default {
     GPU_Num:'GPU quantity',
     All_Machine:'Total number of machines',
     Idle_Machine:'Number of idle machines',
+    All_Gpu:'Total number of GPUs',
+    Idle_Gpu: 'Number of idle GPUs',
     Machine_ID:'Machine ID',
     Room_number:'Room number',
     Machine_sta:'Machine state',

@@ -14,8 +14,15 @@ div.content
         div.topitem {{t('GPU_Num')}}: 
           el-select.select(v-model="GPU_Num", size='mini', placeholder="请选择" @change='SelectNum')
             el-option( v-for="item in options1" , :key="item.value", :label="item.label", :value="item.value")
+        div.topitem(v-if="locale == 'zh'") {{t('All_Machine')}}: {{All_Machine}}
+        div.topitem(v-if="locale == 'zh'") {{t('Idle_Machine')}}: {{Idle_Machine}}
+        div.topitem(v-if="locale == 'zh'") {{t('All_Gpu')}}: {{All_Gpu}}
+        div.topitem(v-if="locale == 'zh'") {{t('Idle_Gpu')}}: {{Idle_Gpu}}  
+      div.topcon(v-if="locale == 'en'")
         div.topitem {{t('All_Machine')}}: {{All_Machine}}
         div.topitem {{t('Idle_Machine')}}: {{Idle_Machine}}
+        div.topitem {{t('All_Gpu')}}: {{All_Gpu}}
+        div.topitem {{t('Idle_Gpu')}}: {{Idle_Gpu}}
       div.table
         div.tableli(v-for="el in Machine_info" :key="el.machine_id")
           div.li_list1
@@ -23,6 +30,9 @@ div.content
               i {{el.machine_id}}
             span(v-if='el.number') {{t('Room_number')}}: 
               i {{el.number}}
+            span {{t('lable_two2')}}: 
+              i(:title='el.machine_owner' v-if='isWin') {{String(el.machine_owner).substring(0,10)+'...'}}
+              i(:title='el.machine_owner' v-else) {{el.machine_owner}}
             span {{t('Machine_sta')}}: 
               i {{el.machine_status == 'rented'?t('Rented'):t('Idle')}}
           div.li_list2
@@ -49,9 +59,9 @@ div.content
             span {{t('Data_hd')}}:  
               i {{Number(el.data_disk)/10}}T
             span {{t('Bandwidth1')}}:  
-              i {{Math.round(Number(el.upload_net)/1024)}}Mbps
+              i {{el.upload_net}}Mbps
             span {{t('Bandwidth2')}}: 
-              i {{Math.round(Number(el.download_net)/1024)}}Mbps
+              i {{el.download_net}}Mbps
             span {{t('CPU_cores')}}:  
               i {{el.cpu_core_num}}
             span {{t('CPU_frequency')}}:  
@@ -163,15 +173,15 @@ div.content
         .topitem{
           font-size: 14px;
           margin-right: 20px;
+          margin-bottom: 10px;
           .select{
             width: 90px;
           }
         }
-        
       }
       .table{
         width: 100%;
-        margin: 20px 0;
+        margin: 0 0 20px;
         .tableli{
           width: 100%;
           padding: 10px;
@@ -302,6 +312,8 @@ export default defineComponent({
     const GPU_Num = ref('')
     const All_Machine = ref(0)
     const Idle_Machine = ref(0)
+    const All_Gpu = ref(0)
+    const Idle_Gpu = ref(0)
     const currentPage = ref(1)
     const PageSize = ref(20)
     const total = ref(0)
@@ -430,12 +442,18 @@ export default defineComponent({
       .then( res => {
         if(status == 'online' && type == 'first'){
           Idle_Machine.value = res.length
+          res.map(el => {
+            Idle_Gpu.value += Number(el.gpu_num)
+          })
         }else{
           showMachines(res, currentPage.value, PageSize.value)
           First_Machine_Info.value = res
           total.value = res.length
           if(type == 'first'){
             All_Machine.value = res.length
+            res.map(el => {
+              All_Gpu.value += Number(el.gpu_num)
+            })
           }
         }
       })
@@ -446,6 +464,8 @@ export default defineComponent({
       PageSize.value = 20
       Idle_Machine.value = 0
       All_Machine.value = 0
+      All_Gpu.value = 0
+      Idle_Gpu.value = 0
       First_Machine_Info.value = []
       getList(active.value , Machine_status.value, GPU_Num.value, 'first')
       setTimeout(()=>{
@@ -538,10 +558,13 @@ export default defineComponent({
       handleChangePageSize,
       handleChangePageSize1,
       handleCurrentChang,
+      locale,
       active,
       isWin,
       All_Machine,
       Idle_Machine,
+      All_Gpu,
+      Idle_Gpu,
       options,
       options1,
       GPU_Num,

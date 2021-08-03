@@ -26,19 +26,23 @@ function byteToStr(arr: Array<number>) {
 
 /**
  * chain_getBlockHash： 高度hash
+ * chain_getBlock 获取戳及块高
  * onlineProfile_getStakerNum: 算工数量
  * onlineProfile_getStakerListInfo: 分页获取数据
  * onlineProfile_getOpInfo: 获取奖励信息
  * onlineProfile_getPosGpuInfo: 获取地图算力节点
  * onlineProfile_getStakerInfo: 获取总金额
+ * onlineProfile_getStakerIdentity: 获取算工名称
  */
  type Methods =
  | "chain_getBlockHash"
+ | "chain_getBlock"
  | "onlineProfile_getOpInfo"
  | "onlineProfile_getStakerNum"
  | "onlineProfile_getPosGpuInfo"
  | "onlineProfile_getStakerListInfo"
- | "onlineProfile_getStakerInfo";
+ | "onlineProfile_getStakerInfo"
+ | "onlineProfile_getStakerIdentity";
 
 class DBCRequest {
   ws: WebSocket;
@@ -275,18 +279,34 @@ export const getPosGpuInfo = async () => {
 };
 
 export const getStakerInfo = async (list: any) => {
-    let bewArray:Array<any> = []
-    for(let i=0; i< list.length;i++){
-      await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
-        res => {
-          let data = 0
-          res.stashStatistic.linearReleaseReward.map( (el: string) => {
-            data += Number(el)
-          })
-          bewArray[i] = data
-        }
-      )
-    }
+  let bewArray:Array<any> = []
+  for(let i=0; i< list.length;i++){
+    await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+      res => {
+        let data = 0
+        res.stashStatistic.linearReleaseReward.map( (el: string) => {
+          data += Number(el)
+        })
+        bewArray[i] = data
+      }
+    )
+  }
+  return bewArray
+};
+export const getBlock = async ()=>{
+  const hash = await request.sendUnique<any>("chain_getBlock");
+  let block = Number(hash.block.header.number)
+  return block
+}
+export const getStakerIdentity = async (list: any) => {
+  let bewArray:Array<any> = []
+  for(let i=0; i< list.length;i++){
+    await request.send<any>("onlineProfile_getStakerIdentity",[list[i].machine_owner]).then(
+      res => {
+        bewArray.push(res)
+      }
+    )
+  }
   return bewArray
 };
 // 可根据算力值排序

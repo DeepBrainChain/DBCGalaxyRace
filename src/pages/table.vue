@@ -31,8 +31,8 @@ div.content
             span(v-if='el.number') {{t('Room_number')}}: 
               i {{el.number}}
             span {{t('lable_two2')}}: 
-              i(:title='el.machine_owner' v-if='isWin') {{String(el.machine_owner).substring(0,10)+'...'}}
-              i(:title='el.machine_owner' v-else) {{el.machine_owner}}
+              i(:title='el.machine_owner' v-if='!el.machine_name') {{String(el.machine_owner).substring(0,10)+'...'}}
+              i(:title='el.machine_owner' v-else) {{el.machine_name}}
             span {{t('Machine_sta')}}: 
               i {{el.machine_status == 'rented'?t('Rented'):t('Idle')}}
           div.li_list2
@@ -48,9 +48,10 @@ div.content
               i {{el.city}}
             span {{t('Cumulative_DBC_rent')}}:  
               i {{getnum1(el.total_rent_fee)}}
-            span {{t('Network_operators')}}:  
-              i {{el.telecom_operators?el.telecom_operators[0]:''}}
-            span(v-if="el.online == ''") {{t('Online_time')}}:  
+            span.operators {{t('Network_operators')}}:
+              span.opera
+                i(v-for="operators in el.telecom_operators") {{operators}}
+            span {{t('Online_time')}}:  
               i {{el.online}}
             span {{t('Memory_num')}}:  
               i {{Math.ceil(Number(el.mem_num)/ 1024)}}G
@@ -229,6 +230,16 @@ div.content
                 font-style: normal;
                 color: #195d91;
               }
+              &.operators{
+                display: flex;
+                align-items: center;
+                .opera{
+                  flex: 1;
+                  display: flex;
+                  margin: 0 0 0 5px;
+                  flex-direction: column;
+                }
+              }
             }
           }
         }
@@ -300,6 +311,7 @@ import { useI18n } from "vue-i18n";
 import BigNumber from "bignumber.js";
 import Pagination from "../components/pagination.vue";
 import axios from '../untils/axios'
+import { getStakerIdentity, getBlock } from '../apis'
 export default defineComponent({
   name: "tablelist",
   components: {
@@ -430,6 +442,37 @@ export default defineComponent({
       num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
       return num1.substring(0,num1.indexOf(".")+3);
     }
+    const byteToStr = (arr) => {
+      if (typeof arr === "string") {
+        return arr;
+      }
+      var str = "", _arr = arr;
+      for (var i = 0; i < _arr.length; i++) {
+        var one = _arr[i].toString(2),
+          v = one.match(/^1+?(?=0)/);
+        if (v && one.length == 8) {
+          var bytesLength = v[0].length;
+          var store = _arr[i].toString(2).slice(7 - bytesLength);
+          for (var st = 1; st < bytesLength; st++) {
+            store += _arr[st + i].toString(2).slice(2);
+          }
+          str += String.fromCharCode(parseInt(store, 2));
+          i += bytesLength - 1;
+        } else {
+          str += String.fromCharCode(_arr[i]);
+        }
+      }
+      return str;
+    }
+    const minsToHourMins = (mins) => {
+      if (mins < 60) {
+        return mins + 'm'
+      } else {
+        const h = Math.floor(mins / 60)
+        const m = mins % 60
+        return `${h}h${m}m`
+      }
+    }
     const getList = (str = '', status = '', num = '', type , pageNum = 1, pageSize = 50 ) => {
       let data = {
         gpu_type: str,
@@ -444,7 +487,18 @@ export default defineComponent({
       axios.get('/api/GetMachine_Details', {
         params: data
       })
-      .then( res => {
+      .then( async (res) => {
+        let block = await getBlock()
+        const data = await getStakerIdentity(res.list)
+        res.list.map( (el, i) => {
+          if(data[i].length > 0){
+            el.machine_name = byteToStr(data[i])
+          }
+          // if(el.operator){
+          //   el.machine_name = byteToStr(JSON.parse(el.operator))
+          // }
+          el.online = minsToHourMins(Math.floor((block-el.bonding_height)/2))
+        })
         Machine_info.value = res.list
         total.value = res.total
         if(type == 'first'){
@@ -464,8 +518,10 @@ export default defineComponent({
     const choose = (str) => {
       loading.value = true
       active.value = str
-      currentPage.value = 1
-      PageSize.value = 20
+      if(isWin.value){
+        currentPage.value = 1
+        PageSize.value = 20
+      }
       Idle_Machine.value = 0
       All_Machine.value = 0
       All_Gpu.value = 0
@@ -500,18 +556,24 @@ export default defineComponent({
       Machine_info.value = needMachines; //需要展示的机器
     }
     const handleChangePageSize = (num) => {
+      loading.value = true
       PageSize.value = num
       getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const handleChangePageSize1 = (num) => {
+      loading.value = true
       PageSize.value = num
       currentPage.value = 1
       getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const handleJumpPage = (num, size) => {
+      loading.value = true
+      PageSize.value = size
+      currentPage.value = num
       getList(active.value , Machine_status.value, GPU_Num.value, '', num, size)
     }
     const handleCurrentChang = (num) => {
+      loading.value = true
       currentPage.value = num
       getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
@@ -562,6 +624,7 @@ export default defineComponent({
       handleChangePageSize1,
       handleCurrentChang,
       showMachines,
+      byteToStr,
       loading,
       locale,
       active,

@@ -275,7 +275,6 @@ export default defineComponent({
       // total.value = remoteTotal;
       setTimeout( async()=>{
         const data = await getStakerInfo(list)
-        console.log(data, 'data');
         list.map(
           (s,i) => {
             s.totalReward = getnum1(String(data[i]*4/3))
@@ -308,7 +307,6 @@ export default defineComponent({
           set(list, tableData);
           // setTimeout( async()=>{
           const data = await getStakerInfo(list)
-          console.log(data, 'data');
           list.map(
             (s,i) => {
               s.totalReward = getnum1(String(data[i]*4/3))
@@ -317,6 +315,8 @@ export default defineComponent({
           set(list, tableData);
           PaDisabled.value = false
           // }, 2000)
+        }else{
+          PaDisabled.value = false
         }
       },
       handleChangePageSize: async (num: number) => {
@@ -327,7 +327,6 @@ export default defineComponent({
         set(list, tableData);
         setTimeout( async()=>{
           const data = await getStakerInfo(list)
-          console.log(data, 'data');
           list.map(
             (s,i) => {
               s.totalReward = getnum1(String(data[i]*4/3))
@@ -343,7 +342,6 @@ export default defineComponent({
         set(list, tableData);
         // setTimeout( async()=>{
           const data = await getStakerInfo(list)
-          console.log(data, 'data');
           list.map(
             (s,i) => {
               s.totalReward = getnum1(String(data[i]*4/3))
@@ -358,7 +356,6 @@ export default defineComponent({
         set(list, tableData);
         setTimeout( async()=>{
           const data = await getStakerInfo(list)
-          console.log(data, 'data');
           list.map(
             (s,i) => {
               s.totalReward = getnum1(String(data[i]*4/3))

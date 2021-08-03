@@ -5,7 +5,7 @@ div.content
   div.left
     div.left_con
       div(v-for='el in tableData' :class="{active: active === el}" @click="choose(el)") {{String(el).slice(7)}}
-  div.right
+  div.right(v-loading="loading")
     div.right_con
       div.topcon
         div.topitem {{t('Machine_status')}}: 
@@ -49,8 +49,8 @@ div.content
             span {{t('Cumulative_DBC_rent')}}:  
               i {{getnum1(el.total_rent_fee)}}
             span {{t('Network_operators')}}:  
-              i {{el.telecom_operators[0]}}
-            span {{t('Online_time')}}:  
+              i {{el.telecom_operators?el.telecom_operators[0]:''}}
+            span(v-if="el.online == ''") {{t('Online_time')}}:  
               i {{el.online}}
             span {{t('Memory_num')}}:  
               i {{Math.ceil(Number(el.mem_num)/ 1024)}}G
@@ -163,7 +163,7 @@ div.content
     margin: 20px 10px 20px 0;
     .right_con{
       width: 100%;
-      padding: 15px;
+      padding: 15px 10px;
       box-sizing: border-box;
       border: 1px solid #999;
       .topcon{
@@ -317,6 +317,7 @@ export default defineComponent({
     const currentPage = ref(1)
     const PageSize = ref(20)
     const total = ref(0)
+    const loading = ref(true)
     const Gpu_Type = ref([
       "GeForceGTX1660S",
       "GeForceRTX2080",
@@ -387,7 +388,6 @@ export default defineComponent({
       }]
     )
     const tableData = ref([]);
-    const First_Machine_Info = ref([])
     const Machine_info = ref([{
       number:'',
       calc_point: "",
@@ -430,35 +430,39 @@ export default defineComponent({
       num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
       return num1.substring(0,num1.indexOf(".")+3);
     }
-    const getList = (str = '', status = '', num = '', type) => {
+    const getList = (str = '', status = '', num = '', type , pageNum = 1, pageSize = 50 ) => {
       let data = {
         gpu_type: str,
         machine_status: status,
-        gpu_num: num
+        gpu_num: num,
+        pageNum: pageNum,
+        pageSize: pageSize
+      }
+      if(status == ''){
+        delete data['machine_status']
       }
       axios.get('/api/GetMachine_Details', {
         params: data
       })
       .then( res => {
-        if(status == 'online' && type == 'first'){
-          Idle_Machine.value = res.length
-          res.map(el => {
-            Idle_Gpu.value += Number(el.gpu_num)
+        Machine_info.value = res.list
+        total.value = res.total
+        if(type == 'first'){
+          axios.get('/api/Count_Details', {params:{gpu_type: str}})
+          .then( res1 => {
+            All_Machine.value = res1.count[str]?res1.count[str]:0
+            Idle_Machine.value = res1.sum[str]?res1.sum[str]:0
+            All_Gpu.value = res1.cpu_num[str]?res1.cpu_num[str]:0
+            Idle_Gpu.value = res1.cpu_total[str]?res1.cpu_total[str]:0
+            loading.value = false
           })
         }else{
-          showMachines(res, currentPage.value, PageSize.value)
-          First_Machine_Info.value = res
-          total.value = res.length
-          if(type == 'first'){
-            All_Machine.value = res.length
-            res.map(el => {
-              All_Gpu.value += Number(el.gpu_num)
-            })
-          }
+          loading.value = false
         }
       })
     }
     const choose = (str) => {
+      loading.value = true
       active.value = str
       currentPage.value = 1
       PageSize.value = 20
@@ -466,18 +470,20 @@ export default defineComponent({
       All_Machine.value = 0
       All_Gpu.value = 0
       Idle_Gpu.value = 0
-      First_Machine_Info.value = []
-      getList(active.value , Machine_status.value, GPU_Num.value, 'first')
-      setTimeout(()=>{
-        getList(active.value , 'online', GPU_Num.value, 'first')
-      }, 1000)
-      
+      Machine_info.value = []
+      Machine_status.value = ''
+      GPU_Num.value = ''
+      getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
     }
     const SelectStatus = () => {
-      getList(active.value , Machine_status.value, GPU_Num.value)
+      loading.value = true
+      currentPage.value = 1
+      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const SelectNum = () => {
-      getList(active.value , Machine_status.value, GPU_Num.value)
+      loading.value = true
+      currentPage.value = 1
+      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const showMachines = (machines, currentPage, pageSize) => {
       let needMachines = []; //需要展示的机器
@@ -495,19 +501,19 @@ export default defineComponent({
     }
     const handleChangePageSize = (num) => {
       PageSize.value = num
-      showMachines(First_Machine_Info.value, currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const handleChangePageSize1 = (num) => {
       PageSize.value = num
       currentPage.value = 1
-      showMachines(First_Machine_Info.value, currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     const handleJumpPage = (num, size) => {
-      showMachines(First_Machine_Info.value, num, size)
+      getList(active.value , Machine_status.value, GPU_Num.value, '', num, size)
     }
     const handleCurrentChang = (num) => {
       currentPage.value = num
-      showMachines(First_Machine_Info.value, currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
     }
     watch(
       () => locale.value,
@@ -529,8 +535,8 @@ export default defineComponent({
       }
     )
     onMounted( async () => {
-      await axios.get('/api/GetGpu_Info')
-      .then(
+      loading.value = true
+      await axios.get('/api/GetGpu_Info').then(
         res => {
           Gpu_Type.value.map(el1=>{
             res.map(el => {
@@ -542,10 +548,7 @@ export default defineComponent({
           active.value = tableData.value[0]
         }
       )
-      await getList(active.value , Machine_status.value, GPU_Num.value, 'first')
-      setTimeout(()=>{
-        getList(active.value , 'online', GPU_Num.value, 'first')
-      }, 1000)
+      await getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
     });
     return {
       t,
@@ -558,6 +561,8 @@ export default defineComponent({
       handleChangePageSize,
       handleChangePageSize1,
       handleCurrentChang,
+      showMachines,
+      loading,
       locale,
       active,
       isWin,

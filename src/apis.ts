@@ -74,7 +74,7 @@ class DBCRequest {
       if (this.wsOpened) {
         this._send<T>(method, params).then(resolve);
       } else {
-        // this.ws = new WebSocket(this.url);
+        this.ws = new WebSocket(this.url);
         this.ws.onopen = () => {
           this.wsOpened = true;
           this._send<T>(method, params).then(resolve);
@@ -226,7 +226,6 @@ export const getNumber =  async () => {
 //     request.sendUnique<number>("onlineProfile_getStakerNum")
 //   ]);
 //   // const data = await getStakerInfo(list)
-//   // console.log(data, 'data');
 //   return {
 //     list: list.map(
 //       (s,i) => ({
@@ -277,7 +276,6 @@ export const getPosGpuInfo = async () => {
 
 export const getStakerInfo = async (list: any) => {
     let bewArray:Array<any> = []
-    console.log(list, 'getStakerInfo');
     for(let i=0; i< list.length;i++){
       await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
         res => {

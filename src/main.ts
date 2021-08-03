@@ -8,7 +8,7 @@ import Map from './pages/map.vue';
 import Table from './pages/table.vue';
 import App from './app.vue';
 import VueI18n from './language'
-import { ElOption, ElSelect, ElIcon, ElPagination } from 'element-plus';
+import { ElOption, ElSelect, ElIcon, ElPagination, ElLoading } from 'element-plus';
 import 'element-plus/packages/theme-chalk/src/base.scss'
 
 const routes = [
@@ -30,5 +30,6 @@ app.component(ElOption.name, ElOption);
 app.component(ElSelect.name, ElSelect);
 app.component(ElIcon.name, ElIcon);
 app.component(ElPagination.name, ElPagination);
+app.use(ElLoading);
 app.component(VueCountdown.name, VueCountdown);
 app.mount('#app');

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 axios.defaults.timeout = 20000;
+// axios.defaults.baseURL = '/api'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 // 请求拦截器，内部根据返回值，重新组装，统一管理。
 axios.interceptors.response.use(response => {

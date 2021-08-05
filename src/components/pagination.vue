@@ -186,7 +186,7 @@ export default defineComponent({
     const { t } = useI18n();
     const { pageSize, total, currentPage, offset, lastPage, prev, next, first, last } = usePagination({
       currentPage: 1,
-      pageSize: 20,
+      pageSize: 50,
       total: 0,
     });
     const all = computed(() => {

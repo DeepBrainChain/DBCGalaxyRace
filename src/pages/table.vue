@@ -1,10 +1,10 @@
 <template lang="pug">
-div.description
- | {{t('desc2')}}
+div.description {{t('desc2')}}
+  a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC/blob/master/chain_ops/rent_machine.md") https://github.com/DeepBrainChain/DBC-DOC/blob/master/chain_ops/rent_machine.md
 div.content
   div.left
     div.left_con
-      div(v-for='el in tableData' :class="{active: active === el}" @click="choose(el)") {{String(el).slice(7)}}
+      div(v-for='el in tableData' :class="{active: active === el.type}" @click="choose(el)") {{String(el.type).slice(7)}}
   div.right(v-loading="loading")
     div.right_con
       div.topcon
@@ -18,11 +18,15 @@ div.content
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem(v-if="locale == 'zh'") {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Gpu')}}: {{Idle_Gpu}}  
+        div.topitem(v-if="locale == 'zh'") {{t('Daily_Rent')}}: 
+          span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.topcon(v-if="locale == 'en'")
         div.topitem {{t('All_Machine')}}: {{All_Machine}}
         div.topitem {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem {{t('Idle_Gpu')}}: {{Idle_Gpu}}
+        div.topitem {{t('Daily_Rent')}}: 
+          span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.table
         div.tableli(v-for="el in Machine_info" :key="el.machine_id")
           div.li_list1
@@ -96,7 +100,7 @@ div.content
   color: #666666;
 }
 .content{
-  width: 1281px;
+  width: 1350px;
   display: flex;
   margin: 32px auto;
   background: #fff;
@@ -159,7 +163,7 @@ div.content
     }
   }
   .right{
-    width: 1050px;
+    width: 1120px;
     color: #666;
     margin: 20px 10px 20px 0;
     .right_con{
@@ -173,10 +177,16 @@ div.content
         align-items: center;
         .topitem{
           font-size: 14px;
-          margin-right: 20px;
+          margin-right: 15px;
           margin-bottom: 10px;
+          &.bold{
+            font-weight: bold;
+          }
           .select{
             width: 90px;
+          }
+          span{
+            color: #f56c6c;
           }
         }
       }
@@ -319,7 +329,10 @@ export default defineComponent({
   },
   setup() {
     const { t, locale } = useI18n();
+    const online_block = ref(0)
     const active = ref('')
+    const Computing_Power = ref(0)
+    const dbc_price = ref(0)
     const Machine_status = ref('')
     const GPU_Num = ref('')
     const All_Machine = ref(0)
@@ -327,29 +340,87 @@ export default defineComponent({
     const All_Gpu = ref(0)
     const Idle_Gpu = ref(0)
     const currentPage = ref(1)
-    const PageSize = ref(20)
+    const PageSize = ref(50)
     const total = ref(0)
     const loading = ref(true)
     const Gpu_Type = ref([
-      "GeForceGTX1660S",
-      "GeForceRTX2080",
-      "GeForceRTX2080Ti",
-      "GeForceRTX3060",
-      "GeForceRTX3060Ti",
-      "GeForceRTX3070",
-      "GeForceRTX3070Ti",
-      "GeForceRTX3080",
-      "GeForceRTX3080Ti",
-      "NVIDIA A5000",
-      "GeForceRTX3090",
-      "NVIDIA A100",
-      "NVIDIA P100",
-      "NVIDIA V100 16G",
-      "NVIDIA V100 32G",
-      "NVIDIA T4",
-      "NVIDIA P40",
-      "NVIDIA P4",
-      "NVIDIA TITAN V"
+      {
+        type: "GeForceGTX1660S",
+        power: 42.08
+      },
+      {
+        type: "GeForceRTX2080",
+        power: 0
+      },
+      {
+        type: "GeForceRTX3060",
+        power: 65.67
+      },
+      {
+        type: "GeForceRTX2080Ti",
+        power: 68.25
+      },
+      {
+        type: "GeForceRTX3060Ti",
+        power: 68.79
+      },
+      {
+        type: "GeForceRTX3070",
+        power: 74.39
+      },
+      {
+        type: "GeForceRTX3070Ti",
+        power: 75.71
+      },
+      {
+        type: "GeForceRTX3080",
+        power: 89.96
+      },
+      {
+        type: "GeForceRTX3080Ti",
+        power: 99.01
+      },
+      {
+        type: "NVIDIA A5000",
+        power: 103.51
+      },
+      {
+        type: "GeForceRTX3090",
+        power: 115.45
+      },
+
+      {
+        type: "NVIDIA A100",
+        power: 0
+      },
+      {
+        type: "NVIDIA P100",
+        power: 0
+      },
+      {
+        type: "NVIDIA V100 16G",
+        power: 0
+      },
+      {
+        type: "NVIDIA V100 32G",
+        power: 0
+      },
+      {
+        type: "NVIDIA T4",
+        power: 0
+      },
+      {
+        type: "NVIDIA P40",
+        power: 0
+      },
+      {
+        type: "NVIDIA P4",
+        power: 0
+      },
+      {
+        type: "NVIDIA TITAN V",
+        power: 0
+      }
     ])
     const options = ref(
       [{
@@ -488,16 +559,16 @@ export default defineComponent({
         params: data
       })
       .then( async (res) => {
-        let block = await getBlock()
-        const data = await getStakerIdentity(res.list)
+        // let block = await getBlock()
+        // const data = await getStakerIdentity(res.list)
         res.list.map( (el, i) => {
-          if(data[i].length > 0){
-            el.machine_name = byteToStr(data[i])
+        //   if(data[i].length > 0){
+        //     el.machine_name = byteToStr(data[i])
+        //   }
+          if(el.operator){
+            el.machine_name = byteToStr(JSON.parse(el.operator))
           }
-          // if(el.operator){
-          //   el.machine_name = byteToStr(JSON.parse(el.operator))
-          // }
-          el.online = minsToHourMins(Math.floor((block-el.bonding_height)/2))
+          el.online = '···'
         })
         Machine_info.value = res.list
         total.value = res.total
@@ -513,14 +584,22 @@ export default defineComponent({
         }else{
           loading.value = false
         }
+        // setTimeout( async ()=> {
+          online_block.value = await getBlock();
+          Machine_info.value.map( (el) => {
+            el.online = minsToHourMins(Math.floor((online_block.value-el.bonding_height)/2))
+          })
+        // },1000)
+
       })
     }
     const choose = (str) => {
       loading.value = true
-      active.value = str
+      active.value = str.type
+      Computing_Power.value = str.power
       if(isWin.value){
         currentPage.value = 1
-        PageSize.value = 20
+        PageSize.value = 50
       }
       Idle_Machine.value = 0
       All_Machine.value = 0
@@ -598,16 +677,22 @@ export default defineComponent({
     )
     onMounted( async () => {
       loading.value = true
+      await axios.get("https://dbchaininfo.congtu.cloud/query/dbc_info?language=CN").then(
+        res => {
+          dbc_price.value = res.content.dbc_price
+        }
+      )
       await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(
         res => {
           Gpu_Type.value.map(el1=>{
             res.map(el => {
-              if(el == el1){
+              if(el == el1.type){
                 tableData.value.push(el1)
               }
             })
           })
-          active.value = tableData.value[0]
+          active.value = tableData.value[0].type
+          Computing_Power.value = tableData.value[0].power
         }
       )
       await getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
@@ -629,6 +714,8 @@ export default defineComponent({
       locale,
       active,
       isWin,
+      dbc_price,
+      Computing_Power,
       All_Machine,
       Idle_Machine,
       All_Gpu,

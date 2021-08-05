@@ -248,7 +248,7 @@ export const getNumber =  async () => {
 //   };
 // };
 
-export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
+export const getList = async (currentPage: number = 0, numOfEachPage: number = 50) => {
   let list:Array<any> = []
   await request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
     // hash,

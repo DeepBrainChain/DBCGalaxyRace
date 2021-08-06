@@ -691,8 +691,8 @@ export default defineComponent({
               }
             })
           })
-          active.value = tableData.value[0].type
-          Computing_Power.value = tableData.value[0].power
+          active.value = tableData.value[0] ? tableData.value[0].type : ''
+          Computing_Power.value = tableData.value[0] ? tableData.value[0].power : 0
         }
       )
       await getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)

@@ -255,7 +255,7 @@ export default defineComponent({
         if(times >= 0){
           return times
         }else{
-          return formateIOS("2021-08-17 00:00").valueOf() - Date.now()
+          return formateIOS("2021-08-17 23:59").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {

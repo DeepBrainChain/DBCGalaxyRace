@@ -48,7 +48,7 @@ class DBCRequest {
   ws: WebSocket;
   keepAlive: boolean = true;
   wsOpened: boolean = false;
-  url: string = "wss://infotest.dbcwallet.io";
+  url: string = "wss://infotest2.dbcwallet.io";
   constructor(keepAlive: boolean = true) {
     this.ws = new WebSocket(this.url);
     this.keepAlive = keepAlive;
@@ -284,7 +284,7 @@ export const getStakerInfo = async (list: any) => {
     await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
       res => {
         let data = 0
-        res.stashStatistic.linearReleaseReward.map( (el: string) => {
+        res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
           data += Number(el)
         })
         bewArray[i] = data

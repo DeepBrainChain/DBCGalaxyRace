@@ -65,11 +65,13 @@ export default defineComponent({
       } catch {
         list = []
       }
-      list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
+      // list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
       list.map((el, index) => {
+        // East 东 West 西 South 南 North 北   lat 纬度 lng 经度
+        // 南纬是负，北纬是正，东经是正，西经是负。
         data1[index] = {};
-        data1[index].lng = el[0] / Math.pow(10, 4);
-        data1[index].lat = el[1] / Math.pow(10, 4);
+        data1[index].lng = el[0]['East'] ? (el[0]['East'] / Math.pow(10, 4)) : -(el[0]['West'] / Math.pow(10, 4));
+        data1[index].lat = el[1]['North'] ? (el[1]['North'] / Math.pow(10, 4)) : -(el[1]['South'] / Math.pow(10, 4));
         data1[index].RentalRate =
         el[2].rentedGpu != 0
             ? maxDecimal((el[2].rentedGpu / el[2].onlineGpu) * 100) + "%"
@@ -77,7 +79,7 @@ export default defineComponent({
         el[2].onlineGpuCalcPoints = el[2].onlineGpuCalcPoints/100;
         data1[index] = { ...data1[index], ...el[2] };
       });
-      console.log(list, 'list')
+      console.log(data1, list, 'list')
       const scene = new Scene({
         id: "map",
         map: new Mapbox({

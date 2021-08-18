@@ -235,7 +235,7 @@ export default defineComponent({
     };
     const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
-    const countDownactive = computed(() => (formateIOS("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
+    const countDownactive = computed(() => (formateIOS("2021-08-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
     watch(
       () => lan.value,
@@ -251,11 +251,11 @@ export default defineComponent({
     return {
       active,
       time: computed(() => {
-        const times = formateIOS("2021-07-18 00:00").valueOf() - Date.now()
+        const times = formateIOS("2021-08-18 00:00").valueOf() - Date.now()
         if(times >= 0){
           return times
         }else{
-          return formateIOS("2021-08-17 23:59").valueOf() - Date.now()
+          return formateIOS("2021-09-17 23:59").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {

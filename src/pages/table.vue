@@ -18,22 +18,22 @@ div.content
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem(v-if="locale == 'zh'") {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Gpu')}}: {{Idle_Gpu}}  
-        div.topitem(v-if="locale == 'zh'") {{t('Daily_Rent')}}: 
-          span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
+        //- div.topitem(v-if="locale == 'zh'") {{t('Daily_Rent')}}: 
+        //-   span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.topcon(v-if="locale == 'en'")
         div.topitem {{t('All_Machine')}}: {{All_Machine}}
         div.topitem {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem {{t('Idle_Gpu')}}: {{Idle_Gpu}}
-        div.topitem {{t('Daily_Rent')}}: 
-          span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
+        //- div.topitem {{t('Daily_Rent')}}: 
+        //-   span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.table
         div.tableli(v-for="el in Machine_info" :key="el.machine_id")
           div.li_list1
             span.Machine_id {{t('Machine_ID')}}: 
               i {{el.machine_id}}
-            span(v-if='el.number') {{t('Room_number')}}: 
-              i {{el.number}}
+            span(v-if='el.server_room') {{t('Room_number')}}: 
+              i(:title='el.server_room' ) {{String(el.server_room).substring(0,10)+'...'}}
             span {{t('lable_two2')}}: 
               i(:title='el.machine_owner' v-if='!el.machine_name') {{String(el.machine_owner).substring(0,10)+'...'}}
               i(:title='el.machine_owner' v-else) {{el.machine_name}}
@@ -44,8 +44,10 @@ div.content
               i {{el.gpu_num}}
             span.blod {{t('GPU_memory')}}: 
               i {{el.gpu_mem}}G
-            span.width50.blod {{t('GPU_type')}}: 
+            span.width30.blod {{t('GPU_type')}}: 
               i {{el.gpu_type}}
+            span.width30.blod {{t('Daily_Rent')}}: 
+              i.color {{getnum2(Number(el.calc_point)/100*0.028229)}}$≈{{getnum2(Number(el.calc_point)/100*0.028229/dbc_price)}}DBC
             span {{t('Country')}}:  
               i {{el.country}}
             span {{t('City')}}:  
@@ -58,11 +60,11 @@ div.content
             span {{t('Online_time')}}:  
               i {{el.online}}
             span {{t('Memory_num')}}:  
-              i {{Math.ceil(Number(el.mem_num)/ 1024)}}G
+              i {{Math.ceil(Number(el.mem_num))}}G
             span {{t('System_hd')}}:  
               i {{el.sys_disk}}G
             span {{t('Data_hd')}}:  
-              i {{Number(el.data_disk)/10}}T
+              i {{Number(el.data_disk)/1000}}T
             span {{t('Bandwidth1')}}:  
               i {{el.upload_net}}Mbps
             span {{t('Bandwidth2')}}: 
@@ -70,7 +72,7 @@ div.content
             span {{t('CPU_cores')}}:  
               i {{el.cpu_core_num}}
             span {{t('CPU_frequency')}}:  
-              i {{getnum2(Number(el.cpu_rate)/100)}}Ghz
+              i {{getnum2(Number(el.cpu_rate)/1000)}}Ghz
             span.width50 {{t('CPU_type')}}:  
               i {{el.cpu_type}}
       div.pagination-container
@@ -232,9 +234,15 @@ div.content
               &.width50{
                 width: 50%;
               }
+              &.width30{
+                width: 30%;
+              }
               &.blod{
                 font-size: 18px;
                 font-weight: bold;
+              }
+              .color{
+                color: #f56c6c;
               }
               i{
                 font-style: normal;
@@ -555,7 +563,7 @@ export default defineComponent({
       if(status == ''){
         delete data['machine_status']
       }
-      axios.get('https://galaxyidentifier.congtu.cloud/GetMachine_Details', {
+      axios.get('https://identifier.congtu.cloud/GetMachine_Details', {
         params: data
       })
       .then( async (res) => {
@@ -573,7 +581,7 @@ export default defineComponent({
         Machine_info.value = res.list
         total.value = res.total
         if(type == 'first'){
-          axios.get('https://galaxyidentifier.congtu.cloud/Count_Details', {params:{gpu_type: str}})
+          axios.get('https://identifier.congtu.cloud/Count_Details', {params:{gpu_type: str}})
           .then( res1 => {
             All_Machine.value = res1.count[str]?res1.count[str]:0
             Idle_Machine.value = res1.sum[str]?res1.sum[str]:0
@@ -682,7 +690,7 @@ export default defineComponent({
           dbc_price.value = res.content.dbc_price
         }
       )
-      await axios.get('https://galaxyidentifier.congtu.cloud/GetGpu_Info').then(
+      await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(
         res => {
           Gpu_Type.value.map(el1=>{
             res.map(el => {

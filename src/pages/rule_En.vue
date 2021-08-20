@@ -447,7 +447,7 @@ div.rule-wrapper
         border: none;
       }
       div {
-        width: 16.67%;
+        width: 16.66%;
         min-height: 60px;
         text-align: center;
         line-height: 60px;

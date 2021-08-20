@@ -446,7 +446,7 @@ div.rule-wrapper
         border: none;
       }
       div {
-        width: 16.67%;
+        width: 16.66%;
         min-height: 60px;
         text-align: center;
         line-height: 60px;
@@ -533,12 +533,9 @@ div.rule-wrapper
       line-height: 1.2;
       .table {
         .table_con {
+          height: 10vw;
           div {
-            line-height: 1.1;
-          }
-        }
-        .table_li {
-          div {
+            height: 10vw;
             line-height: 1.2;
           }
         }

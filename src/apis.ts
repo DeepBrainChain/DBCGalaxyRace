@@ -283,15 +283,15 @@ export const getStakerInfo = async (list: any) => {
   for(let i=0; i< list.length;i++){
     await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
       res => {
-        let data = 0
-        res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
-          data += Number(el)
-        })
-        bewArray[i] = data
+        // let data = 0
+        // res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
+        //   data += Number(el)
+        // })
+        bewArray[i] = res.stashStatistic.totalEarnedReward
       }
     )
   }
-  return bewArray
+  return bewArray 
 };
 export const getBlock = async ()=>{
   const hash = await request.sendUnique<any>("chain_getBlock");

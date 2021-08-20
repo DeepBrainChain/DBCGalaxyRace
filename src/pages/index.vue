@@ -277,7 +277,7 @@ export default defineComponent({
         const data = await getStakerInfo(list)
         list.map(
           (s,i) => {
-            s.totalReward = getnum1(String(data[i]*4/3))
+            s.totalReward = getnum1(String(data[i]))
           }
         )
         set(list, tableData);
@@ -309,7 +309,7 @@ export default defineComponent({
           const data = await getStakerInfo(list)
           list.map(
             (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
+              s.totalReward = getnum1(String(data[i]))
             }
           )
           set(list, tableData);
@@ -329,7 +329,7 @@ export default defineComponent({
           const data = await getStakerInfo(list)
           list.map(
             (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
+              s.totalReward = getnum1(String(data[i]))
             }
           )
           set(list, tableData);
@@ -344,7 +344,7 @@ export default defineComponent({
           const data = await getStakerInfo(list)
           list.map(
             (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
+              s.totalReward = getnum1(String(data[i]))
             }
           )
           set(list, tableData);
@@ -358,7 +358,7 @@ export default defineComponent({
           const data = await getStakerInfo(list)
           list.map(
             (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
+              s.totalReward = getnum1(String(data[i]))
             }
           )
           set(list, tableData);

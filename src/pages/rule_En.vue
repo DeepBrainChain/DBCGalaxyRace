@@ -228,8 +228,8 @@ div.rule-wrapper
             div 385.30
           div.line
             div 4
-            div 768
-            div 692.61
+            div 832
+            div 710.90
       div.table_li
         div 3080ti
         div 10240
@@ -310,7 +310,7 @@ div.rule-wrapper
     div 1). If the machine is in the leased state
       ul
         li The offline machine is more than 3 minutes but not more than 7 minutes, and there is no new online reward, and 2% pledge coins will be deducted. 100% goes to the treasury.
-        li If the machine is offline for more than 7 minutes, the remaining 4 days will be deducted. 100% goes to the treasury.
+        li If the machine is offline for more than 7 minutes, 4% pledged coins will be deducted. 100% into the treasury
         li If the machine is offline for more than 48 hours, 30% of the pledged coins will be deducted, 10% will be given to the user, and 90% will go to the treasury.
         li If the machine is offline for more than 120 hours, 50% of the deposit will be deducted. 10% goes to users and 90% goes to the treasury.
     div 2). If the machine is in idle state

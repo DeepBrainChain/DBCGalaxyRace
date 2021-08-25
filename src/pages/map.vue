@@ -79,7 +79,6 @@ export default defineComponent({
         el[2].onlineGpuCalcPoints = el[2].onlineGpuCalcPoints/100;
         data1[index] = { ...data1[index], ...el[2] };
       });
-      console.log(data1, list, 'list')
       const scene = new Scene({
         id: "map",
         map: new Mapbox({

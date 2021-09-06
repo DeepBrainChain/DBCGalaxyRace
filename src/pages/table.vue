@@ -357,7 +357,15 @@ export default defineComponent({
         power: 42.08
       },
       {
+        type: "GeForceRTX2070S",
+        power: 0
+      },
+      {
         type: "GeForceRTX2080",
+        power: 0
+      },
+      {
+        type: "GeForceRTX2080S",
         power: 0
       },
       {
@@ -563,7 +571,7 @@ export default defineComponent({
       if(status == ''){
         delete data['machine_status']
       }
-      axios.get('https://galaxyidentifier.congtu.cloud/GetMachine_Details', {
+      axios.get('https://identifier.congtu.cloud/GetMachine_Details', {
         params: data
       })
       .then( async (res) => {
@@ -581,7 +589,7 @@ export default defineComponent({
         Machine_info.value = res.list
         total.value = res.total
         if(type == 'first'){
-          axios.get('https://galaxyidentifier.congtu.cloud/Count_Details', {params:{gpu_type: str}})
+          axios.get('https://identifier.congtu.cloud/Count_Details', {params:{gpu_type: str}})
           .then( res1 => {
             All_Machine.value = res1.count[str]?res1.count[str]:0
             Idle_Machine.value = res1.sum[str]?res1.sum[str]:0
@@ -690,7 +698,7 @@ export default defineComponent({
           dbc_price.value = res.content.dbc_price
         }
       )
-      await axios.get('https://galaxyidentifier.congtu.cloud/GetGpu_Info').then(
+      await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(
         res => {
           Gpu_Type.value.map(el1=>{
             res.map(el => {

@@ -38,7 +38,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
-    div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing.
+    div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month.
     | The calculation model is as follows: the computing power value of the whole machine=50*√(number of cards)+memory/3.5+(√(number of cuda)*√(video memory/10))*number of graphics cards
     div.table
       div.table_con

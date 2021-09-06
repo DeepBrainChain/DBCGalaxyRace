@@ -37,7 +37,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 二.算力值计算规则
   div.rule-content
-    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。
+    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.8468美金/C/月。
     | 计算模型如下：整机算力值=50*√（卡数）+内存/3.5+(√(cuda数量)*√（显存/10））*显卡数量
     div.table
       div.table_con

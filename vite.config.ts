@@ -14,7 +14,7 @@ export default defineConfig({
       //假如你要请求https://api.*.com/a/a
       //那么axios的url，可以配置为 /api/a/a
       '/api': {     //这里最好有一个 /
-        target: 'https://identifier.congtu.cloud/',  // 后台接口域名
+        target: 'http://10.1.8.224:8080/',  // 后台接口域名
         // ws: true,        //如果要代理 websockets，配置这个参数
         secure: true,  // 如果是https接口，需要配置这个参数
         changeOrigin: true,  //是否跨域

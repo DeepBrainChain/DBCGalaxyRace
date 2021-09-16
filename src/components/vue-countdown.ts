@@ -67,6 +67,10 @@ export default defineComponent({
       validator: (value: number) => value >= 0,
     },
 
+    just: {
+      type: Boolean,
+      default: true,
+    },
     /**
      * Transforms the output props before render.
      */
@@ -190,7 +194,9 @@ export default defineComponent({
        */
       handler() {
         this.totalMilliseconds = this.time;
-        this.endTime = this.now() + this.time;
+        if(this.just){
+          this.endTime = this.now() + this.time;
+        }
 
         if (this.autoStart) {
           this.start();
@@ -295,8 +301,12 @@ export default defineComponent({
       if (!this.counting) {
         return;
       }
-
-      this.totalMilliseconds -= this.interval;
+      if(this.just){
+        this.totalMilliseconds -= this.interval;
+      }else{
+        this.totalMilliseconds += this.interval;
+      }
+      
 
       if (this.emitEvents && this.totalMilliseconds > 0) {
         /**
@@ -370,7 +380,7 @@ export default defineComponent({
      * @private
      */
     update() {
-      if (this.counting) {
+      if (this.counting && this.just) {
         this.totalMilliseconds = Math.max(0, this.endTime - this.now());
       }
     },

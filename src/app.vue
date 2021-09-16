@@ -28,12 +28,13 @@ el-config-provider(:locale="locale")
     div.name
       span DeepBrain
       | Chain
-  h1.title {{t('title')}}
+  h1.title(v-if='countDownactive') {{t('title')}}
+  h1.title(v-else) {{t('title1')}}
   div.time-wrapper
     div.time-title(v-if='countDownactive') {{t('countDown')}}
     div.time-title(v-else) {{t('countDown1')}}
     div.time
-      vue-countdown(v-if="counting",@end="handleCountdownEnd" ,:time="time", v-slot="{ days, hours, minutes, seconds }")
+      vue-countdown(v-if="counting", @end="handleCountdownEnd", :time="time", :just="countDownactive" v-slot="{ days, hours, minutes, seconds }")
         span {{days}}{{t('Day')}}
         span {{hours}}{{t('Hour')}}
         span {{minutes}}{{t('Minute')}}
@@ -235,7 +236,7 @@ export default defineComponent({
     };
     const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
-    const countDownactive = computed(() => (formateIOS("2021-08-18 00:00").valueOf() - Date.now()) > 0 );
+    const countDownactive = computed(() => (formateIOS("2021-09-18 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
     watch(
       () => lan.value,
@@ -251,11 +252,11 @@ export default defineComponent({
     return {
       active,
       time: computed(() => {
-        const times = formateIOS("2021-08-18 00:00").valueOf() - Date.now()
+        const times =  Date.now() - formateIOS("2021-09-18 00:00").valueOf()
         if(times >= 0){
           return times
         }else{
-          return formateIOS("2021-09-17 23:59").valueOf() - Date.now()
+          return formateIOS("2021-09-18 00:00").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {

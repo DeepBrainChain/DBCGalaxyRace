@@ -49,7 +49,7 @@ class DBCRequest {
   keepAlive: boolean = true;
   wsOpened: boolean = false;
   // url: string = "wss://infotest2.dbcwallet.io";
-  url: string = 'wss://preinfo.dbcwallet.io'
+  url: string = 'wss://preinfo.dbcwallet.io';
   constructor(keepAlive: boolean = true) {
     this.ws = new WebSocket(this.url);
     this.keepAlive = keepAlive;
@@ -264,9 +264,8 @@ export const getList = async (currentPage: number = 0, numOfEachPage: number = 5
         ...s,
         totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
         calcPoints: Number(s.calcPoints)/100,
-        unlockReward: getnum(s.totalReward),
-        // totalReward: getnum(String(data[i]*4/3)),
-        totalReward: '···',
+        unlockReward: getnum(s.totalReleasedReward),
+        totalReward: getnum(s.totalReward),
         index: s.index >= 0?s.index+1:i+1,
         name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
         rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
@@ -279,21 +278,21 @@ export const getPosGpuInfo = async () => {
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 
-export const getStakerInfo = async (list: any) => {
-  let bewArray:Array<any> = []
-  for(let i=0; i< list.length;i++){
-    await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
-      res => {
-        // let data = 0
-        // res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
-        //   data += Number(el)
-        // })
-        bewArray[i] = res.stashStatistic.totalEarnedReward
-      }
-    )
-  }
-  return bewArray 
-};
+// export const getStakerInfo = async (list: any) => {
+//   let bewArray:Array<any> = []
+//   for(let i=0; i< list.length;i++){
+//     await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+//       res => {
+//         // let data = 0
+//         // res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
+//         //   data += Number(el)
+//         // })
+//         bewArray[i] = res.stashStatistic.totalEarnedReward
+//       }
+//     )
+//   }
+//   return bewArray 
+// };
 export const getBlock = async ()=>{
   const hash = await request.sendUnique<any>("chain_getBlock");
   let block = Number(hash.block.header.number)

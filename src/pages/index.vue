@@ -155,7 +155,7 @@ div.pagination-container
 import { defineComponent, computed, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare, getNumber } from "../apis";
+import { getRewardInfo, getList, RewardInfoType, ItemType, compare, getNumber } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
@@ -272,17 +272,18 @@ export default defineComponent({
       
       const { list } = await getList();
       set(list, tableData);
+      PaDisabled.value = false
       // total.value = remoteTotal;
-      setTimeout( async()=>{
-        const data = await getStakerInfo(list)
-        list.map(
-          (s,i) => {
-            s.totalReward = getnum1(String(data[i]))
-          }
-        )
-        set(list, tableData);
-        PaDisabled.value = false
-      }, 2000)
+      // setTimeout( async()=>{
+      //   const data = await getStakerInfo(list)
+      //   list.map(
+      //     (s,i) => {
+      //       s.totalReward = getnum1(String(data[i]))
+      //     }
+      //   )
+      //   set(list, tableData);
+      //   PaDisabled.value = false
+      // }, 2000)
     });
 
     return {
@@ -306,13 +307,13 @@ export default defineComponent({
           const { list } = await getList(currentPage.value, PageSize.value);
           set(list, tableData);
           // setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]))
-            }
-          )
-          set(list, tableData);
+          // const data = await getStakerInfo(list)
+          // list.map(
+          //   (s,i) => {
+          //     s.totalReward = getnum1(String(data[i]))
+          //   }
+          // )
+          // set(list, tableData);
           PaDisabled.value = false
           // }, 2000)
         }else{
@@ -325,15 +326,15 @@ export default defineComponent({
         })
         const { list } = await getList(1, num);
         set(list, tableData);
-        setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]))
-            }
-          )
-          set(list, tableData);
-        }, 2000)
+        // setTimeout( async()=>{
+        //   const data = await getStakerInfo(list)
+        //   list.map(
+        //     (s,i) => {
+        //       s.totalReward = getnum1(String(data[i]))
+        //     }
+        //   )
+        //   set(list, tableData);
+        // }, 2000)
       },
       handleCurrentChange: async (num: number) => {
         PaDisabled.value = true
@@ -341,28 +342,28 @@ export default defineComponent({
         const { list } = await getList(currentPage.value, PageSize.value);
         set(list, tableData);
         // setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]))
-            }
-          )
-          set(list, tableData);
+          // const data = await getStakerInfo(list)
+          // list.map(
+          //   (s,i) => {
+          //     s.totalReward = getnum1(String(data[i]))
+          //   }
+          // )
+          // set(list, tableData);
           PaDisabled.value = false
         // }, 2000)
       },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
-        setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]))
-            }
-          )
-          set(list, tableData);
-        }, 2000)
+        // setTimeout( async()=>{
+        //   const data = await getStakerInfo(list)
+        //   list.map(
+        //     (s,i) => {
+        //       s.totalReward = getnum1(String(data[i]))
+        //     }
+        //   )
+        //   set(list, tableData);
+        // }, 2000)
       }
     };
   }

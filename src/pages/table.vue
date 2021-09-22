@@ -35,8 +35,8 @@ div.content
             span(v-if='el.server_room') {{t('Room_number')}}: 
               i(:title='el.server_room' ) {{String(el.server_room).substring(0,10)+'...'}}
             span {{t('lable_two2')}}: 
-              i(:title='el.machine_owner' v-if='!el.machine_name') {{String(el.machine_owner).substring(0,10)+'...'}}
-              i(:title='el.machine_owner' v-else) {{el.machine_name}}
+              i(:title='el.machine_stash' v-if='!el.machine_name') {{String(el.machine_stash).substring(0,10)+'...'}}
+              i(:title='el.machine_stash' v-else) {{el.machine_name}}
             span {{t('Machine_sta')}}: 
               i {{el.machine_status == 'rented'?t('Rented'):t('Idle')}}
           div.li_list2
@@ -397,6 +397,10 @@ export default defineComponent({
         power: 99.01
       },
       {
+        type: "NVIDIA A4000",
+        power: 0
+      },
+      {
         type: "NVIDIA A5000",
         power: 103.51
       },
@@ -404,7 +408,6 @@ export default defineComponent({
         type: "GeForceRTX3090",
         power: 115.45
       },
-
       {
         type: "NVIDIA A100",
         power: 0

@@ -194,7 +194,7 @@ export default defineComponent({
        */
       handler() {
         this.totalMilliseconds = this.time;
-        if(this.just){
+        if (this.just) {
           this.endTime = this.now() + this.time;
         }
 
@@ -301,9 +301,9 @@ export default defineComponent({
       if (!this.counting) {
         return;
       }
-      if(this.just){
+      if (this.just) {
         this.totalMilliseconds -= this.interval;
-      }else{
+      } else {
         this.totalMilliseconds += this.interval;
       }
       

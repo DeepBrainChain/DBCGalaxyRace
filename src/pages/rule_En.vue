@@ -3,8 +3,8 @@ div.description
   | The DeepBrain Chain Galaxy Computing Power Race Incentive Program is a collaborative race to stress test the network, it encourages participation from miners around the world, and help prepare miners to operate the world's largest high-performance computing network.
 div.rule-wrapper
   div.rule-title Rules of the Race
-  div.rule-content The public beta of the Galaxy Hash Power Contest is from July 18, 2021, Beijing time to August 17, 2021, and the public test of the Galaxy Hash Power Contest is from August 18, 2021, to September 17, 2021, Beijing time. The pre-mainnet deployment will go live on September 18, 2021, Beijing time. It will be upgraded to the mainnet after the pre-mainnet security audit is passed. When it meets the 5000 GPU competition of the whole network, it will be automatically activated. After activation, the competition will last for 2 months. During this period, all computing workers will share 133 million DBC rewards together, and the top 5 computing workers can receive an additional 30 million DBC rewards! Before the official activation of the Galaxy Race, the miners enjoy the double income of rental income and online rewards, with a total monthly online reward of 33.33 million DBC, and 100% destruction/burning of the rent after activation!
-  div.rule-title I. Computing power server configuration requirements. Computing server parameters: only when a machine meets the minimum requirements will it pass the online audit, otherwise it can not obtain node revenue.
+  div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
+  div.rule-title I. Minimum requirements for GPU server parameters: Only when the parameters of the computing power server meet the minimum requirements, can it be reviewed and launched by the validator, otherwise no revenue will be obtained
   div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
     li 
@@ -34,12 +34,15 @@ div.rule-wrapper
       span Note: 
       | Taking into account the stability of the machine, the stability of online income and the penalty mechanism, it is recommended to use the manufacturer's brand machine, and the assembly machine is not recommended.
     li 
+      span Recommended GPU model: 
+      | 3080、3080Ti、3090、A5000、A6000
+    li 
       span GPU server deployment for Galaxy Race document: 
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
     div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month.
-    | The calculation model is as follows: the computing power value of the whole machine=50*√(number of cards)+memory/3.5+(√(number of cuda)*√(video memory/10))*number of graphics cards
+    | The calculation model is as follows: the computing power value of the whole machine=25*(number of cards)+memory/3.5+(√(number of cuda)*√(video memory/10))*number of graphics cards
     div.table
       div.table_con
         div GPU type
@@ -47,7 +50,9 @@ div.rule-wrapper
         div Video memory
         div Graphics card number
         div RAM(G)
-        div Computing power of the whole machine(C)
+        div.fs10 Computing power of the whole machine(C)
+        div Machine rental(USD)
+        div.fs10 Rent USD/month/card (USD)
       div.table_li
         div 1080
         div 2560
@@ -56,11 +61,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 188.65
+            div 167.94
+            div 142.22
+            div 71.11
           div.line
             div 4
             div 192
             div 335.88
+            div 284.45
+            div 71.11
       div.table_li
         div 1080ti
         div 3584
@@ -69,11 +78,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 223.72
+            div 203.31
+            div 171.92
+            div 85.96
           div.line
             div 4
             div 192
             div 406.01
+            div 343.84
+            div 85.96
       div.table_li
         div 1660
         div 1408
@@ -82,11 +95,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 156.27
+            div 135.56
+            div 114.80
+            div 57.40
           div.line
             div 4
             div 192
             div 271.12
+            div 229.60
+            div 57.40
       div.table_li
         div 1660ti
         div 1536
@@ -95,11 +112,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 158.85
+            div 138.14
+            div 116.99
+            div 58.50
           div.line
             div 4
             div 192
             div 276.29
+            div 233.98
+            div 58.50
       div.table_li
         div 1660s
         div 1408
@@ -108,11 +129,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 156.27
+            div 135.56
+            div 114.80
+            div 57.40
           div.line
             div 4
             div 192
             div 271.12
+            div 229.60
+            div 57.40
       div.table_li
         div 2080
         div 2944
@@ -121,11 +146,32 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 195.20
+            div 174.49
+            div 147.77
+            div 73.89
           div.line
             div 4
             div 192
             div 348.98
+            div 295.54
+            div 73.89
+      div.table_li
+        div 2080s
+        div 3072
+        div 8
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 176.58
+            div 149.54
+            div 74.77
+          div.line
+            div 4
+            div 192
+            div 353.15
+            div 299.08
+            div 74.77
       div.table_li
         div 2080ti
         div 4352
@@ -134,11 +180,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 236.52
+            div 215.81
+            div 182.76
+            div 91.38
           div.line
             div 4
             div 192
             div 431.62
+            div 365.52
+            div 91.38
       div.table_li
         div 2080ti
         div 4352
@@ -147,11 +197,15 @@ div.rule-wrapper
           div.line
             div 2
             div 448
-            div 337.09
+            div 316.38
+            div 267.93
+            div 133.97
           div.line
             div 4
             div 832
             div 614.47
+            div 520.38
+            div 130.10
       div.table_li
         div 3060
         div 3584
@@ -160,11 +214,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 229.30
+            div 208.59
+            div 176.65
+            div 88.32
           div.line
             div 4
             div 192
             div 417.18
+            div 353.30
+            div 88.32
       div.table_li
         div 3060ti
         div 4864
@@ -173,11 +231,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 222.90
+            div 202.19
+            div 171.23
+            div 85.61
           div.line
             div 4
             div 192
             div 404.38
+            div 342.46
+            div 85.61
       div.table_li
         div 3070
         div 5888
@@ -186,11 +248,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 235.40
+            div 214.69
+            div 182.82
+            div 45.45
           div.line
             div 4
             div 192
             div 429.39
+            div 363.64
+            div 90.91
       div.table_li
         div 3070ti
         div 6144
@@ -199,11 +265,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 238.36
+            div 217.65
+            div 184.32
+            div 92.16
           div.line
             div 4
             div 192
             div 435.29
+            div 368.64
+            div 92.16
       div.table_li
         div 3080
         div 8704
@@ -212,11 +282,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 284.73
+            div 264.02
+            div 223.59
+            div 111.80
           div.line
             div 4
             div 192
             div 528.04
+            div 447.18
+            div 111.80
       div.table_li
         div 3080
         div 8704
@@ -225,11 +299,15 @@ div.rule-wrapper
           div.line
             div 2
             div 448
-            div 385.30
+            div 364.59
+            div 308.76
+            div 154.38
           div.line
             div 4
             div 832
             div 710.90
+            div 602.04
+            div 150.51
       div.table_li
         div 3080ti
         div 10240
@@ -238,11 +316,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 319.84
+            div 299.13
+            div 253.33
+            div 126.66
           div.line
             div 4
             div 192
             div 598.26
+            div 506.65
+            div 126.66
       div.table_li
         div 3080ti
         div 10240
@@ -251,11 +333,15 @@ div.rule-wrapper
           div.line
             div 2
             div 448
-            div 420.41
+            div 399.70
+            div 338.50
+            div 169.25
           div.line
             div 4
             div 832
             div 781.12
+            div 661.51
+            div 165.38
       div.table_li
         div 3090
         div 10496
@@ -264,11 +350,15 @@ div.rule-wrapper
           div.line
             div 2
             div 96
-            div 415.57
+            div 394.86
+            div 334.40
+            div 167.20
           div.line
             div 4
             div 192
             div 789.72
+            div 668.79
+            div 167.20
       div.table_li
         div 3090
         div 10496
@@ -277,11 +367,49 @@ div.rule-wrapper
           div.line
             div 2
             div 448
-            div 516.14
+            div 495.43
+            div 419.57
+            div 209.78
           div.line
             div 4
             div 832
             div 972.57
+            div 823.65
+            div 205.91
+      div.table_li
+        div A4000
+        div 6144
+        div 16
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 275.73
+            div 233.50
+            div 116.75
+          div.line
+            div 4
+            div 192
+            div 551.45
+            div 467.01
+            div 116.75
+      div.table_li
+        div A5000
+        div 8192
+        div 24
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 357.86
+            div 303.06
+            div 151.53
+          div.line
+            div 4
+            div 192
+            div 715.73
+            div 606.13
+            div 151.53
   div.rule-title Ⅲ. Galaxy Race reward calculation rules:
   div.rule-content
     div Several factors affect the miners' DBC rewards.
@@ -290,7 +418,7 @@ div.rule-wrapper
       li The number of GPUs owned
       li The number of GPUs owned by a single wallet. For each additional GPU owned by a single wallet, the points of all machines will increase by 0.01% until it increases by 10%.
       li Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
-      li Daily rewards obtained by computing workers = the percentage of computing power owned by computing workers in the total network computing power * 1.0959 million DBC, of which 25% are obtained immediately, 75% are released for 150 days, and 0.5% is released every day
+      li Daily rewards obtained by computing workers = the percentage of computing power owned by computing workers in the total network computing power * 1.09589 million DBC, of which 25% are obtained immediately, 75% are released for 150 days, and 0.5% is released every day
   //- div.rule-title.fs16 Example:
   //- div.rule-content
   //-   div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
@@ -304,7 +432,7 @@ div.rule-wrapper
   div.rule-content
     div 1). The validator needs to pledge 20,000 dbc in advance
     div 2). The reporter needs to pledge 20,000 dbc in advance, otherwise the report cannot be reported
-    div 3). When the deposit 50% is in the warning state, when the machine deposit is less than 40%, the validator qualification will be cancelled. Each time an order is rushed, 1000 pledges are consumed, and the order status is completed, 1000 pledges will be refunded
+    div 3). When the validator's deposit is 50% remaining, it will be in a warning state. When the validator's deposit is less than 40%, the validator's qualification will be cancelled. Each time an order is rushed, 1000 pledges are consumed, and the order status is completed, 1000 pledges will be refunded
   div.rule-title.fs16 1. In the case that the machine provider takes the initiative to send offline notification:
   div.rule-content
     div 1). If the machine is in the leased state
@@ -361,17 +489,17 @@ div.rule-wrapper
   div.rule-content
     div 1. When the machine is online for the first time for 365 days, it can be re-pledged, and the re-pledging will be based on the current number of GPU of the whole network and token price, and if the new pledged tokens are lower than the original pledged tokens, the difference will be ''un-pledged''. The operation can be performed once every 365 days.
     div 2. When the machine has been online for 365 days for the first time, and the machine has been idle for more than 10 days, the machine can be taken offline and all tokens can be released.
-  div.rule-title Ⅶ、Other rules
+  div.rule-title Ⅶ、Contact details
   div.rule-content
-    div The computing workers participating in the test can give us more feedback and suggestions to facilitate the modification of the rules and share and build together.
-    div.rule-content
-      div Contact details：
-        ul
-          li Mail：zhouyu@deepbrainchain.org；leo@deepbrainchain.org
-          li WeChat：DeepBrainChain；DBC-Leo
-          li Telegram：18221230521；13681709317
-  div.rule-title Disclaimer:
-  div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
+    div If you have any questions, please contact email: zhouyu@deepbrainchain.org; leo@deepbrainchain.org
+    //- div.rule-content
+    //-   div Contact details：
+    //-     ul
+    //-       li Mail：zhouyu@deepbrainchain.org；leo@deepbrainchain.org
+    //-       li WeChat：DeepBrainChain；DBC-Leo
+    //-       li Telegram：18221230521；13681709317
+  //- div.rule-title Disclaimer:
+  //- div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
 </template>
 <style lang="less" scoped>
 .li-style {
@@ -422,7 +550,7 @@ div.rule-wrapper
       justify-content: space-between;
       border-bottom: 1px solid #333;
       div {
-        width: 16.67%;
+        width: 12.5%;
         height: 80px;
         display: flex;
         align-items: center;
@@ -434,6 +562,9 @@ div.rule-wrapper
         &:last-child {
           border: none;
         }
+      }
+      .fs10{
+        font-size: 10px;
       }
     }
     .table_li {
@@ -447,7 +578,7 @@ div.rule-wrapper
         border: none;
       }
       div {
-        width: 16.66%;
+        width: 12.5%;
         min-height: 60px;
         text-align: center;
         line-height: 60px;
@@ -458,7 +589,7 @@ div.rule-wrapper
         }
       }
       .width60{
-        width: 50%;
+        width: 62.5%;
         display: flex;
         align-items: center;
         flex-direction: column;

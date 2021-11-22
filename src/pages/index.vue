@@ -248,6 +248,9 @@ export default defineComponent({
     }
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
+      if(rewardInfo.totalGpuNum) {
+        localStorage.setItem('totalGpuNum', rewardInfo.totalGpuNum)
+      }
       rewardInfo.Rent = '0'
       Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;

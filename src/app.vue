@@ -29,7 +29,7 @@ el-config-provider(:locale="locale")
       span DeepBrain
       | Chain
   h1.title(v-if='countDownactive') {{t('title')}}
-  h1.title(v-else) {{t('title1')}}
+  h1.title(v-else) {{t('title1')}} {{ lastGpuNum }} {{t('piece')}} GPU
   div.time-wrapper
     div.time-title(v-if='countDownactive') {{t('countDown')}}
     div.time-title(v-else) {{t('countDown1')}}
@@ -236,8 +236,10 @@ export default defineComponent({
     };
     const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
-    const countDownactive = computed(() => (formateIOS("2021-09-18 00:00").valueOf() - Date.now()) > 0 );
+    const countDownactive = computed(() => (formateIOS("2021-11-22 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
+    const totalGpuNum = ref(localStorage.getItem('totalGpuNum') || 0)
+    const lastGpuNum = computed(() => ( 5000 - Number(totalGpuNum.value) ));
     watch(
       () => lan.value,
       (value, pervalue) => {
@@ -252,11 +254,11 @@ export default defineComponent({
     return {
       active,
       time: computed(() => {
-        const times =  Date.now() - formateIOS("2021-09-18 00:00").valueOf()
+        const times =  Date.now() - formateIOS("2021-11-22 00:00").valueOf()
         if(times >= 0){
           return times
         }else{
-          return formateIOS("2021-09-18 00:00").valueOf() - Date.now()
+          return formateIOS("2021-11-22 00:00").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {
@@ -267,6 +269,7 @@ export default defineComponent({
       t,
       lan,
       locale,
+      lastGpuNum,
       handleSelect: (e: any) => {
         lan.value = e.target.value
         localStorage.setItem('lan', e.target.value)

@@ -49,7 +49,7 @@ class DBCRequest {
   keepAlive: boolean = true;
   wsOpened: boolean = false;
   // url: string = "wss://infotest2.dbcwallet.io";
-  url: string = 'wss://preinfo.dbcwallet.io';
+  url: string = 'wss://info.dbcwallet.io';
   constructor(keepAlive: boolean = true) {
     this.ws = new WebSocket(this.url);
     this.keepAlive = keepAlive;

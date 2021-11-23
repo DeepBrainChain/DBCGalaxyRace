@@ -209,7 +209,7 @@ el-config-provider(:locale="locale")
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Background from "./components/background.vue";
 import { useI18n } from "vue-i18n";
@@ -251,6 +251,11 @@ export default defineComponent({
         }
       }
     )
+    onMounted(() => {
+      setInterval(() => {
+        totalGpuNum.value =  localStorage.getItem('totalGpuNum') || 0
+      }, 5000)
+    });
     return {
       active,
       time: computed(() => {

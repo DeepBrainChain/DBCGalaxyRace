@@ -600,6 +600,9 @@ export default defineComponent({
             Idle_Gpu.value = res1.cpu_total[str]?res1.cpu_total[str]:0
             loading.value = false
           })
+          .catch( err => {
+            console.log(err);
+          })
         }else{
           loading.value = false
         }
@@ -610,6 +613,9 @@ export default defineComponent({
           })
         // },1000)
 
+      })
+      .catch( err => {
+        console.log(err);
       })
     }
     const choose = (str) => {
@@ -696,24 +702,26 @@ export default defineComponent({
     )
     onMounted( async () => {
       loading.value = true
-      await axios.get("https://dbchaininfo.congtu.cloud/query/dbc_info?language=CN").then(
-        res => {
-          dbc_price.value = res.content.dbc_price
-        }
-      )
-      await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(
-        res => {
-          Gpu_Type.value.map(el1=>{
-            res.map(el => {
-              if(el == el1.type){
-                tableData.value.push(el1)
-              }
-            })
+      await axios.get("https://dbchaininfo.congtu.cloud/query/dbc_info?language=CN").then(res => {
+        dbc_price.value = res.content.dbc_price
+      })
+      .catch( err => {
+        console.log(err);
+      })
+      await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(res => {
+        Gpu_Type.value.map(el1=>{
+          res.map(el => {
+            if(el == el1.type){
+              tableData.value.push(el1)
+            }
           })
-          active.value = tableData.value[0] ? tableData.value[0].type : ''
-          Computing_Power.value = tableData.value[0] ? tableData.value[0].power : 0
-        }
-      )
+        })
+        active.value = tableData.value[0] ? tableData.value[0].type : ''
+        Computing_Power.value = tableData.value[0] ? tableData.value[0].power : 0
+      })
+      .catch( err => {
+        console.log(err);
+      })
       await getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
     });
     return {

@@ -15,7 +15,20 @@ table.table(ce)
       td.td(v-for="column in tableColumns")
         | {{row[column.key]}}
 div.pagination-container
-  Pagination(:total="total", :onChangePageSize="handleChangePageSize",:onJumpPage="handleJump")
+  Pagination(v-if='!isWin' :total="total", :onChangePageSize="handleChangePageSize",:onJumpPage="handleJump")
+  el-pagination.pagination(
+    v-else
+    @size-change="handleChangePageSize1", 
+    @current-change="handleCurrentChange", 
+    :currentPage="currentPage", 
+    :page-sizes="[5, 10, 20, 30, 50]",
+    :page-size="PageSize",
+    small
+    popper-class='pagination'
+    :disabled = 'PaDisabled'
+    layout="total, sizes, prev, pager, next, jumper",
+    :total="total"
+  )
 </template>
 <style lang="less" scoped>
 .pagination-container {
@@ -139,10 +152,10 @@ div.pagination-container
 }
 </style>
 <script lang="ts">
-import { defineComponent, onMounted, reactive, ref } from "vue";
+import { defineComponent, computed, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { getRewardInfo, getList, RewardInfoType, ItemType, getStakerInfo, compare } from "../apis";
+import { getRewardInfo, getList, RewardInfoType, ItemType, compare, getNumber } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
   components: {
@@ -150,6 +163,16 @@ export default defineComponent({
   },
   setup() {
     const { t } = useI18n();
+    const currentPage = ref(1)
+    const PageSize = ref(50)
+    const PaDisabled = ref(true)
+    const isWin = computed(()=>{
+      if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+        return false
+      }else{
+        return true
+      }
+    })
     const rewardsItems: Array<{ key: keyof RewardInfoType; label: string }> = [
       { key: "totalCalcPoints", label: "总算力值" },
       { key: "totalGpuNum", label: "GPU总数" },
@@ -194,10 +217,7 @@ export default defineComponent({
         label: "奖励总数"
       }
     ];
-    const set = (
-      serverList: Array<ItemType>,
-      reactiveList: Array<ItemType>
-    ) => {
+    const set = ( serverList: Array<ItemType>, reactiveList: Array<ItemType> ) => {
       reactiveList.splice(0, reactiveList.length);
       // todo
       serverList.forEach(item => {
@@ -220,18 +240,17 @@ export default defineComponent({
         return '100'
       }
       let num1 = String(num);
-      let hasPoint;
-      num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
-      return hasPoint ? num1.substring(0,num1.indexOf(".")+3) : num1
+      return num1.substring(0,num1.indexOf(".")+3);
     }
     const getnum1 = (num: string):string => {
       const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
-      let hasPoint;
-      num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
-      return hasPoint ? num1.substring(0,num1.indexOf(".")+5) : num1
+      return num1.substring(0,num1.indexOf(".")+5);
     }
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
+      if(rewardInfo.totalGpuNum) {
+        localStorage.setItem('totalGpuNum', rewardInfo.totalGpuNum)
+      }
       rewardInfo.Rent = '0'
       Object.keys(itemsData).forEach(k => {
         const key = k as keyof RewardInfoType;
@@ -249,19 +268,25 @@ export default defineComponent({
         }
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
-      const { list, total: remoteTotal } = await getList();
+      
+      await getNumber().then( res => {
+        total.value = res
+      })
+      
+      const { list } = await getList();
       set(list, tableData);
-      total.value = remoteTotal;
-      setTimeout( async()=>{
-        const data = await getStakerInfo(list)
-        console.log(data, 'data');
-        list.map(
-          (s,i) => {
-            s.totalReward = getnum1(String(data[i]*4/3))
-          }
-        )
-        set(list, tableData);
-      }, 2000)
+      PaDisabled.value = false
+      // total.value = remoteTotal;
+      // setTimeout( async()=>{
+      //   const data = await getStakerInfo(list)
+      //   list.map(
+      //     (s,i) => {
+      //       s.totalReward = getnum1(String(data[i]))
+      //     }
+      //   )
+      //   set(list, tableData);
+      //   PaDisabled.value = false
+      // }, 2000)
     });
 
     return {
@@ -270,35 +295,78 @@ export default defineComponent({
       tableColumns: columns,
       tableData,
       total,
+      currentPage,
+      PageSize,
       t,
-      handleChangePageSize: async (num: number) => {
-        const { list, total: remoteTotal } = await getList(1, num);
-        set(list, tableData);
-        total.value = remoteTotal;
-        setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          console.log(data, 'data');
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
-            }
-          )
+      isWin,
+      PaDisabled,
+      handleChangePageSize1: async (num: number) => {
+        PaDisabled.value = true
+        PageSize.value = num
+        // await getNumber().then( res => {
+        //   total.value = res
+        // })
+        if(Math.ceil(total.value / num) > currentPage.value ){
+          const { list } = await getList(currentPage.value, PageSize.value);
           set(list, tableData);
-        }, 2000)
+          // setTimeout( async()=>{
+          // const data = await getStakerInfo(list)
+          // list.map(
+          //   (s,i) => {
+          //     s.totalReward = getnum1(String(data[i]))
+          //   }
+          // )
+          // set(list, tableData);
+          PaDisabled.value = false
+          // }, 2000)
+        }else{
+          PaDisabled.value = false
+        }
+      },
+      handleChangePageSize: async (num: number) => {
+        await getNumber().then( res => {
+          total.value = res
+        })
+        const { list } = await getList(1, num);
+        set(list, tableData);
+        // setTimeout( async()=>{
+        //   const data = await getStakerInfo(list)
+        //   list.map(
+        //     (s,i) => {
+        //       s.totalReward = getnum1(String(data[i]))
+        //     }
+        //   )
+        //   set(list, tableData);
+        // }, 2000)
+      },
+      handleCurrentChange: async (num: number) => {
+        PaDisabled.value = true
+        currentPage.value = num
+        const { list } = await getList(currentPage.value, PageSize.value);
+        set(list, tableData);
+        // setTimeout( async()=>{
+          // const data = await getStakerInfo(list)
+          // list.map(
+          //   (s,i) => {
+          //     s.totalReward = getnum1(String(data[i]))
+          //   }
+          // )
+          // set(list, tableData);
+          PaDisabled.value = false
+        // }, 2000)
       },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
-        setTimeout( async()=>{
-          const data = await getStakerInfo(list)
-          console.log(data, 'data');
-          list.map(
-            (s,i) => {
-              s.totalReward = getnum1(String(data[i]*4/3))
-            }
-          )
-          set(list, tableData);
-        }, 2000)
+        // setTimeout( async()=>{
+        //   const data = await getStakerInfo(list)
+        //   list.map(
+        //     (s,i) => {
+        //       s.totalReward = getnum1(String(data[i]))
+        //     }
+        //   )
+        //   set(list, tableData);
+        // }, 2000)
       }
     };
   }

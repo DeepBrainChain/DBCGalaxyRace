@@ -4,7 +4,7 @@ import ZH from './zh'
 import EN from './en'
 // 识别浏览器默认语言
 const language = window.navigator.language.slice(0, 2);
-localStorage.setItem('lan', language)
+// localStorage.setItem('lan', language)
 //注册i8n实例并引入语言文件
 const i18n = createI18n({
     silentTranslationWarn: true,

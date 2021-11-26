@@ -1,42 +1,47 @@
 <template lang="pug">
-nav.navigator
-  router-link.navigator-item(to='/',:class='{active:  active === 0}')
-    | {{t('header_menu1')}}
-    div.navigator-active
-  router-link.navigator-item(to='/rule',:class='{active: active === 1}',v-if="lan == 'zh'")
-    | {{t('header_menu2')}}
-    div.navigator-active
-  router-link.navigator-item(to='/rule_En',:class='{active: active === 2}',v-else)
-    | {{t('header_menu2')}}
-    div.navigator-active
-  router-link.navigator-item(to='/map',:class='{active: active === 3}')
-    | {{t('header_menu3')}}
-    div.navigator-active
-  div.select-wrapper
-    Arrow.down-arrow
-    div.select-box.border-1px
-      select(@change="handleSelect", :value="lan")
-        option(value="zh") 简体中文
-        option(value="en") ENGLISH
+el-config-provider(:locale="locale")
+  nav.navigator
+    router-link.navigator-item(to='/',:class='{active:  active === 0}')
+      | {{t('header_menu1')}}
+      div.navigator-active
+    router-link.navigator-item(to='/rule',:class='{active: active === 1}',v-if="lan == 'zh'")
+      | {{t('header_menu2')}}
+      div.navigator-active
+    router-link.navigator-item(to='/rule_En',:class='{active: active === 2}',v-else)
+      | {{t('header_menu2')}}
+      div.navigator-active
+    router-link.navigator-item(to='/map',:class='{active: active === 3}')
+      | {{t('header_menu3')}}
+      div.navigator-active
+    router-link.navigator-item(to='/table',:class='{active: active === 4}')
+      | {{t('header_menu4')}}
+      div.navigator-active
+    div.select-wrapper
+      Arrow.down-arrow
+      div.select-box.border-1px
+        select(@change="handleSelect", :value="lan")
+          option(value="zh") 简体中文
+          option(value="en") ENGLISH
 
-div.logger-wrapper
-  img(src='./assets/logo.gif')
-  div.name
-    span DeepBrain
-    | Chain
-h1.title {{t('title')}}
-div.time-wrapper
-  div.time-title(v-if='countDownactive') {{t('countDown')}}
-  div.time-title(v-else) {{t('countDown1')}}
-  div.time
-    vue-countdown(v-if="counting",@end="handleCountdownEnd" ,:time="time", v-slot="{ days, hours, minutes, seconds }")
-      span {{days}}{{t('Day')}}
-      span {{hours}}{{t('Hour')}}
-      span {{minutes}}{{t('Minute')}}
-      span {{seconds}}{{t('Second')}}
-    span(v-else) {{t('TheEnd')}}
-router-view
-Background
+  div.logger-wrapper
+    img(src='./assets/logo.gif')
+    div.name
+      span DeepBrain
+      | Chain
+  h1.title(v-if='countDownactive') {{t('title')}}
+  h1.title(v-else) {{t('title1')}} {{ lastGpuNum }} {{t('piece')}} GPU
+  div.time-wrapper
+    div.time-title(v-if='countDownactive') {{t('countDown')}}
+    div.time-title(v-else) {{t('countDown1')}}
+    div.time
+      vue-countdown(v-if="counting", @end="handleCountdownEnd", :time="time", :just="countDownactive" v-slot="{ days, hours, minutes, seconds }")
+        span {{days}}{{t('Day')}}
+        span {{hours}}{{t('Hour')}}
+        span {{minutes}}{{t('Minute')}}
+        span {{seconds}}{{t('Second')}}
+      span(v-else) {{t('TheEnd')}}
+  router-view
+  Background
 </template>
 
 <style lang="less">
@@ -204,44 +209,61 @@ Background
 </style>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import Background from "./components/background.vue";
 import { useI18n } from "vue-i18n";
 import Arrow from "./components/arrow.vue";
 import { changeLan } from '../src/language'
+import { ElConfigProvider } from 'element-plus'
+import ZH from '../src/language/zh'
+import EN from '../src/language/en'
 export default defineComponent({
   name: "App",
   components: {
     Background,
-    Arrow
+    Arrow,
+    [ElConfigProvider.name]: ElConfigProvider,
   },
   setup() {
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
+    const locale = ref(ZH)
     const formateIOS = (time: string) => {
       const myDate = new Date((time.replace(/-/g, "/")));
       return myDate;
     };
-    const active = computed(() => ["/", "/rule", "/rule_En", "/map"].indexOf(route.path));
+    const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
-    const countDownactive = computed(() => (formateIOS("2021-07-18 00:00").valueOf() - Date.now()) > 0 );
+    const countDownactive = computed(() => (formateIOS("2021-11-22 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
+    const totalGpuNum = ref(localStorage.getItem('totalGpuNum') || 0)
+    const lastGpuNum = computed(() => ( 5000 - Number(totalGpuNum.value) ));
     watch(
       () => lan.value,
       (value, pervalue) => {
         lan.value = value
+        if(value == 'zh'){
+          locale.value = ZH
+        }else{
+          locale.value = EN
+        }
       }
     )
+    onMounted(() => {
+      setInterval(() => {
+        totalGpuNum.value =  localStorage.getItem('totalGpuNum') || 0
+      }, 5000)
+    });
     return {
       active,
       time: computed(() => {
-        const times = formateIOS("2021-07-18 00:00").valueOf() - Date.now()
+        const times =  Date.now() - formateIOS("2021-11-22 00:00").valueOf()
         if(times >= 0){
           return times
         }else{
-          return formateIOS("2021-08-17 00:00").valueOf() - Date.now()
+          return formateIOS("2021-11-22 00:00").valueOf() - Date.now()
         }
       }),
       handleCountdownEnd: () => {
@@ -251,7 +273,8 @@ export default defineComponent({
       countDownactive,
       t,
       lan,
-      options: [ { i:'zh', val:'简体中文'}, { i:'en', val:'ENGLISH'} ],
+      locale,
+      lastGpuNum,
       handleSelect: (e: any) => {
         lan.value = e.target.value
         localStorage.setItem('lan', e.target.value)

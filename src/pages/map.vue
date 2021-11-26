@@ -46,7 +46,7 @@ import { getPosGpuInfo } from "../apis";
 export default defineComponent({
   name: "maps",
   setup() {
-    const { t, locale } = useI18n();
+    const { t } = useI18n();
     const maxDecimal = number => {
       return String(number).replace(/^(.*\..{4}).*$/, "$1");
     };
@@ -62,14 +62,16 @@ export default defineComponent({
       let data1 = []
       try {
         list = await getPosGpuInfo()
-        list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
       } catch {
         list = []
       }
+      // list = list.filter((el) => { return (el[0] <= 1800000 && el[1] <= 900000)})
       list.map((el, index) => {
+        // East 东 West 西 South 南 North 北   lat 纬度 lng 经度
+        // 南纬是负，北纬是正，东经是正，西经是负。
         data1[index] = {};
-        data1[index].lng = el[0] / Math.pow(10, 4);
-        data1[index].lat = el[1] / Math.pow(10, 4);
+        data1[index].lng = el[0]['East'] ? (el[0]['East'] / Math.pow(10, 4)) : -(el[0]['West'] / Math.pow(10, 4));
+        data1[index].lat = el[1]['North'] ? (el[1]['North'] / Math.pow(10, 4)) : -(el[1]['South'] / Math.pow(10, 4));
         data1[index].RentalRate =
         el[2].rentedGpu != 0
             ? maxDecimal((el[2].rentedGpu / el[2].onlineGpu) * 100) + "%"
@@ -124,7 +126,8 @@ export default defineComponent({
           });
         pointLayer.on("mousemove", e => {
           let str = "";
-          if (locale.value == "zh") {
+          let lan = localStorage.getItem("lan");
+          if (lan == "zh") {
             if (e.feature.offlineGpu <= 0) {
               str = `
                             <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
@@ -166,7 +169,8 @@ export default defineComponent({
         });
         pointLayer.on("click", e => {
           let str = "";
-          if (locale.value == "zh") {
+          let lan = localStorage.getItem("lan");
+          if (lan == "zh") {
             if (e.feature.offlineGpu <= 0) {
               str = `
                             <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>

@@ -3,176 +3,503 @@ div.description
   | The DeepBrain Chain Galaxy Computing Power Race Incentive Program is a collaborative race to stress test the network, it encourages participation from miners around the world, and help prepare miners to operate the world's largest high-performance computing network.
 div.rule-wrapper
   div.rule-title Rules of the Race
-  div.rule-content Galaxy Computing Power Race public test phase 1 is from July 18th, 2021 Beijing time - August 17th, 2021; public test phase 2 is from August 18th, 2021 Beijing time - September 17th, 2021. Galaxy Computing Power Race mainnet deployment online is Beijing time September 18th, 2021, when the whole network reaches 5,000 GPU the race is automatically activated, after the activation the race will continue for 2 months, during the race period all miners together will divide 133 million DBC rewards,  the top 5 miners can get an additional 30 million DBC rewards!Before the official activation of the Galaxy Race, the miners enjoy the double income of rental income and online rewards, with a total monthly online reward of 33.33 million DBC, and 100% destruction/burning of the rent after activation!
-  div.rule-title I. Computing power server configuration requirements. Computing server parameters: only when a machine meets the minimum requirements will it pass the online audit, otherwise it can not obtain node revenue.
-
+  div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
+  div.rule-title I. Minimum requirements for GPU server parameters: Only when the parameters of the computing power server meet the minimum requirements, can it be reviewed and launched by the validator, otherwise no revenue will be obtained
   div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
     li 
       span GPU: 
-      | minimum 1 card, recommended 2 or 4 cards. Nvidia's Nvidia series graphics cards, with a minimum requirement of 8G video memory. Considering the rental rate, the type of graphics card recommended are: 3080ti, 3080, 3090, 3070ti, 2080ti, 3070, etc. Notes on the configuration of DBC Computing Server:In case of newly configured machines, one graphics deceiver per GPU is required.
+      | Minimum 1 card, 2 or 4 cards recommended; Nvidia series graphics card is required.
     li 
       span Memory: 
-      | Minimally 1 graphic card needs 224g, 2 cards - 384g, 4 cards - 768g, and so on. (If the GPU memory of the server is less than 10G, then each card of GPU only needs to be 80G or more, 2 cards are 160G or more, and 4 cards are 320G or more.)
+      | The minimum memory requirement is 48G per card, and the minimum requirement of the whole machine is 64G (that is, 48G per card is allocated to pass the chain review); combined with the actual application scenario requirements of the user, if the GPU memory is greater than or equal to 10G and the CudaCore is greater than 4000, the recommended configuration of the server is large Memory, 256G is recommended for one card, 448G for two cards, and 832G for four cards)
     li 
-      span CPU: Intel/AMD: 
-      | Main frequency 2.0Ghz and above, single CPU 8 cores and above, with an average of 8 or more cores per GPU. Important Notes: Considering the medium and long-term rental rate, as well as the 30% bonus of computing power value in the rental state, it is recommended that the CPU of the new machine be configured as follows:
-      | Intel, V3 or above, main frequency 2.5Ghz, core frequency 3.0Ghz and above, single CPU 10 cores or above, average each GPU allocated 5 cores 10 threads or above, 4 cards GPU server recommended dual CPU.
+      span CPU: 
+      | Intel/AMD, clocked at 2.0Ghz and above, single CPU with 8 cores and above; special attention: Considering the medium and long-term rental rate and the 30% calculation power bonus under rental status, it is recommended that the CPU of the new machine follow The configuration is as follows: Intel, V3 or higher, frequency 2.4Ghz, turbo frequency 3.0Ghz or higher, a single CPU with 10 cores or more, an average of 5 cores and 10 threads or more per GPU, dual CPU is recommended for 4 card GPU servers;
     li 
       span Hard disk: 
-      | GPU machine with 4 graphic cards and below: system disk 480G and above (SSD), data disk 2T and above (mechanical hard disk is also acceptable). GPU machine with 4 graphic cards and/or above: system disk 1T ssd, data disk 4T (mechanical hard disk is also acceptable).
+      | System disk 100G and above (SSD), data disk 1T and above (mechanical hard disk is also available)
     li 
       span Network bandwidth: 
-      | GPU machine with 4 graphic cards: uplink and downlink bandwidth 20M or more; GPU machine with 2 cards: uplink and downlink bandwidth 10M or more, an average of 5M bandwidth per GPU or more. ＊Important Notes: considering the medium and long-term rental rate, it is recommended that the machine is hosted somewhere that supports three-line bandwidth (see Chinese telecom companies: CMCC, CUCC, CTCC), which can be flexibly adjusted according to user needs.
+      | 4 card GPU machines have a bandwidth of more than 20M for uplink and downlink, and 2 card GPU machines have a bandwidth of more than 10M for uplink and downlink. The average bandwidth of each GPU is more than 5M. Pay special attention to the medium and long-term rental rate. Telecom), which can be flexibly adjusted according to user needs;
+    li
+      span Graphics Virtualizer:
+      | All on-chain server equipment needs to be equipped with a graphics card virtualizer (also known as a graphics card spoofer) with the corresponding number of graphics cards. New machines recommend 10 Gigabit network cards; machines without a graphics card virtualizer will not be able to pass the on-chain review
     li 
       span Each machine has an independent fixed IP 
     li 
       span Hosting IDC: 
-      | the machine is placed in a standard data center T3 or higher, taking into account the rental occupancy rate, it is recommended that the machine be hosted in cities along the Yangtze River, coastal cities, or the surrounding areas of these cities, with priority recommended for East China, South China; Southwest, Central China, North China placed in moderation;
+      | The machine is placed in the standard data center above T3. Considering the medium and long-term occupancy rate, it is recommended that the machine be hosted in cities along the Yangtze River, coastal cities, or the surrounding areas of these cities.
     li 
       span Note: 
-      | taking into account the stability of machine use and online reward stability, and there is a pledge, it is recommended to use the manufacturer brand machines, assembly machines not recommended.
+      | Taking into account the stability of the machine, the stability of online income and the penalty mechanism, it is recommended to use the manufacturer's brand machine, and the assembly machine is not recommended.
+    li 
+      span Recommended GPU model: 
+      | 3080、3080Ti、3090、A5000、A6000
     li 
       span GPU server deployment for Galaxy Race document: 
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
-  div.rule-title II. Computing power value calculation rules: 
+  div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
-    div A single GPU's computing power value has two impact indicators: the number of GPU Cuda Core and video memory size, the number of GPU Cuda Core accounts for 70%, and video memory accounts for 30%. 3080ti is the reference standard. GPU computing power value calculation formula: Base computing power value = 13 + 0.7 x √(number of cuda) + 0.3 x  memory/24 x √(number of cuda) In the above formula, √ indicates the square root, and some of the graphics card base computing power value reference is as follows:
-    //- div 2080ti算力点数：4352=4352*80%+4352*11/11*20%
-    //- div 3070算力点数：5302=5608*80%+5608*8/11*20%
-    //- div 3070Ti 8G显存版本算力点数：5734=6144*80%+6144*8/11*20%
-    //- div 3070Ti 16G显存版本算力点数：6703=6144*80%+6144*16/11*20%
-    //- div 3080算力点数：8546=8704*80%+8704*10/11*20%
-    //- div 3080Ti算力点数：10426=10240*80%+10240*12/11*20%
-    //- div 3090算力点数：12977=10496*80%+10496*24/11*20%
+    div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month.
+    | The calculation model is as follows: the computing power value of the whole machine=25*(number of cards)+memory/3.5+(√(number of cuda)*√(video memory/10))*number of graphics cards
     div.table
       div.table_con
-        div GPU type
+        div GPU type
         div Cuda core
         div Video memory
-        div Computing Power Value
+        div Graphics card number
+        div RAM(G)
+        div.fs10 Computing power of the whole machine(C)
+        div Machine rental(USD)
+        div.fs10 Rent USD/month/card (USD)
+      div.table_li
+        div 1080
+        div 2560
+        div 8
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 167.94
+            div 142.22
+            div 71.11
+          div.line
+            div 4
+            div 192
+            div 335.88
+            div 284.45
+            div 71.11
+      div.table_li
+        div 1080ti
+        div 3584
+        div 11
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 203.31
+            div 171.92
+            div 85.96
+          div.line
+            div 4
+            div 192
+            div 406.01
+            div 343.84
+            div 85.96
+      div.table_li
+        div 1660
+        div 1408
+        div 6
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 135.56
+            div 114.80
+            div 57.40
+          div.line
+            div 4
+            div 192
+            div 271.12
+            div 229.60
+            div 57.40
+      div.table_li
+        div 1660ti
+        div 1536
+        div 6
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 138.14
+            div 116.99
+            div 58.50
+          div.line
+            div 4
+            div 192
+            div 276.29
+            div 233.98
+            div 58.50
       div.table_li
         div 1660s
         div 1408
         div 6
-        div 42.08
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 135.56
+            div 114.80
+            div 57.40
+          div.line
+            div 4
+            div 192
+            div 271.12
+            div 229.60
+            div 57.40
+      div.table_li
+        div 2080
+        div 2944
+        div 8
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 174.49
+            div 147.77
+            div 73.89
+          div.line
+            div 4
+            div 192
+            div 348.98
+            div 295.54
+            div 73.89
+      div.table_li
+        div 2080s
+        div 3072
+        div 8
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 176.58
+            div 149.54
+            div 74.77
+          div.line
+            div 4
+            div 192
+            div 353.15
+            div 299.08
+            div 74.77
       div.table_li
         div 2080ti
         div 4352
         div 11
-        div 68.25
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 215.81
+            div 182.76
+            div 91.38
+          div.line
+            div 4
+            div 192
+            div 431.62
+            div 365.52
+            div 91.38
+      div.table_li
+        div 2080ti
+        div 4352
+        div 11
+        div.width60
+          div.line
+            div 2
+            div 448
+            div 316.38
+            div 267.93
+            div 133.97
+          div.line
+            div 4
+            div 832
+            div 614.47
+            div 520.38
+            div 130.10
+      div.table_li
+        div 3060
+        div 3584
+        div 12
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 208.59
+            div 176.65
+            div 88.32
+          div.line
+            div 4
+            div 192
+            div 417.18
+            div 353.30
+            div 88.32
       div.table_li
         div 3060ti
         div 4864
         div 8
-        div 68.79
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 202.19
+            div 171.23
+            div 85.61
+          div.line
+            div 4
+            div 192
+            div 404.38
+            div 342.46
+            div 85.61
       div.table_li
         div 3070
         div 5888
         div 8
-        div 74.39
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 214.69
+            div 182.82
+            div 45.45
+          div.line
+            div 4
+            div 192
+            div 429.39
+            div 363.64
+            div 90.91
       div.table_li
         div 3070ti
         div 6144
         div 8
-        div 75.71
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 217.65
+            div 184.32
+            div 92.16
+          div.line
+            div 4
+            div 192
+            div 435.29
+            div 368.64
+            div 92.16
       div.table_li
         div 3080
         div 8704
         div 10
-        div 89.96
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 264.02
+            div 223.59
+            div 111.80
+          div.line
+            div 4
+            div 192
+            div 528.04
+            div 447.18
+            div 111.80
+      div.table_li
+        div 3080
+        div 8704
+        div 10
+        div.width60
+          div.line
+            div 2
+            div 448
+            div 364.59
+            div 308.76
+            div 154.38
+          div.line
+            div 4
+            div 832
+            div 710.90
+            div 602.04
+            div 150.51
       div.table_li
         div 3080ti
         div 10240
         div 12
-        div 99.01
-      div.table_li.hide
-        div A5000
-        div 8192
-        div 24
-        div 103.51
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 299.13
+            div 253.33
+            div 126.66
+          div.line
+            div 4
+            div 192
+            div 598.26
+            div 506.65
+            div 126.66
+      div.table_li
+        div 3080ti
+        div 10240
+        div 12
+        div.width60
+          div.line
+            div 2
+            div 448
+            div 399.70
+            div 338.50
+            div 169.25
+          div.line
+            div 4
+            div 832
+            div 781.12
+            div 661.51
+            div 165.38
       div.table_li
         div 3090
         div 10496
         div 24
-        div 115.45
-  div.rule-title III. Galaxy Race reward calculation rules:
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 394.86
+            div 334.40
+            div 167.20
+          div.line
+            div 4
+            div 192
+            div 789.72
+            div 668.79
+            div 167.20
+      div.table_li
+        div 3090
+        div 10496
+        div 24
+        div.width60
+          div.line
+            div 2
+            div 448
+            div 495.43
+            div 419.57
+            div 209.78
+          div.line
+            div 4
+            div 832
+            div 972.57
+            div 823.65
+            div 205.91
+      div.table_li
+        div A4000
+        div 6144
+        div 16
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 275.73
+            div 233.50
+            div 116.75
+          div.line
+            div 4
+            div 192
+            div 551.45
+            div 467.01
+            div 116.75
+      div.table_li
+        div A5000
+        div 8192
+        div 24
+        div.width60
+          div.line
+            div 2
+            div 96
+            div 357.86
+            div 303.06
+            div 151.53
+          div.line
+            div 4
+            div 192
+            div 715.73
+            div 606.13
+            div 151.53
+  div.rule-title Ⅲ. Galaxy Race reward calculation rules:
   div.rule-content
     div Several factors affect the miners' DBC rewards.
     ul
-      li 1) The computing power value of each GPU
-      li 2) The number of GPUs owned
-      li 3) The number of GPUs owned by a single wallet, for each additional GPU owned by a single wallet, the value of all machines increases by 0.01%, until it increases by 10%
-      li 3) Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
-      li Miner's daily reward = the proportion of the miner's computing power value of the whole network * 3.33 million DBC, of which 25% is immediately released, 75% is released in the next 150 days, 0.5% is released every day
-  div.rule-title.fs16 Example:
-  div.rule-content
-    div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
-    div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
-    div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
+      li The computing power of the server device
+      li The number of GPUs owned
+      li The number of GPUs owned by a single wallet. For each additional GPU owned by a single wallet, the points of all machines will increase by 0.01% until it increases by 10%.
+      li Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
+      li Daily rewards obtained by computing workers = the percentage of computing power owned by computing workers in the total network computing power * 1.09589 million DBC, of which 25% are obtained immediately, 75% are released for 150 days, and 0.5% is released every day
+  //- div.rule-title.fs16 Example:
+  //- div.rule-content
+  //-   div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
+  //-   div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
+  //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   
   div.rule-title IV、Penalty rules
   div.rule-content
-    div No matter if the machine is online or offline, it needs to send the on-chain notification by itself. If the machine has problems and does not send the on-chain notification proactively, the penalty will be more serious. Once a machine is officially launched on the chain successfully, it cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified.
+    div Regardless of whether the machine is online or offline, computing workers need to actively send on-chain notifications by themselves. If the machine fails to actively send on-chain notifications, the penalty will be more serious. Once the machine is officially on the chain successfully, you cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified. When the machine receives a penalty, only the pledged coins are deducted. The historical rewards that will be issued in the next 150 days will not be deducted, but there is no new online reward. When the machine deposit is less than 90%, it will be in a warning state, when the machine deposit is less than 80%. %, there will be no online rewards.
+    | Number of pledges:
+  div.rule-content
+    div 1). The validator needs to pledge 20,000 dbc in advance
+    div 2). The reporter needs to pledge 20,000 dbc in advance, otherwise the report cannot be reported
+    div 3). When the validator's deposit is 50% remaining, it will be in a warning state. When the validator's deposit is less than 40%, the validator's qualification will be cancelled. Each time an order is rushed, 1000 pledges are consumed, and the order status is completed, 1000 pledges will be refunded
   div.rule-title.fs16 1. In the case that the machine provider takes the initiative to send offline notification:
   div.rule-content
     div 1). If the machine is in the leased state
       ul
-        li If the machine is offline, there will be no new online bonus, and 2 days worth of bonus will be deducted from the remaining bonus. 100% of the bonus will go to the treasury.
-        li If the machine is offline for more than 7 minutes, 4 days of remaining rewards will be deducted. 100% of the rewards will go to the treasury.
-        li If the machine is offline for more than 48h, all remaining rewards will be deducted. 50% of the reward will be given to the user and 50% will go to the treasury.
-        li If the machine is offline for more than 120h, all the remaining rewards will be deducted and 50% of the deposit will be taken away. 50% of the rewards will be given to the user, 50% will go to the treasury, and all deposits will go to the treasury.
+        li The offline machine is more than 3 minutes but not more than 7 minutes, and there is no new online reward, and 2% pledge coins will be deducted. 100% goes to the treasury.
+        li If the machine is offline for more than 7 minutes, 4% pledged coins will be deducted. 100% into the treasury
+        li If the machine is offline for more than 48 hours, 30% of the pledged coins will be deducted, 10% will be given to the user, and 90% will go to the treasury.
+        li If the machine is offline for more than 120 hours, 50% of the deposit will be deducted. 10% goes to users and 90% goes to the treasury.
     div 2). If the machine is in idle state
       ul
-        li When the machine is idle for more than 10 days, it will be removed from online, there will be no new online rewards but the old rewards are still released linearly.(After the machine is offline, if the machine has been online for more than 365 days since the first time it was launched online, the machine provider can apply for a refund of the deposit.)
-        li If the machine is in the idle state for less than 10 days, at this time we will remove the machine from online, there will be no new online rewards, deduct 2 days bonus out of the remaining rewards. All rewards will go into the treasury
-        li If the machine is in the idle state of less than 10 days, and the machine has been offline for more than 7 minutes, 4 days of remaining rewards will be deducted. All rewards will go into the treasury
-        li If the machine is idle for less than 10 days, and the machine is offline for more than 48h, all the remaining rewards will be deducted. All rewards will go to the treasury
-        li If the machine is idle for less than 10 days, and the machine is offline for more than 240h, all the remaining rewards will be deducted and 50% of the deposit will be deducted. All rewards will go to the treasury and all deposits will go to the treasury. If the machine has been online for more than 365 days since the first time it was launched online, the remaining 50% of the deposit can be returned.
+        li After being idle for more than 10 days, the machine is offline, and there is no new online reward, and the old reward is still released linearly. (After the machine is offline, if the machine is more than 365 days from the first online time, you can apply for a refund of the deposit)
+        li I have been idle for less than 10 days. At this time, the machine is offline and there is no new online reward. 2% of the pledged coins will be deducted, and all the pledged coins will enter the national treasury.
+        li I have been idle for less than 10 days, when the machine is offline for more than 7 minutes, 4% of pledged coins will be deducted, and all pledged coins will enter the treasury
+        li After being idle for less than 10 days, when the machine is offline for more than 48 hours, 30% of the pledged coins will be deducted, and all the pledged coins will enter the national treasury.
+        li If the machine has been idle for less than 10 days, and the machine is offline for more than 240 hours, 80% of the pledged coins will be deducted. All pledged coins enter the national treasury. If the machine has been online for more than 365 days since the first time it went online, the remaining 20% of the deposit can be refunded.
   div.rule-title.fs16 2. If the machine provider does not send an offline notification proactively and is reported instead:
   div.rule-content
-    div If there is a problem with the machine, but the machine provider does not send an offline notification, instead is reported by a reporter. After the report, the verifier grabs the order and verifies whether there is a problem with the machine. If the machine is in rental status, only an user can report the machine.
+    div If there is a problem with the machine, but the calculation worker does not send a offline notice, but the reporter has been reported. After the report, the verifier grabs the order and verifies whether there is a problem with the machine. The machine is in a leased state, and only users can report it.
   div.rule-content
     div 1). When the machine is in a rented state, the machine is not accessible at this time:
       ul
-        li If the machine is offline for more than 3 minutes, there will be no new online rewards, 4 days of remaining rewards will be deducted. 100% goes into the treasury;
-        li If the machine is offline for more than 7 minutes, the remaining 8 days of rewards will be deducted. 100% of the rewards will go into the treasury;
-        li If the machine is offline for more than 48h, all remaining rewards will be deducted. 30% of the reward will be given to the user, 20% to the verifier, and 50% will go to the treasury.
-        li If the machine is offline for more than 120h, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go to the treasury, and all deposits will go to the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be returned
+        li The offline machine is more than 3 minutes but not more than 7 minutes, and there is no new online reward, and 4% pledge coins will be deducted. 10% goes to the validator and 90% goes to the treasury.
+        li When offline for more than 7 minutes, 8% pledged coins will be deducted. 10% goes to the validator and 90% goes to the treasury.
+        li When offline for more than 48 hours, 60% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 120 hours, 100% deposit will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
     div 2). When the machine is in a rented state, and at this time it has been  determined that the machine has hardware failure:
       ul
-        li If the machine is offline no more than 4 hours, there will be no new online rewards, and 8 days' reward out of the remaining rewards will be deducted.  30% of the reward goes to the user, 20% to the verifier, 50% into the treasury
-        li If you are offline for more than 4 hours, then 12 days of remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
-        li If you are offline for more than 24 hours, 16 days of remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
-        li If you are offline for more than 48 hours, all remaining rewards will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, and 50% will go to the treasury.
-        li If the machine is offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% of the rewards will go to the treasury, and all of the deposit will go to the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be returned.
-    div 3). When the machine is in a rented state, and at this time it has been determined that there is a case of hardware parameters configuration fraud (bandwidth actual value is less than 30%, latitude and longitude error in a circle of 100 km away, hardware parameters are not consistent)
+        li When offline for less than 4 hours and no new online rewards, 6% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 4 hours, 12% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 24 hours, 16% of pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 48 hours, 60% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 120 hours, 100% of the deposit will be deducted, 10% will be given to the user, 20% to the validator, and 70% to the treasury.
+    div 3). When the machine is in a leased state, it is determined that the hardware parameter configuration is fraudulent (the actual bandwidth value is less than 30%, the latitude and longitude error is outside 30 kilometers, or other hardware parameters are inconsistent)
       ul
-        li If the machine is offline no more than 4 hours, there will be no new online rewards, 8 days out of the remaining rewards will be deducted and 1% deposit will be deducted. 30% of the reward goes to the user, 20% of the reward goes to the verifier, 50% into the treasury
-        li If you are offline for more than 4 hours, then 12 days remaining rewards and 1% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If you are offline for more than 24 hours, 16 days remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If you are offline for more than 48 hours, all remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If the machine has been offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go into the treasury and all of the deposit will go into the treasury. If the machine is online for more than 365 days from the first time it was launched online, the remaining 50% of the deposit can be applied for a refund
+        li When offline for no more than 4 hours, and no new online rewards, 12% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 4 hours, 24% of pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 24 hours, 32% of pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 48 hours, 60% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 120 hours, 100% of the deposit will be deducted, 10% will be given to the user, 20% to the validator, and 70% to the treasury.
     div 4). When the machine is in an idle state, and it is determined that the machine can not be rented
       ul
-        li If the machine is offline for no more than 4 hours, there will be no new online rewards, then 8 days of rewards out of the remaining rewards and  1% deposit will be deducted. 30% of the reward to the user, 20% of the reward to the verifier, 50% into the treasury
-        li If you are offline for more than 4 hours, then 12 days remaining rewards and 1% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If you are offline for more than 24 hours, 16 days remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If you are offline for more than 48 hours, all remaining rewards and 2% deposit will be deducted. 30% of the reward will be given to the user, 20% of the reward will be given to the verifier, 50% will go to the treasury, and all the deposit will go to the treasury.
-        li If the machine has been offline for more than 120 hours, all remaining rewards will be deducted and 50% of the deposit will be deducted. 30% of the rewards will be given to the user, 20% of the rewards will be given to the verifier, 50% will go into the treasury and all of the deposit will go into the treasury.  If the machine has been online for more than 365 days since the first time it was launched online, the remaining 50% of the deposit can be returned.
+        li When offline for less than 4 hours and no new online rewards, 6% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 4 hours, 12% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 24 hours, 16% of pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 48 hours, 60% pledged coins will be deducted. 10% goes to users, 20% goes to validators, and 70% goes to the treasury.
+        li When offline for more than 120 hours, 100% of the deposit will be deducted, 10% will be given to the user, 20% to the validator, and 70% to the treasury.
     div.rule-title V、Grievance rules
   div.rule-content
     div 1. If the machine is maliciously reported, the machine provider can appeal within 48 hours, otherwise it is invalid. If the complaint is passed, the network will cancel any penalties. If the complaint is not passed, all penalties are doubled.
-    div 2. If it is confirmed that the reporter has reported the machine maliciously, 100 RMB equivalent of DBC deposit will be deducted from the reporter. The reporter can also appeal within 48 hours
-    div 3. If the verifier is a minority verifier or verified the report out of malicious intent, the network will deduct 100 RMB equivalent of DBC deposit from the verifier. The verifier can also appeal within 48 hours
+    div 2. If it is confirmed that the reporter made a malicious report, the 10% equivalent dbc deposit of the reporter will be deducted. Reporters can also appeal within 48 hours
+    div 3. If the validator is a minority or malicious verification, the validator's 10% equivalent dbc deposit will be deducted. The verifier can also appeal within 48 hours.
     div 4. In any given report, out of the three parties, machine provider, reporter and validator, as long as one of them has appealed, the other can not appeal again
   div.rule-title Ⅵ、Mechanism of unlocking the pledged DBCs
   div.rule-content
     div 1. When the machine is online for the first time for 365 days, it can be re-pledged, and the re-pledging will be based on the current number of GPU of the whole network and token price, and if the new pledged tokens are lower than the original pledged tokens, the difference will be ''un-pledged''. The operation can be performed once every 365 days.
     div 2. When the machine has been online for 365 days for the first time, and the machine has been idle for more than 10 days, the machine can be taken offline and all tokens can be released.
-  
-  div.rule-title Disclaimer:
-  div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
+  div.rule-title Ⅶ、Contact details
+  div.rule-content
+    div If you have any questions, please contact email: zhouyu@deepbrainchain.org; leo@deepbrainchain.org
+    //- div.rule-content
+    //-   div Contact details：
+    //-     ul
+    //-       li Mail：zhouyu@deepbrainchain.org；leo@deepbrainchain.org
+    //-       li WeChat：DeepBrainChain；DBC-Leo
+    //-       li Telegram：18221230521；13681709317
+  //- div.rule-title Disclaimer:
+  //- div.rule-content If a serious bug is found during the Race, the DeepBrain Chain team may end the race early. Rewards will still be given for the period of time prior to the discovery of the bug. If such a bug is disclosed to the DeepBrain Chain team, the team reporting the bug will be eligible for a reward of up to 3 million DBC, depending on the severity of the bug, as determined by the DeepBrain Chain team.
 </template>
 <style lang="less" scoped>
 .li-style {
@@ -210,51 +537,81 @@ div.rule-wrapper
   ul {
     .li-style;
   }
-  .table{
-    width: 800px;
-    margin: 10px auto;
+  .table {
+    width: 100%;
+    margin: 10px 0;
     border: 1px solid #333;
-    .table_con{
+    .table_con {
       width: 100%;
-      height: 60px;
+      height: 80px;
       display: flex;
       align-items: center;
       font-weight: bold;
       justify-content: space-between;
       border-bottom: 1px solid #333;
-      div{
-        width: 200px;
-        height: 60px;
+      div {
+        width: 12.5%;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        line-height: 30px;
         box-sizing: border-box;
         border-right: 1px solid #333;
-        &:last-child{
+        &:last-child {
           border: none;
         }
       }
+      .fs10{
+        font-size: 10px;
+      }
     }
-    .table_li{
+    .table_li {
       width: 100%;
       min-height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #333;
-      &:last-child{
+      &:last-child {
         border: none;
       }
-      div{
-        width: 200px;
-        min-height: 30px;
+      div {
+        width: 12.5%;
+        min-height: 60px;
         text-align: center;
-        line-height: 30px;
+        line-height: 60px;
         box-sizing: border-box;
         border-right: 1px solid #333;
-        &:last-child{
+        &:last-child {
           border: none;
+        }
+      }
+      .width60{
+        width: 62.5%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .line{
+          width: 100%;
+          display: flex;
+          min-height: 30px;
+          line-height: 30px;
+          align-items: center;
+          border-bottom: 1px solid #333;
+          border-right: none;
+          &:last-child {
+            border: none;
+          }
+          div{
+            width: 33.333%;
+            min-height: 30px;
+            line-height: 30px;
+            &:last-child {
+              border: none;
+            }
+          }
         }
       }
     }
@@ -311,12 +668,9 @@ div.rule-wrapper
       line-height: 1.2;
       .table {
         .table_con {
+          height: 10vw;
           div {
-            line-height: 1.2;
-          }
-        }
-        .table_li {
-          div {
+            height: 10vw;
             line-height: 1.2;
           }
         }

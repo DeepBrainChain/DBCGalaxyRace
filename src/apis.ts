@@ -26,25 +26,30 @@ function byteToStr(arr: Array<number>) {
 
 /**
  * chain_getBlockHash： 高度hash
+ * chain_getBlock 获取戳及块高
  * onlineProfile_getStakerNum: 算工数量
  * onlineProfile_getStakerListInfo: 分页获取数据
  * onlineProfile_getOpInfo: 获取奖励信息
  * onlineProfile_getPosGpuInfo: 获取地图算力节点
  * onlineProfile_getStakerInfo: 获取总金额
+ * onlineProfile_getStakerIdentity: 获取算工名称
  */
  type Methods =
  | "chain_getBlockHash"
+ | "chain_getBlock"
  | "onlineProfile_getOpInfo"
  | "onlineProfile_getStakerNum"
  | "onlineProfile_getPosGpuInfo"
  | "onlineProfile_getStakerListInfo"
- | "onlineProfile_getStakerInfo";
+ | "onlineProfile_getStakerInfo"
+ | "onlineProfile_getStakerIdentity";
 
 class DBCRequest {
   ws: WebSocket;
   keepAlive: boolean = true;
   wsOpened: boolean = false;
-  url: string = "wss://infotest.dbcwallet.io";
+  // url: string = "wss://infotest2.dbcwallet.io";
+  url: string = 'wss://info.dbcwallet.io';
   constructor(keepAlive: boolean = true) {
     this.ws = new WebSocket(this.url);
     this.keepAlive = keepAlive;
@@ -74,7 +79,7 @@ class DBCRequest {
       if (this.wsOpened) {
         this._send<T>(method, params).then(resolve);
       } else {
-        // this.ws = new WebSocket(this.url);
+        this.ws = new WebSocket(this.url);
         this.ws.onopen = () => {
           this.wsOpened = true;
           this._send<T>(method, params).then(resolve);
@@ -201,64 +206,104 @@ export type ItemType = {
 
 const getnum = (num: string):string => {
   const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
-  let hasPoint;
-  num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
-  return hasPoint ? num1.substring(0,num1.indexOf(".")+5) : num1
+  return num1.substring(0,num1.indexOf(".")+5);
 }
 const getRent = (num: number):string => {
   if( num>=100 ){
     return '100'
   }
   let num1 = String(num);
-  let hasPoint;
-  num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
-  return hasPoint ? num1.substring(0,num1.indexOf(".")+3) : num1
+  return num1.substring(0,num1.indexOf(".")+3);
 }
-export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
-  // const hash = await request.send<string>("chain_getBlockHash");
-  const [list, total] = await Promise.all([
-    request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
-      // hash,
-      currentPage == 0 ? 0 : currentPage - 1,
-      numOfEachPage
-    ]),
-    request.sendUnique<number>("onlineProfile_getStakerNum")
-  ]);
-  // const data = await getStakerInfo(list)
-  // console.log(data, 'data');
+
+export const getNumber =  async () => {
+  return request.sendUnique<number>("onlineProfile_getStakerNum")
+};
+
+// export const getList = async (currentPage: number = 0, numOfEachPage: number = 20) => {
+//   // const hash = await request.send<string>("chain_getBlockHash");
+//   const [list, total] = await Promise.all([
+//     request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
+//       // hash,
+//       currentPage == 0 ? 0 : currentPage - 1,
+//       numOfEachPage
+//     ]),
+//     request.sendUnique<number>("onlineProfile_getStakerNum")
+//   ]);
+//   // const data = await getStakerInfo(list)
+//   return {
+//     list: list.map(
+//       (s,i) => ({
+//           ...s,
+//           totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
+//           calcPoints: Number(s.calcPoints)/100,
+//           unlockReward: getnum(s.totalReward),
+//           // totalReward: getnum(String(data[i]*4/3)),
+//           totalReward: '···',
+//           index: s.index >= 0?s.index+1:i+1,
+//           name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
+//           rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+//         })
+//       ),
+//     total
+//   };
+// };
+
+export const getList = async (currentPage: number = 0, numOfEachPage: number = 50) => {
+  let list:Array<any> = []
+  await request.send<Array<ItemType>>("onlineProfile_getStakerListInfo", [
+    // hash,
+    currentPage == 0 ? 0 : currentPage - 1,
+    numOfEachPage
+  ]).then(res => {
+    list = res
+  })
   return {
     list: list.map(
       (s,i) => ({
-          ...s,
-          totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
-          calcPoints: Number(s.calcPoints)/100,
-          unlockReward: getnum(s.totalReward),
-          // totalReward: getnum(String(data[i]*4/3)),
-          totalReward: '···',
-          index: s.index >= 0?s.index+1:i+1,
-          name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
-          rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
-        })
-      ),
-    total
+        ...s,
+        totalRentFee: Math.round(Number(s.totalRentFee)/ Math.pow(10,15)),
+        calcPoints: Number(s.calcPoints)/100,
+        unlockReward: getnum(s.totalReleasedReward),
+        totalReward: getnum(s.totalReward),
+        index: s.index >= 0?s.index+1:i+1,
+        name: s.stakerName.length ? byteToStr(s.stakerName): s.stakerAccount ,
+        rentRate: Number(s.totalRentedGpu) != 0 ?(getRent(Number(s.totalRentedGpu)/Number(s.totalGpuNum)*100)+'%') : 0
+      })
+    )
   };
 };
-
 
 export const getPosGpuInfo = async () => {
   return request.sendUnique<Array<any>>("onlineProfile_getPosGpuInfo");
 };
 
-export const getStakerInfo = async (list: any) => {
+// export const getStakerInfo = async (list: any) => {
+//   let bewArray:Array<any> = []
+//   for(let i=0; i< list.length;i++){
+//     await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+//       res => {
+//         // let data = 0
+//         // res.stashStatistic.linearReleaseReward && res.stashStatistic.linearReleaseReward.map( (el: string) => {
+//         //   data += Number(el)
+//         // })
+//         bewArray[i] = res.stashStatistic.totalEarnedReward
+//       }
+//     )
+//   }
+//   return bewArray 
+// };
+export const getBlock = async ()=>{
+  const hash = await request.sendUnique<any>("chain_getBlock");
+  let block = Number(hash.block.header.number)
+  return block
+}
+export const getStakerIdentity = async (list: any) => {
   let bewArray:Array<any> = []
   for(let i=0; i< list.length;i++){
-    await request.send<any>("onlineProfile_getStakerInfo",[list[i].stakerAccount]).then(
+    await request.send<any>("onlineProfile_getStakerIdentity",[list[i].machine_owner]).then(
       res => {
-        let data = 0
-        res.stashStatistic.linearReleaseReward.map( (el: string) => {
-          data += Number(el)
-        })
-        bewArray.push(data)
+        bewArray.push(res)
       }
     )
   }

@@ -12,7 +12,7 @@ table.table(ce)
         | {{ t(`lable_two${index+1}`) }}
   tbody
     tr.tr(v-for="row in tableData")
-      td.td(v-for="column in tableColumns")
+      td.td(v-for="column in tableColumns" :title='column.key === "name" ? row.stakerAccount : ""')
         | {{row[column.key]}}
 div.pagination-container
   Pagination(v-if='!isWin' :total="total", :onChangePageSize="handleChangePageSize",:onJumpPage="handleJump")
@@ -274,6 +274,7 @@ export default defineComponent({
       })
       
       const { list } = await getList();
+      console.log(list, tableData, '33333333');
       set(list, tableData);
       PaDisabled.value = false
       // total.value = remoteTotal;

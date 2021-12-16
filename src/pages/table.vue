@@ -1,6 +1,6 @@
 <template lang="pug">
 div.description {{t('desc2')}}
-  a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC/blob/master/chain_ops/rent_machine.md") https://github.com/DeepBrainChain/DBC-DOC/blob/master/chain_ops/rent_machine.md
+  a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC/blob/master/rent_machine.assets/rent_machine.md") https://github.com/DeepBrainChain/DBC-DOC/blob/master/rent_machine.assets/rent_machine.md
 div.content
   div.left
     div.left_con
@@ -92,7 +92,7 @@ div.content
 </template>
 <style lang="less" scoped >
 .description {
-  width: 744px;
+  width: 800px;
   font-family: PingFang SC, sans-serif;
   font-weight: 500;
   font-size: 16px;

@@ -3,7 +3,9 @@ import { createI18n } from 'vue-i18n'		//引入vue-i18n组件
 import ZH from './zh'
 import EN from './en'
 // 识别浏览器默认语言
-const language = window.navigator.language.slice(0, 2);
+const browserlanguage = (navigator.language || navigator.browserLanguage)
+const language = browserlanguage.slice(0, 2)
+console.log(language, 'language')
 // localStorage.setItem('lan', language)
 //注册i8n实例并引入语言文件
 const i18n = createI18n({

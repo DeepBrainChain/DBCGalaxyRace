@@ -41,7 +41,7 @@ div.rule-wrapper
   div.rule-title 二.算力值计算规则
   div.rule-content
     div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.8468美金/C/月。
-    | 计算模型如下：整机算力值=25*卡数+内存/3.5+(√(cuda数量)*√（显存/10））*显卡数量
+    | 计算模型如下：整机算力值=(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量) * 系数，当地域系数为1时算力值如下：
     div.table
       div.table_con
         div 显卡类型
@@ -409,6 +409,43 @@ div.rule-wrapper
             div 715.73
             div 606.13
             div 151.53
+    div 地域系数如下：
+    div.table1
+      div.table_con
+        div 地域系数
+        div 系数
+        div 地域系数
+        div 系数
+      div.table_li
+        div 中国大陆
+        div 1
+        div 北美
+        div 1.2
+      div.table_li
+        div 南美
+        div 1.3
+        div 欧洲
+        div 1.5
+      div.table_li
+        div 中东
+        div 1.3
+        div 韩国
+        div 1.6
+      div.table_li
+        div 日本
+        div 1.7
+        div 中国台湾
+        div 1.3
+      div.table_li
+        div 中国香港和澳门
+        div 1.3
+        div 马来西亚
+        div 1.5
+      div.table_li
+        div 印尼
+        div 1.5
+        div 新加坡
+        div 1.5
   div.rule-title 三、比赛奖励计算规则
   div.rule-content
     div 影响算工DBC奖励的几个因素：
@@ -613,6 +650,56 @@ div.rule-wrapper
     }
     .hide{
       display: none;
+    }
+  }
+  .table1 {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #333;
+    .table_con {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+      div {
+        width: 25%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 30px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+    .table_li {
+      width: 100%;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid #333;
+      &:last-child {
+        border: none;
+      }
+      div {
+        width: 25%;
+        min-height: 40px;
+        text-align: center;
+        line-height: 40px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:nth-child(4n) {
+          border: none;
+        }
+      }
     }
   }
 }

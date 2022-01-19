@@ -42,7 +42,7 @@ div.rule-wrapper
   div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
     div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month.
-    | The calculation model is as follows: the computing power value of the whole machine=25*(number of cards)+memory/3.5+(√(number of cuda)*√(video memory/10))*number of graphics cards
+    | The calculation model is as follows: computing power value of the whole machine = (25 * number of cards + memory/3.5 + (√(number of cuda) * √(memory/10)) * number of graphics cards ) * coefficient, when the local coefficient is 1, the computing power value is as follows:
     div.table
       div.table_con
         div GPU type
@@ -410,6 +410,43 @@ div.rule-wrapper
             div 715.73
             div 606.13
             div 151.53
+    div The regional coefficients are as follows:
+    div.table1
+      div.table_con
+        div Regional coefficient
+        div Coefficient
+        div Regional coefficient
+        div Coefficient
+      div.table_li
+        div China
+        div 1
+        div North America
+        div 1.2
+      div.table_li
+        div South America
+        div 1.3
+        div Europe
+        div 1.5
+      div.table_li
+        div Middle East
+        div 1.3
+        div Korea
+        div 1.6
+      div.table_li
+        div Japan
+        div 1.7
+        div Taiwan, China
+        div 1.3
+      div.table_li
+        div Hong Kong and Macau, China
+        div 1.3
+        div Malaysia
+        div 1.5
+      div.table_li
+        div Indonesia
+        div 1.5
+        div Singapore
+        div 1.5
   div.rule-title Ⅲ. Galaxy Race reward calculation rules:
   div.rule-content
     div Several factors affect the miners' DBC rewards.
@@ -617,6 +654,56 @@ div.rule-wrapper
     }
     .hide{
       display: none;
+    }
+  }
+  .table1 {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #333;
+    .table_con {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+      div {
+        width: 25%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 30px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+    .table_li {
+      width: 100%;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid #333;
+      &:last-child {
+        border: none;
+      }
+      div {
+        width: 25%;
+        min-height: 40px;
+        text-align: center;
+        line-height: 40px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:nth-child(4n) {
+          border: none;
+        }
+      }
     }
   }
 }

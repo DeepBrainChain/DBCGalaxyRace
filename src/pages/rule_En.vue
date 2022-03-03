@@ -250,7 +250,7 @@ div.rule-wrapper
             div 96
             div 214.69
             div 182.82
-            div 45.45
+            div 90.91
           div.line
             div 4
             div 192

@@ -10,7 +10,11 @@ const EVENT_PROGRESS = "progress";
 const EVENT_START = "start";
 const EVENT_VISIBILITY_CHANGE = "visibilitychange";
 function prefixZero(num: number, n = 2) {
-  return (Array(n).join('0') + num).slice(-n);
+  if(num >= 100) {
+    return num
+  } else {
+    return (Array(n).join('0') + num).slice(-n);
+  }
 }
 
 export default defineComponent({

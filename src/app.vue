@@ -7,13 +7,16 @@ el-config-provider(:locale="locale")
     router-link.navigator-item(to='/rule',:class='{active: active === 1}',v-if="lan == 'zh'")
       | {{t('header_menu2')}}
       div.navigator-active
+    router-link.navigator-item(to='/rule_Ko',:class='{active: active === 3}',v-else-if="lan == 'ko'")
+      | {{t('header_menu2')}}
+      div.navigator-active
     router-link.navigator-item(to='/rule_En',:class='{active: active === 2}',v-else)
       | {{t('header_menu2')}}
       div.navigator-active
-    router-link.navigator-item(to='/map',:class='{active: active === 3}')
+    router-link.navigator-item(to='/map',:class='{active: active === 4}')
       | {{t('header_menu3')}}
       div.navigator-active
-    router-link.navigator-item(to='/table',:class='{active: active === 4}')
+    router-link.navigator-item(to='/table',:class='{active: active === 5}')
       | {{t('header_menu4')}}
       div.navigator-active
     div.select-wrapper
@@ -22,6 +25,7 @@ el-config-provider(:locale="locale")
         select(@change="handleSelect", :value="lan")
           option(value="zh") 简体中文
           option(value="en") ENGLISH
+          option(value="ko") 한국어
 
   div.logger-wrapper
     img(src='./assets/logo.gif')
@@ -218,6 +222,7 @@ import { changeLan } from '../src/language'
 import { ElConfigProvider } from 'element-plus'
 import ZH from '../src/language/zh'
 import EN from '../src/language/en'
+import KO from '../src/language/ko'
 export default defineComponent({
   name: "App",
   components: {
@@ -229,12 +234,12 @@ export default defineComponent({
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
-    const locale = ref(ZH)
+    const locale = ref()
     const formateIOS = (time: string) => {
       const myDate = new Date((time.replace(/-/g, "/")));
       return myDate;
     };
-    const active = computed(() => ["/", "/rule", "/rule_En", "/map", "/table"].indexOf(route.path));
+    const active = computed(() => ["/", "/rule", "/rule_En", "/rule_Ko", "/map", "/table"].indexOf(route.path));
     const counting = ref(true);
     const countDownactive = computed(() => (formateIOS("2021-11-22 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
@@ -246,12 +251,21 @@ export default defineComponent({
         lan.value = value
         if(value == 'zh'){
           locale.value = ZH
+        } else if (value == 'ko'){
+          locale.value = KO
         }else{
           locale.value = EN
         }
       }
     )
     onMounted(() => {
+      if(lan.value == 'zh'){
+        locale.value = ZH
+      } else if (lan.value == 'ko'){
+        locale.value = KO
+      }else{
+        locale.value = EN
+      }
       setInterval(() => {
         totalGpuNum.value =  localStorage.getItem('totalGpuNum') || 0
       }, 5000)
@@ -279,10 +293,12 @@ export default defineComponent({
         lan.value = e.target.value
         localStorage.setItem('lan', e.target.value)
         changeLan( e.target.value )
-        let path = ["/rule", "/rule_En"].indexOf(route.path)
+        let path = ["/rule", "/rule_En", "/rule_Ko"].indexOf(route.path)
         if(path >= 0){
           if(e.target.value == 'zh'){
             router.push('./rule')
+          }if(e.target.value == 'ko'){
+            router.push('./rule_Ko')
           }else{
             router.push('./rule_En')
           }

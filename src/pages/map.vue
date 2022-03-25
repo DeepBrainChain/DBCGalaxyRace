@@ -142,6 +142,21 @@ export default defineComponent({
                             <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
                             `;
             }
+          } else if (lan == "ko") {
+            if (e.feature.offlineGpu <= 0) {
+              str = `
+                            <div class='l7-popup-p'>온라인 GPU 수: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>컴퓨팅값: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>임대율: <span>${e.feature.RentalRate}</span></div>
+                            `;
+            } else {
+              str = `
+                            <div class='l7-popup-p'>오프라인 GPU 수: <span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>온라인 GPU 수: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>컴퓨팅값: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>임대율: <span>${e.feature.RentalRate}</span></div>
+                            `;
+            }
           } else {
             if (e.feature.offlineGpu <= 0) {
               str = `
@@ -183,6 +198,21 @@ export default defineComponent({
                             <div class='l7-popup-p'>在线GPU数量：<span>${e.feature.onlineGpu}</span></div>
                             <div class='l7-popup-p'>算力值：<span>${e.feature.onlineGpuCalcPoints}</span></div>
                             <div class='l7-popup-p'>租用率：<span>${e.feature.RentalRate}</span></div>
+                            `;
+            }
+          } else if (lan == "ko") {
+            if (e.feature.offlineGpu <= 0) {
+              str = `
+                            <div class='l7-popup-p'>온라인 GPU 수: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>컴퓨팅값: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>임대율: <span>${e.feature.RentalRate}</span></div>
+                            `;
+            } else {
+              str = `
+                            <div class='l7-popup-p'>오프라인 GPU 수: <span>${e.feature.offlineGpu}</span></div>
+                            <div class='l7-popup-p'>온라인 GPU 수: <span>${e.feature.onlineGpu}</span></div>
+                            <div class='l7-popup-p'>컴퓨팅값: <span>${e.feature.onlineGpuCalcPoints}</span></div>
+                            <div class='l7-popup-p'>임대율: <span>${e.feature.RentalRate}</span></div>
                             `;
             }
           } else {

@@ -4,6 +4,7 @@ import VueCountdown from './components/vue-countdown';
 import Index from './pages/index.vue';
 import Rule from './pages/rule.vue';
 import RuleEn from './pages/rule_En.vue';
+import RuleKo from './pages/rule_Ko.vue';
 import Map from './pages/map.vue';
 import Table from './pages/table.vue';
 import App from './app.vue';
@@ -15,6 +16,7 @@ const routes = [
   { path: '/', component: Index },
   { path: '/rule', component: Rule },
   { path: '/rule_En', component: RuleEn },
+  { path: '/rule_Ko', component: RuleKo },
   { path: '/map', component: Map },
   { path: '/table', component: Table },
 ];

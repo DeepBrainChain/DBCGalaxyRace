@@ -2,10 +2,11 @@
 import { createI18n } from 'vue-i18n'		//引入vue-i18n组件
 import ZH from './zh'
 import EN from './en'
+import KO from './ko'
 // 识别浏览器默认语言
 const browserlanguage = (navigator.language || navigator.browserLanguage)
 let language = browserlanguage.slice(0, 2)
-if (language == 'zh' || language == 'en') {
+if (language == 'zh' || language == 'en' || language == 'ko') {
     language = language
 } else {
     language = 'en'
@@ -18,7 +19,8 @@ const i18n = createI18n({
     locale: localStorage.getItem('lan') || language  || 'en',	//默认显示的语言 
     messages: {
         'zh': ZH,
-        'en': EN
+        'en': EN,
+        'ko': KO
     }
 })
 export const changeLan = (lan: string)=>{

@@ -410,6 +410,72 @@ div.rule-wrapper
             div 715.73
             div 606.13
             div 151.53
+      div.table_li.height30
+        div A100
+        div 6912
+        div 40
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 1002.82 
+            div 849.18
+            div 212.29
+      div.table_li.height30
+        div A100
+        div 6912
+        div 80
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 1278.32
+            div 1082.48
+            div 270.62   
+      div.table_li.height30
+        div A40
+        div 10752
+        div 48
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 1246.42
+            div 1055.47
+            div 263.87 
+      div.table_li.height30
+        div V100
+        div 5120
+        div 16
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 699.75
+            div 592.55
+            div 148.14   
+      div.table_li.height30
+        div V100
+        div 5120
+        div 32
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 849.71 
+            div 719.53
+            div 179.88
+      div.table_li.height30
+        div T4
+        div 2560
+        div 16
+        div.width60
+          div.line
+            div 4
+            div 832
+            div 593.71 
+            div 502.75
+            div 125.69  
     div The regional coefficients are as follows:
     div.table1
       div.table_con
@@ -429,7 +495,7 @@ div.rule-wrapper
         div 1.5
       div.table_li
         div Middle East
-        div 1.3
+        div 1.6
         div Korea
         div 1.6
       div.table_li
@@ -649,6 +715,12 @@ div.rule-wrapper
               border: none;
             }
           }
+        }
+      }
+      &.height30{
+        div {
+          min-height: 30px;
+          line-height: 30px;
         }
       }
     }

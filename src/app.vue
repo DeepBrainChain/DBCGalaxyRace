@@ -294,12 +294,12 @@ export default defineComponent({
         localStorage.setItem('lan', e.target.value)
         changeLan( e.target.value )
         let path = ["/rule", "/rule_En", "/rule_Ko"].indexOf(route.path)
-        if(path >= 0){
-          if(e.target.value == 'zh'){
+        if (path >= 0) {
+          if (e.target.value == 'zh') {
             router.push('./rule')
-          }if(e.target.value == 'ko'){
+          } else if(e.target.value == 'ko') {
             router.push('./rule_Ko')
-          }else{
+          } else {
             router.push('./rule_En')
           }
         }

@@ -18,18 +18,25 @@ div.rule-wrapper
       | Intel/AMD, clocked at 2.0Ghz and above, single CPU with 8 cores and above; special attention: Considering the medium and long-term rental rate and the 30% calculation power bonus under rental status, it is recommended that the CPU of the new machine follow The configuration is as follows: Intel, V3 or higher, frequency 2.4Ghz, turbo frequency 3.0Ghz or higher, a single CPU with 10 cores or more, an average of 5 cores and 10 threads or more per GPU, dual CPU is recommended for 4 card GPU servers;
     li 
       span Hard disk: 
-      | System disk 100G and above (SSD), data disk 1T and above (mechanical hard disk is also available)
+      | System disk 100G SSD and above, data disk 1T nvme SSD and above (3.84T nvme SSD is recommended for new machine 4-card gpu server);
     li 
       span Network bandwidth: 
-      | 4 card GPU machines have a bandwidth of more than 20M for uplink and downlink, and 2 card GPU machines have a bandwidth of more than 10M for uplink and downlink. The average bandwidth of each GPU is more than 5M. Pay special attention to the medium and long-term rental rate. Telecom), which can be flexibly adjusted according to user needs;
+      | The uplink and downlink bandwidth of 4-card GPU machine is more than 20M, the uplink and downlink bandwidth of 2-card GPU machine is more than 10M, and the average bandwidth of each GPU is more than 5M; special attention, considering the medium and long-term rental rate, it is recommended that the machine hosting room in mainland China can support BGP and third-line bandwidth , Other overseas regions support BGP bandwidth;
     li
       span Graphics Virtualizer:
       | All on-chain server equipment needs to be equipped with a graphics card virtualizer (also known as a graphics card spoofer) with the corresponding number of graphics cards. New machines recommend 10 Gigabit network cards; machines without a graphics card virtualizer will not be able to pass the on-chain review
-    li 
-      span Each machine has an independent fixed IP 
+    li
+      span 10 Gigabit network card:
+      | The GPU server is at least configured with a 10 Gigabit network card;
+    li
+      span Each machine has an independent fixed IP :
+      | Each GPU server is configured with an independent public network IP and maintains scalability. Some user scenarios require each GPU to have a public network IP, that is, 4 GPU servers need 5 IPs
     li 
       span Hosting IDC: 
       | The machine is placed in the standard data center above T3. Considering the medium and long-term occupancy rate, it is recommended that the machine be hosted in cities along the Yangtze River, coastal cities, or the surrounding areas of these cities.
+    li
+      span IDC room switch:
+      | The access layer needs to support 10G intranet switches, the core layer switches need to be more than twice the bandwidth of the access layer, and need to support 20G intranet bandwidth;
     li 
       span Note: 
       | Taking into account the stability of the machine, the stability of online income and the penalty mechanism, it is recommended to use the manufacturer's brand machine, and the assembly machine is not recommended.

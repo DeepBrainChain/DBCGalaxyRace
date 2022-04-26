@@ -12,7 +12,7 @@ div.rule-wrapper
       | Minimum 1 card, 2 or 4 cards recommended; Nvidia series graphics card is required.
     li 
       span Memory: 
-      | The minimum memory requirement is 48G per card, and the minimum requirement of the whole machine is 64G (that is, 48G per card is allocated to pass the chain review); combined with the actual application scenario requirements of the user, if the GPU memory is greater than or equal to 10G and the CudaCore is greater than 4000, the recommended configuration of the server is large Memory, 256G is recommended for one card, 448G for two cards, and 832G for four cards)
+      | The minimum memory requirement is 48G per card, and the minimum requirement of the whole machine is 64G (that is, if the memory allocated to each card reaches 48G, it can pass the chain review. If it is a new machine with 4 cards, 320G memory is recommended.); combined with the actual application scenario requirements of the user, if the GPU memory is greater than or equal to 10G and the CudaCore is greater than 4000, the recommended configuration of the server is large Memory, 256G is recommended for one card, 448G for two cards, and 832G for four cards)
     li 
       span CPU: 
       | Intel/AMD, clocked at 2.0Ghz and above, single CPU with 8 cores and above; special attention: Considering the medium and long-term rental rate and the 30% calculation power bonus under rental status, it is recommended that the CPU of the new machine follow The configuration is as follows: Intel, V3 or higher, frequency 2.4Ghz, turbo frequency 3.0Ghz or higher, a single CPU with 10 cores or more, an average of 5 cores and 10 threads or more per GPU, dual CPU is recommended for 4 card GPU servers;

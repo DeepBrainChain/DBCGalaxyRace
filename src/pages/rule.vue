@@ -40,6 +40,10 @@ div.rule-wrapper
       span 特别注意：
       | 考虑到机器使用稳定性、在线收益稳定性以及惩罚机制，建议使用厂商品牌机，不推荐组装机。
     li
+      span 推荐机房的交换机和网络架构：
+      | 所有的GPU机器ETH0网口归属一个Vlan，该网口配置服务器网络信息。所有GPU服务器ETH1网口和存储服务器ETHx网口 归属同一个新的Vlan，网口不需要做任何IP配置，存储服务器ETHx网口需要配置vlan信息
+    img.ruleimg(src="../assets/rule.png")
+    li
       span 推荐GPU型号：
       | 3080、3080Ti、3090、A5000、A6000
     li
@@ -645,6 +649,9 @@ div.rule-wrapper
   }
   ul {
     .li-style;
+  }
+  .ruleimg{
+    width: 100%;
   }
   .table {
     width: 100%;

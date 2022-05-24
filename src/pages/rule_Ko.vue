@@ -39,6 +39,10 @@ div.rule-wrapper
     li 
       span 주의사항: 
       | 기기 사용의 안정성, 온라인 수익 안정성, 패널티 메커니즘을 고려하여 조립 기기가 아닌 제조업체 브랜드 기기 사용을 권장합니다
+    li
+      span 컴퓨터실의 권장 스위치 및 네트워크 아키텍처: 
+      | 모든 GPU 머신 ETH0 네트워크 포트는 하나의 Vlan에 속하며 이 네트워크 포트는 서버 네트워크 정보로 구성됩니다. 모든 GPU 서버 ETH1 네트워크 포트 및 스토리지 서버 ETHx 네트워크 포트는 동일한 새 Vlan에 속하며 네트워크 포트에는 IP 구성이 필요하지 않으며 스토리지 서버 ETHx 네트워크 포트는 vlan 정보로 구성해야 합니다.
+    img.ruleimg(src="../assets/rule.png")
     li 
       span GPU모델 추천: 
       | 3080、3080Ti、3090、A5000、A6000
@@ -645,6 +649,9 @@ div.rule-wrapper
   }
   ul {
     .li-style;
+  }
+  .ruleimg{
+    width: 100%;
   }
   .table {
     width: 100%;

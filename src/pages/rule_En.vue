@@ -40,6 +40,10 @@ div.rule-wrapper
     li 
       span Note: 
       | Taking into account the stability of the machine, the stability of online income and the penalty mechanism, it is recommended to use the manufacturer's brand machine, and the assembly machine is not recommended.
+    li
+      span Recommended switch and network architecture in the computer room: 
+      | All GPU machine ETH0 network ports belong to one Vlan, and this network port is configured with server network information. All GPU server ETH1 network ports and storage server ETHx network ports belong to the same new Vlan, network ports do not need any IP configuration, and storage server ETHx network ports need to be configured with vlan information
+    img.ruleimg(src="../assets/rule.png")
     li 
       span Recommended GPU model: 
       | 3080、3080Ti、3090、A5000、A6000
@@ -646,6 +650,9 @@ div.rule-wrapper
   }
   ul {
     .li-style;
+  }
+  .ruleimg{
+    width: 100%;
   }
   .table {
     width: 100%;

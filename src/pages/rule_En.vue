@@ -547,7 +547,8 @@ div.rule-wrapper
     div 1). The validator needs to pledge 20,000 dbc in advance
     div 2). The reporter needs to pledge 20,000 dbc in advance, otherwise the report cannot be reported
     div 3). When the validator's deposit is 50% remaining, it will be in a warning state. When the validator's deposit is less than 40%, the validator's qualification will be cancelled. Each time an order is rushed, 1000 pledges are consumed, and the order status is completed, 1000 pledges will be refunded
-  div.rule-title.fs16 1. In the case that the machine provider takes the initiative to send offline notification:
+  div.rule-title 1. In the case that the machine provider takes the initiative to send offline notification:
+  div.rule-title.fs16 As long as the machine has been on the chain for less than a year, no matter how long it is idle, it will be punished as long as it is offline.
   div.rule-content
     div 1). If the machine is in the leased state
       ul
@@ -562,7 +563,7 @@ div.rule-wrapper
         li I have been idle for less than 10 days, when the machine is offline for more than 7 minutes, 4% of pledged coins will be deducted, and all pledged coins will enter the treasury
         li After being idle for less than 10 days, when the machine is offline for more than 48 hours, 30% of the pledged coins will be deducted, and all the pledged coins will enter the national treasury.
         li If the machine has been idle for less than 10 days, and the machine is offline for more than 240 hours, 80% of the pledged coins will be deducted. All pledged coins enter the national treasury. If the machine has been online for more than 365 days since the first time it went online, the remaining 20% of the deposit can be refunded.
-  div.rule-title.fs16 2. If the machine provider does not send an offline notification proactively and is reported instead:
+  div.rule-title 2. If the machine provider does not send an offline notification proactively and is reported instead:
   div.rule-content
     div If there is a problem with the machine, but the calculation worker does not send a offline notice, but the reporter has been reported. After the report, the verifier grabs the order and verifies whether there is a problem with the machine. The machine is in a leased state, and only users can report it.
   div.rule-content
@@ -804,7 +805,7 @@ div.rule-wrapper
   &:first-child {
     margin-top: 0;
   }
-  &fs16{
+  &.fs16{
     font-size: 16px;
   }
 }

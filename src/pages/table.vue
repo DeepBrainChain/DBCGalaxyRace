@@ -4,7 +4,7 @@ div.description {{t('desc2')}}
 div.content
   div.left
     div.left_con
-      div(v-for='el in tableData' :class="{active: active === el.type}" @click="choose(el)") {{String(el.type).slice(7)}}
+      div(v-for='el in tableData' :class="{active: active === el}" @click="choose(el)") {{String(el).slice(7)}}
   div.right(v-loading="loading")
     div.right_con
       div.topcon
@@ -18,15 +18,11 @@ div.content
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem(v-if="locale == 'zh'") {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Gpu')}}: {{Idle_Gpu}}  
-        //- div.topitem(v-if="locale == 'zh'") {{t('Daily_Rent')}}: 
-        //-   span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.topcon(v-if="locale == 'en'")
         div.topitem {{t('All_Machine')}}: {{All_Machine}}
         div.topitem {{t('Idle_Machine')}}: {{Idle_Machine}}
         div.topitem {{t('All_Gpu')}}: {{All_Gpu}}
         div.topitem {{t('Idle_Gpu')}}: {{Idle_Gpu}}
-        //- div.topitem {{t('Daily_Rent')}}: 
-        //-   span {{getnum2(Computing_Power*5/99.01)}}$≈{{getnum2(Computing_Power*5/99.01/dbc_price)}}DBC
       div.table
         div.tableli(v-for="el in Machine_info" :key="el.machine_id")
           div.li_list1
@@ -45,7 +41,7 @@ div.content
             span.blod {{t('GPU_memory')}}: 
               i {{el.gpu_mem}}G
             span.width30.blod {{t('GPU_type')}}: 
-              i {{el.gpu_type}}
+              i {{el.gpuType}}
             span.width30.blod {{t('Daily_Rent')}}: 
               i.color {{getnum2(Number(el.calc_point)/100*0.028229)}}$≈{{getnum2(Number(el.calc_point)/100*0.028229/dbc_price)}}DBC
             span {{t('Country')}}:  
@@ -74,7 +70,7 @@ div.content
             span {{t('CPU_frequency')}}:  
               i {{getnum2(Number(el.cpu_rate)/1000)}}Ghz
             span.width50 {{t('CPU_type')}}:  
-              i {{el.cpu_type}}
+              i {{el.cpuType}}
       div.pagination-container
         Pagination(v-if='!isWin' :total="total", :onChangePageSize="handleChangePageSize1",:onJumpPage="handleJumpPage")
         el-pagination.pagination(
@@ -339,7 +335,6 @@ export default defineComponent({
     const { t, locale } = useI18n();
     const online_block = ref(0)
     const active = ref('')
-    const Computing_Power = ref(0)
     const dbc_price = ref(0)
     const Machine_status = ref('')
     const GPU_Num = ref('')
@@ -351,96 +346,6 @@ export default defineComponent({
     const PageSize = ref(50)
     const total = ref(0)
     const loading = ref(true)
-    const Gpu_Type = ref([
-      {
-        type: "GeForceGTX1660S",
-        power: 42.08
-      },
-      {
-        type: "GeForceRTX2070S",
-        power: 0
-      },
-      {
-        type: "GeForceRTX2080",
-        power: 0
-      },
-      {
-        type: "GeForceRTX2080S",
-        power: 0
-      },
-      {
-        type: "GeForceRTX3060",
-        power: 65.67
-      },
-      {
-        type: "GeForceRTX2080Ti",
-        power: 68.25
-      },
-      {
-        type: "GeForceRTX3060Ti",
-        power: 68.79
-      },
-      {
-        type: "GeForceRTX3070",
-        power: 74.39
-      },
-      {
-        type: "GeForceRTX3070Ti",
-        power: 75.71
-      },
-      {
-        type: "GeForceRTX3080",
-        power: 89.96
-      },
-      {
-        type: "GeForceRTX3080Ti",
-        power: 99.01
-      },
-      {
-        type: "NVIDIA A4000",
-        power: 0
-      },
-      {
-        type: "NVIDIA A5000",
-        power: 103.51
-      },
-      {
-        type: "GeForceRTX3090",
-        power: 115.45
-      },
-      {
-        type: "NVIDIA A100",
-        power: 0
-      },
-      {
-        type: "NVIDIA P100",
-        power: 0
-      },
-      {
-        type: "NVIDIA V100 16G",
-        power: 0
-      },
-      {
-        type: "NVIDIA V100 32G",
-        power: 0
-      },
-      {
-        type: "NVIDIA T4",
-        power: 0
-      },
-      {
-        type: "NVIDIA P40",
-        power: 0
-      },
-      {
-        type: "NVIDIA P4",
-        power: 0
-      },
-      {
-        type: "NVIDIA TITAN V",
-        power: 0
-      }
-    ])
     const options = ref(
       [{
         value: '',
@@ -532,28 +437,6 @@ export default defineComponent({
       num1.indexOf(".") >= 0? hasPoint = true: hasPoint = false
       return num1.substring(0,num1.indexOf(".")+3);
     }
-    const byteToStr = (arr) => {
-      if (typeof arr === "string") {
-        return arr;
-      }
-      var str = "", _arr = arr;
-      for (var i = 0; i < _arr.length; i++) {
-        var one = _arr[i].toString(2),
-          v = one.match(/^1+?(?=0)/);
-        if (v && one.length == 8) {
-          var bytesLength = v[0].length;
-          var store = _arr[i].toString(2).slice(7 - bytesLength);
-          for (var st = 1; st < bytesLength; st++) {
-            store += _arr[st + i].toString(2).slice(2);
-          }
-          str += String.fromCharCode(parseInt(store, 2));
-          i += bytesLength - 1;
-        } else {
-          str += String.fromCharCode(_arr[i]);
-        }
-      }
-      return str;
-    }
     const minsToHourMins = (mins) => {
       if (mins < 60) {
         return mins + 'm'
@@ -566,52 +449,31 @@ export default defineComponent({
     const getList = (str = '', status = '', num = '', type , pageNum = 1, pageSize = 50 ) => {
       let data = {
         gpu_type: str,
-        machine_status: status,
-        gpu_num: num,
-        pageNum: pageNum,
+        status: status,
+        gpu_num: num != '' ? Number(num) : '',
+        pageNum: pageNum - 1,
         pageSize: pageSize
       }
-      if(status == ''){
-        delete data['machine_status']
-      }
-      axios.get('https://identifier.congtu.cloud/GetMachine_Details', {
-        params: data
-      })
+      axios.post('https://identifier.congtu.cloud/api/select/getlistByGpu', data)
       .then( async (res) => {
+        let data = res.content
         // let block = await getBlock()
         // const data = await getStakerIdentity(res.list)
-        res.list.map( (el, i) => {
-        //   if(data[i].length > 0){
-        //     el.machine_name = byteToStr(data[i])
-        //   }
-          if(el.operator){
-            el.machine_name = byteToStr(JSON.parse(el.operator))
-          }
+        data.list.map( (el, i) => {
           el.online = '···'
         })
-        Machine_info.value = res.list
-        total.value = res.total
-        if(type == 'first'){
-          axios.get('https://identifier.congtu.cloud/Count_Details', {params:{gpu_type: str}})
-          .then( res1 => {
-            All_Machine.value = res1.count[str]?res1.count[str]:0
-            Idle_Machine.value = res1.sum[str]?res1.sum[str]:0
-            All_Gpu.value = res1.cpu_num[str]?res1.cpu_num[str]:0
-            Idle_Gpu.value = res1.cpu_total[str]?res1.cpu_total[str]:0
-            loading.value = false
-          })
-          .catch( err => {
-            console.log(err);
-          })
-        }else{
-          loading.value = false
-        }
-        // setTimeout( async ()=> {
-          online_block.value = await getBlock();
-          Machine_info.value.map( (el) => {
-            el.online = minsToHourMins(Math.floor((online_block.value-el.bonding_height)/2))
-          })
-        // },1000)
+        Machine_info.value = data.list
+        total.value = data.typeTotal
+        All_Machine.value = data.total
+        Idle_Machine.value = data.onlinetotal
+        All_Gpu.value = data.totalgpunum
+        Idle_Gpu.value = data.totalonlinegpunum
+
+        online_block.value = await getBlock();
+        Machine_info.value.map( (el) => {
+          el.online = minsToHourMins(Math.floor((online_block.value-el.bonding_height)/2))
+        })
+        loading.value = false
 
       })
       .catch( err => {
@@ -620,8 +482,7 @@ export default defineComponent({
     }
     const choose = (str) => {
       loading.value = true
-      active.value = str.type
-      Computing_Power.value = str.power
+      active.value = str
       if(isWin.value){
         currentPage.value = 1
         PageSize.value = 50
@@ -644,20 +505,6 @@ export default defineComponent({
       loading.value = true
       currentPage.value = 1
       getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
-    }
-    const showMachines = (machines, currentPage, pageSize) => {
-      let needMachines = []; //需要展示的机器
-      // 循环页面要显示的机器数量次
-      currentPage == 0? currentPage = 1: currentPage
-      for (
-        let machineIndex = (currentPage - 1) * pageSize; //当前分页机器起始索引
-        machineIndex < currentPage * pageSize && //当前分页机器索引范围
-        machineIndex < machines.length; //机器索引最大值
-        machineIndex++
-      ) {
-        needMachines.push(machines[machineIndex]);
-      }
-      Machine_info.value = needMachines; //需要展示的机器
     }
     const handleChangePageSize = (num) => {
       loading.value = true
@@ -702,22 +549,15 @@ export default defineComponent({
     )
     onMounted( async () => {
       loading.value = true
-      await axios.get("https://dbchaininfo.congtu.cloud/query/dbc_info?language=CN").then(res => {
-        dbc_price.value = res.content.dbc_price
+      await axios.get("https://identifier.congtu.cloud/api/select/getdbcPrice").then(res => {
+        dbc_price.value = res.content
       })
       .catch( err => {
         console.log(err);
       })
-      await axios.get('https://identifier.congtu.cloud/GetGpu_Info').then(res => {
-        Gpu_Type.value.map(el1=>{
-          res.map(el => {
-            if(el == el1.type){
-              tableData.value.push(el1)
-            }
-          })
-        })
-        active.value = tableData.value[0] ? tableData.value[0].type : ''
-        Computing_Power.value = tableData.value[0] ? tableData.value[0].power : 0
+      await axios.get('https://identifier.congtu.cloud/api/select/getgpuType').then(res => {
+        tableData.value = res.content
+        active.value = tableData.value[0] ? tableData.value[0] : ''
       })
       .catch( err => {
         console.log(err);
@@ -735,14 +575,11 @@ export default defineComponent({
       handleChangePageSize,
       handleChangePageSize1,
       handleCurrentChang,
-      showMachines,
-      byteToStr,
       loading,
       locale,
       active,
       isWin,
       dbc_price,
-      Computing_Power,
       All_Machine,
       Idle_Machine,
       All_Gpu,

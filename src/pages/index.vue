@@ -221,7 +221,9 @@ export default defineComponent({
       reactiveList.splice(0, reactiveList.length);
       // todo
       serverList.forEach(item => {
-        reactiveList.push(item);
+        if (item.totalGpuNum) {
+          reactiveList.push(item);
+        }
       });
     };
     let itemsData = reactive<RewardInfoType>({
@@ -274,7 +276,6 @@ export default defineComponent({
       })
       
       const { list } = await getList();
-      console.log(list, tableData, '33333333');
       set(list, tableData);
       PaDisabled.value = false
       // total.value = remoteTotal;

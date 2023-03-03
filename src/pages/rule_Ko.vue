@@ -523,6 +523,9 @@ div.rule-wrapper
         div 1.5
         div 싱가폴
         div 1.5
+      div.table_li
+        div 베트남
+        div 1.3
   div.rule-title 다.레이스 보상 계산 규칙:
   div.rule-content
     div 컴퓨팅제공자의 DBC보상에 영향을 미치는 몇가지 요소:

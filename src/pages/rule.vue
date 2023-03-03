@@ -523,6 +523,9 @@ div.rule-wrapper
         div 1.5
         div 新加坡
         div 1.5
+      div.table_li
+        div 越南
+        div 1.3
   div.rule-title 三、比赛奖励计算规则
   div.rule-content
     div 影响算工DBC奖励的几个因素：

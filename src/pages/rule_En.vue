@@ -524,6 +524,9 @@ div.rule-wrapper
         div 1.5
         div Singapore
         div 1.5
+      div.table_li
+        div Vietnam
+        div 1.3
   div.rule-title Ⅲ. Galaxy Race reward calculation rules:
   div.rule-content
     div Several factors affect the miners' DBC rewards.

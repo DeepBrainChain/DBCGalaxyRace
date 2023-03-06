@@ -52,7 +52,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
-    div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month.
+    div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.8468 USD/C/month. According to the price change of GPU in the market, this parameter will be changed through community referendum.
     | The calculation model is as follows: computing power value of the whole machine = (25 * number of cards + memory/3.5 + (√(number of cuda) * √(memory/10)) * number of graphics cards ) * coefficient, when the local coefficient is 1, the computing power value is as follows:
     div.table
       div.table_con
@@ -609,7 +609,7 @@ div.rule-wrapper
     div 2. When the machine has been online for 365 days for the first time, and the machine has been idle for more than 10 days, the machine can be taken offline and all tokens can be released.
   div.rule-title Ⅶ、Contact details
   div.rule-content
-    div If you have any questions, please contact email: zhouyu@deepbrainchain.org; leo@deepbrainchain.org
+    div If you have any questions, please contact email: feng@deepbrainchain.org
     //- div.rule-content
     //-   div Contact details：
     //-     ul

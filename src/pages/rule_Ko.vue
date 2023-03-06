@@ -51,7 +51,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 나.컴퓨팅값 계산 규칙
   div.rule-content
-    div 이번 모델 수정에서는 서버 기본값 및 메모리도 계산 모델에 포함되며 전체 생태계  클라이언트의 임대 비용도 컴퓨팅값 시스템을 참조하여 가격이 책정됩니다. 임대 수익은 $0.8468/C/월 입니다.
+    div 이번 모델 수정에서는 서버 기본값 및 메모리도 계산 모델에 포함되며 전체 생태계  클라이언트의 임대 비용도 컴퓨팅값 시스템을 참조하여 가격이 책정됩니다. 임대 수익은 $0.8468/C/월 입니다. 시장에서 GPU의 가격 변동에 따라 이 매개변수는 커뮤니티 투표를 통해 변경됩니다.
     | 계산 모델은 다음과 같습니다:전체 기기의 컴퓨팅값 = (25 * 카드 수 + 메모리/3.5 + (√(쿠다 수) * √(그래픽 메모리/10)) * 그래픽 카드 수) * 계수, 로컬 계수가 1일 때 컴퓨팅값은 다음과 같습니다:
     div.table
       div.table_con
@@ -608,7 +608,7 @@ div.rule-wrapper
     div 2. 기기가 365일 동안 온체인 상태일 경우. 기기가 10일 이상 유휴 상태이면 기기를 오프라인 상태로 전환하고 모든 스테이킹 토큰을 해제할 수 있습니다.
   div.rule-title 사. 연락처 
   div.rule-content
-    div 상담 메일  참조: zhouyu@deepbrainchain.org; leo@deepbrainchain.org
+    div 상담 메일  참조: feng@deepbrainchain.org
     //- div.rule-content
     //-   div Contact details：
     //-     ul

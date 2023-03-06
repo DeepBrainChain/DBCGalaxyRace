@@ -16,7 +16,7 @@ export default {
     Minute:'Minutes',
     Second:'Seconds',
     TheEnd:'Times Up',
-    desc:"The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards!",
+    desc:"The DeepBrain Chain computing power main network has been launched. When the 5,000 GPUs on the entire network are met, the competition will be automatically activated (if the community referendum is passed, the number of 5,000 GPUs may become smaller). After activation, the competition will last for 2 months. During the competition, all computing workers Share 133 million DBC rewards together, and the top 5 hash workers can get an additional 30 million DBC rewards!",
     desc1: "By viewing the hashrate map, you can see the hashrate location information from the world, the number of GPUs, the GPU rental rate, and whether any machines are offline.",
     desc2: "View the number of machines, machine status, and detailed machine information of different models of GPUs. Machine rental documents:",
     lable_one1:'Total Computing Power Value',

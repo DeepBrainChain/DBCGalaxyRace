@@ -51,7 +51,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 二.算力值计算规则
   div.rule-content
-    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.8468美金/C/月。
+    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.8468美金/C/月。根据市场GPU的价格变化，这个参数通过社区公投会进行改变。
     | 计算模型如下：整机算力值=(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量) * 系数，当地域系数为1时算力值如下：
     div.table
       div.table_con
@@ -608,7 +608,7 @@ div.rule-wrapper
     div 2. 当机器首次上线满足365天，且机器闲置超过10天，则可以下线机器，解押所有币。
   div.rule-title 七、联系方式
   div.rule-content
-    div 算工有任何问题可以咨询邮箱：zhouyu@deepbrainchain.org；leo@deepbrainchain.org
+    div 算工有任何问题可以咨询邮箱：feng@deepbrainchain.org
     //- div.rule-content
     //-   div 联系方式：
     //-     ul

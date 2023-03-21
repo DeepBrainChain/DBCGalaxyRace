@@ -39,7 +39,7 @@ div.rule-wrapper
       | The access layer needs to support 10G intranet switches, the core layer switches need to be more than twice the bandwidth of the access layer, and need to support 20G intranet bandwidth;
     li 
       span Note: 
-      | Taking into account the stability of the machine, the stability of online income and the penalty mechanism, it is recommended to use the manufacturer's brand machine, and the assembly machine is not recommended.
+      | Each GPU can pledge up to USD 1,500 worth of DBC, and at least 100,000 DBC. Considering the stability of machine use, online income stability, and penalty mechanism, it is recommended to use a manufacturer’s brand machine instead of an assembled machine.
     li
       span Recommended switch and network architecture in the computer room: 
       | All GPU machine ETH0 network ports belong to one Vlan, and this network port is configured with server network information. All GPU server ETH1 network ports and storage server ETHx network ports belong to the same new Vlan, network ports do not need any IP configuration, and storage server ETHx network ports need to be configured with vlan information

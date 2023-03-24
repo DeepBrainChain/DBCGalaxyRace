@@ -10,21 +10,24 @@ div.rule-wrapper
     li 
       span GPU: 
       | Minimum 1 card, 2 or 4 cards recommended; Nvidia series graphics card is required.
-    li 
-      span Memory: 
-      | The minimum memory requirement is 48G per card, and the minimum requirement of the whole machine is 64G (that is, if the memory allocated to each card reaches 48G, it can pass the chain review. If it is a new machine with 4 cards, 320G memory is recommended.); combined with the actual application scenario requirements of the user, if the GPU memory is greater than or equal to 10G and the CudaCore is greater than 4000, the recommended configuration of the server is large Memory, 256G is recommended for one card, 448G for two cards, and 832G for four cards)
-    li 
-      span CPU: 
-      | Intel/AMD, clocked at 2.0Ghz and above, single CPU with 8 cores and above; special attention: Considering the medium and long-term rental rate and the 30% calculation power bonus under rental status, it is recommended that the CPU of the new machine follow The configuration is as follows: Intel, V3 or higher, frequency 2.4Ghz, turbo frequency 3.0Ghz or higher, a single CPU with 10 cores or more, an average of 5 cores and 10 threads or more per GPU, dual CPU is recommended for 4 card GPU servers;
-    li 
-      span Hard disk: 
-      | System disk 100G SSD and above, data disk 1T nvme SSD and above (3.84T nvme SSD is recommended for new machine 4-card gpu server);
-    li 
-      span Network bandwidth: 
-      | The uplink and downlink bandwidth of 4-card GPU machine is more than 20M, the uplink and downlink bandwidth of 2-card GPU machine is more than 10M, and the average bandwidth of each GPU is more than 5M; special attention, considering the medium and long-term rental rate, it is recommended that the machine hosting room in mainland China can support BGP and third-line bandwidth , Other overseas regions support BGP bandwidth;
     li
-      span Graphics Virtualizer:
-      | All on-chain server equipment needs to be equipped with a graphics card virtualizer (also known as a graphics card spoofer) with the corresponding number of graphics cards. New machines recommend 10 Gigabit network cards; machines without a graphics card virtualizer will not be able to pass the on-chain review
+      span Memory:<br>
+      | Meet the requirements of cloud games: the minimum memory requirement is 16G per card. <br>
+      | Meet the requirements of AI: the minimum memory requirement is 48G per card, and the minimum requirement for the whole machine is 64G (that is, the allocated memory of each card reaches 48G to pass the on-chain audit, and if it is a new machine with 4 cards, 320G memory is recommended); combined with the actual application scenario requirements of the user end, If the GPU memory is greater than or equal to 10G and the CudaCore is greater than 4000, it is recommended to configure a large memory. One card recommends 256G, two cards recommend 448G, and four cards recommend 832G.
+    li
+      span CPU:<br>
+      | Meet the requirements of cloud games: Intel/AMD, main frequency 3.5Ghz and above; each GPU needs to be configured with a separate CPU<br>
+      | Meet the requirements of AI: Intel/AMD, main frequency 2.0Ghz and above, single CPU with 8 cores and above; special attention: considering the mid-to-long-term rental rate and the 30% computing power bonus in the rental state, it is recommended The CPU of the new machine is configured as follows: Intel, V3 or above, main frequency 2.4Ghz, turbo frequency 3.0Ghz and above, a single CPU with more than 10 cores, and an average of 5 cores and 10 threads per GPU. 4-card GPU servers recommend dual CPU;
+    li
+      span Hard disk:<br>
+      | Meet the requirements of cloud games: the system disk is 100G SSD or above, no data disk is required, and a diskless system can be used<br>
+      | Meet the requirements of AI: system disk 100G SSD and above, data disk 1T nvme SSD and above (3.84T nvme SSD is recommended for new machines with 4 cards gpu server);
+    li
+      span Network bandwidth:<br>
+      | Meet the requirements of cloud games: each GPU machine must have at least 10M bandwidth;<br>
+      | Meet the requirements of AI: 4-card GPU machines have a bandwidth of more than 20M uplink and downlink, 2-card GPU machines have a bandwidth of more than 10M uplink and downlink, and the average bandwidth of each GPU is more than 5M; special attention, considering the medium and long-term rental rate, it is recommended that the machine hosting room in mainland China can Support BGP and third-line bandwidth, and other overseas regions support BGP bandwidth;
+    //-   span Graphics Virtualizer:
+    //-   | All on-chain server equipment needs to be equipped with a graphics card virtualizer (also known as a graphics card spoofer) with the corresponding number of graphics cards. New machines recommend 10 Gigabit network cards; machines without a graphics card virtualizer will not be able to pass the on-chain review
     li
       span 10 Gigabit network card:
       | The GPU server is at least configured with a 10 Gigabit network card;

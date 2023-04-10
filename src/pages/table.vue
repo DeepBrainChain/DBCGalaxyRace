@@ -43,7 +43,7 @@ div.content
             span.width30.blod {{t('GPU_type')}}: 
               i {{el.gpuType}}
             span.width30.blod {{t('Daily_Rent')}}: 
-              i.color {{getnum2(Number(el.calc_point)/100*0.028229)}}$≈{{getnum2(Number(el.calc_point)/100*0.028229/dbc_price)}}DBC
+              i.color {{getnum2(Number(el.calc_point)/100*0.016937)}}$≈{{getnum2(Number(el.calc_point)/100*0.016937/dbc_price)}}DBC
             span {{t('Country')}}:  
               i {{el.country}}
             span {{t('City')}}:  

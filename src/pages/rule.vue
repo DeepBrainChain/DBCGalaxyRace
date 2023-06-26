@@ -8,7 +8,7 @@ div.rule-wrapper
   ul.rule-content
     li
       span GPU：
-      | 最低1卡，推荐2卡或者4卡；必须英伟达Nvidia系列显卡；
+      | 最低1卡，云网吧推荐4卡和6卡机器，AI推荐8卡机器；必须英伟达Nvidia系列显卡；
     li
       span 内存：<br>
       | 满足云游戏的要求：内存最低要求每卡16G。<br>
@@ -56,7 +56,7 @@ div.rule-wrapper
       a(target="_blank" href="https://github.com/DeepBrainChain/DBC-DOC") https://github.com/DeepBrainChain/DBC-DOC
   div.rule-title 二.算力值计算规则
   div.rule-content
-    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.8468美金/C/月。根据市场GPU的价格变化，这个参数通过社区公投会进行改变。
+    div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.508美金/C/月。根据市场GPU的价格变化，这个参数通过社区公投会进行改变。
     | 计算模型如下：整机算力值=(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量) * 系数，当地域系数为1时算力值如下：
     div.table
       div.table_con
@@ -74,423 +74,613 @@ div.rule-wrapper
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 167.94
-            div 142.22
-            div 71.11
+            div 4
+            div 64
+            div 299.31
+            div 152.05 
+            div 38.01
           div.line
             div 4
-            div 192
-            div 335.88
-            div 284.45
-            div 71.11
+            div 128
+            div 317.59
+            div 161.34
+            div 40.33
       div.table_li
         div 1080ti
         div 3584
         div 11
         div.width60
           div.line
-            div 2
-            div 96
-            div 203.31
-            div 171.92
-            div 85.96
+            div 4
+            div 64
+            div 369.44 
+            div 187.68
+            div 46.92
           div.line
             div 4
-            div 192
-            div 406.01
-            div 343.84
-            div 85.96
+            div 128
+            div 387.73
+            div 196.96 
+            div 49.24 
       div.table_li
         div 1660
         div 1408
         div 6
         div.width60
           div.line
-            div 2
-            div 96
-            div 135.56
-            div 114.80
-            div 57.40
+            div 4
+            div 64
+            div 234.55 
+            div 119.15 
+            div 29.79 
           div.line
             div 4
-            div 192
-            div 271.12
-            div 229.60
-            div 57.40
+            div 128
+            div 252.83 
+            div 128.44 
+            div 32.11 
       div.table_li
         div 1660ti
         div 1536
         div 6
         div.width60
           div.line
-            div 2
-            div 96
-            div 138.14
-            div 116.99
-            div 58.50
+            div 4
+            div 64
+            div 239.72 
+            div 121.78 
+            div 30.44 
           div.line
             div 4
-            div 192
-            div 276.29
-            div 233.98
-            div 58.50
+            div 128
+            div 258.00 
+            div 131.07 
+            div 32.77 
       div.table_li
         div 1660s
         div 1408
         div 6
         div.width60
           div.line
-            div 2
-            div 96
-            div 135.56
-            div 114.80
-            div 57.40
+            div 4
+            div 64
+            div 234.55 
+            div 119.15 
+            div 32.11 
           div.line
             div 4
-            div 192
-            div 271.12
-            div 229.60
-            div 57.40
+            div 128
+            div 252.83 
+            div 128.44 
+            div 32.11 
+      div.table_li
+        div 2070s
+        div 2560
+        div 8
+        div.width60
+          div.line
+            div 4
+            div 64
+            div 299.31 
+            div 152.05 
+            div 38.01 
+          div.line
+            div 4
+            div 128
+            div 317.59 
+            div 161.34 
+            div 40.33 
       div.table_li
         div 2080
         div 2944
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 174.49
-            div 147.77
-            div 73.89
+            div 4
+            div 64
+            div 312.41 
+            div 158.70 
+            div 39.68 
           div.line
             div 4
-            div 192
-            div 348.98
-            div 295.54
-            div 73.89
+            div 128
+            div 330.69 
+            div 167.99 
+            div 42.00 
       div.table_li
         div 2080s
         div 3072
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 176.58
-            div 149.54
-            div 74.77
+            div 4
+            div 64
+            div 316.58 
+            div 160.82 
+            div 40.21 
           div.line
             div 4
-            div 192
-            div 353.15
-            div 299.08
-            div 74.77
+            div 128
+            div 334.87 
+            div 170.11 
+            div 42.53 
       div.table_li
         div 2080ti
         div 4352
         div 11
         div.width60
           div.line
-            div 2
-            div 96
-            div 215.81
-            div 182.76
-            div 91.38
+            div 4
+            div 64
+            div 395.04 
+            div 200.68 
+            div 50.17 
           div.line
             div 4
-            div 192
-            div 431.62
-            div 365.52
-            div 91.38
-      div.table_li
-        div 2080ti
-        div 4352
-        div 11
-        div.width60
-          div.line
-            div 2
-            div 448
-            div 316.38
-            div 267.93
-            div 133.97
-          div.line
-            div 4
-            div 832
-            div 614.47
-            div 520.38
-            div 130.10
+            div 128
+            div 413.33 
+            div 209.97 
+            div 52.49 
       div.table_li
         div 3060
         div 3584
         div 12
         div.width60
           div.line
-            div 2
-            div 96
-            div 208.59
-            div 176.65
-            div 88.32
+            div 4
+            div 64
+            div 380.61 
+            div 193.35 
+            div 48.34 
           div.line
             div 4
-            div 192
-            div 417.18
-            div 353.30
-            div 88.32
+            div 128
+            div 398.89 
+            div 202.64 
+            div 50.66 
       div.table_li
         div 3060ti
         div 4864
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 202.19
-            div 171.23
-            div 85.61
+            div 4
+            div 64
+            div 367.80 
+            div 186.84 
+            div 46.71 
           div.line
             div 4
-            div 192
-            div 404.38
-            div 342.46
-            div 85.61
+            div 128
+            div 386.09 
+            div 196.13 
+            div 49.03 
       div.table_li
         div 3070
         div 5888
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 214.69
-            div 182.82
-            div 90.91
+            div 4
+            div 64
+            div 392.82 
+            div 199.55 
+            div 49.89 
           div.line
             div 4
-            div 192
-            div 429.39
-            div 363.64
-            div 90.91
+            div 128
+            div 411.10 
+            div 208.84 
+            div 52.21 
       div.table_li
         div 3070ti
         div 6144
         div 8
         div.width60
           div.line
-            div 2
-            div 96
-            div 217.65
-            div 184.32
-            div 92.16
+            div 4
+            div 64
+            div 398.72 
+            div 202.55 
+            div 50.64 
           div.line
             div 4
-            div 192
-            div 435.29
-            div 368.64
-            div 92.16
+            div 128
+            div 417.01 
+            div 211.84 
+            div 52.96 
       div.table_li
         div 3080
         div 8704
         div 10
         div.width60
           div.line
-            div 2
-            div 96
-            div 264.02
-            div 223.59
-            div 111.80
+            div 4
+            div 128
+            div 509.75 
+            div 258.95 
+            div 64.74 
           div.line
             div 4
-            div 192
-            div 528.04
-            div 447.18
-            div 111.80
-      div.table_li
-        div 3080
-        div 8704
-        div 10
-        div.width60
-          div.line
-            div 2
-            div 448
-            div 364.59
-            div 308.76
-            div 154.38
-          div.line
-            div 4
-            div 832
-            div 710.90
-            div 602.04
-            div 150.51
+            div 512
+            div 619.47 
+            div 314.69 
+            div 78.67 
       div.table_li
         div 3080ti
         div 10240
         div 12
         div.width60
           div.line
-            div 2
-            div 96
-            div 299.13
-            div 253.33
-            div 126.66
+            div 4
+            div 128
+            div 579.98 
+            div 294.63 
+            div 73.66 
           div.line
             div 4
-            div 192
-            div 598.26
-            div 506.65
-            div 126.66
-      div.table_li
-        div 3080ti
-        div 10240
-        div 12
-        div.width60
-          div.line
-            div 2
-            div 448
-            div 399.70
-            div 338.50
-            div 169.25
-          div.line
-            div 4
-            div 832
-            div 781.12
-            div 661.51
-            div 165.38
+            div 512
+            div 689.69 
+            div 350.36 
+            div 87.59 
       div.table_li
         div 3090
         div 10496
         div 24
         div.width60
           div.line
-            div 2
-            div 96
-            div 394.86
-            div 334.40
-            div 167.20
+            div 4
+            div 128
+            div 771.43 
+            div 391.89 
+            div 97.97 
           div.line
             div 4
-            div 192
-            div 789.72
-            div 668.79
-            div 167.20
-      div.table_li
-        div 3090
-        div 10496
-        div 24
-        div.width60
-          div.line
-            div 2
-            div 448
-            div 495.43
-            div 419.57
-            div 209.78
-          div.line
-            div 4
-            div 832
-            div 972.57
-            div 823.65
-            div 205.91
+            div 512
+            div 881.15 
+            div 447.62 
+            div 111.91 
       div.table_li
         div A4000
         div 6144
         div 16
         div.width60
           div.line
-            div 2
-            div 96
-            div 275.73
-            div 233.50
-            div 116.75
+            div 4
+            div 128
+            div 533.16 
+            div 270.85 
+            div 67.71 
           div.line
             div 4
-            div 192
-            div 551.45
-            div 467.01
-            div 116.75
+            div 512
+            div 642.88 
+            div 326.58 
+            div 81.65 
       div.table_li
         div A5000
         div 8192
         div 24
         div.width60
           div.line
-            div 2
-            div 96
-            div 357.86
-            div 303.06
-            div 151.53
+            div 4
+            div 128
+            div 697.44 
+            div 354.30 
+            div 88.57 
           div.line
             div 4
-            div 192
-            div 715.73
-            div 606.13
-            div 151.53
-      div.table_li.height30
-        div A100
-        div 6912
-        div 40
-        div.width60
-          div.line
-            div 4
-            div 832
-            div 1002.82 
-            div 849.18
-            div 212.29
-      div.table_li.height30
-        div A100
-        div 6912
-        div 80
-        div.width60
-          div.line
-            div 4
-            div 832
-            div 1278.32
-            div 1082.48
-            div 270.62   
+            div 512
+            div 807.15 
+            div 410.03 
+            div 102.51 
       div.table_li.height30
         div A40
         div 10752
         div 48
         div.width60
           div.line
-            div 4
-            div 832
-            div 1246.42
-            div 1055.47
-            div 263.87 
+            div 8
+            div 2048
+            div 2602.56 
+            div 1322.10 
+            div 165.26 
+      div.table_li.height30
+        div A100 PCIe
+        div 6912
+        div 40
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2115.36 
+            div 1074.60 
+            div 134.33 
+      div.table_li.height30
+        div A100 PCIe
+        div 6912
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2666.35 
+            div 1354.51 
+            div 169.31 
+      div.table_li.height30
+        div A100 SXM4
+        div 6912
+        div 40
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2115.36 
+            div 1074.60 
+            div 134.33 
+      div.table_li.height30
+        div A100 SXM4
+        div 6912
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2666.35 
+            div 1354.51 
+            div 169.31 
+      div.table_li.height30
+        div A800 PCIe
+        div 6912
+        div 40
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2115.36 
+            div 1074.60 
+            div 134.33 
+      div.table_li.height30
+        div A800 PCIe
+        div 6912
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2666.35 
+            div 1354.51 
+            div 169.31 
+      div.table_li.height30
+        div A800 SXM5
+        div 6912
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 2666.35 
+            div 1354.51 
+            div 169.31 
       div.table_li.height30
         div V100
         div 5120
         div 16
         div.width60
           div.line
-            div 4
-            div 832
-            div 699.75
-            div 592.55
-            div 148.14   
+            div 8
+            div 2048
+            div 1509.22 
+            div 766.68 
+            div 95.84  
       div.table_li.height30
         div V100
         div 5120
         div 32
         div.width60
           div.line
-            div 4
-            div 832
-            div 849.71 
-            div 719.53
-            div 179.88
+            div 8
+            div 2048
+            div 1809.14 
+            div 919.04 
+            div 114.88 
       div.table_li.height30
-        div T4
-        div 2560
+        div H100 SXM5
+        div 16896
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 3726.36 
+            div 1892.99 
+            div 236.62  
+      div.table_li.height30
+        div H100 PCIe
+        div 14592
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 3518.47 
+            div 1787.39 
+            div 223.42 
+      div.table_li.height30
+        div H100 NVL1
+        div 16896
+        div 94
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 3973.35 
+            div 2018.46 
+            div 252.31 
+      div.table_li.height30
+        div H800 SXM5
+        div 16896
+        div 80
+        div.width60
+          div.line
+            div 8
+            div 2048
+            div 3726.36 
+            div 1892.99 
+            div 236.62  
+      div.table_li
+        div 4060
+        div 3072
+        div 8
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 334.87 
+            div 170.11 
+            div 42.53 
+          div.line
+            div 4
+            div 512
+            div 444.58 
+            div 225.85 
+            div 56.46 
+      div.table_li
+        div 4060ti
+        div 4352
+        div 8
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 372.59
+            div 189.28 
+            div 47.32 
+          div.line
+            div 4
+            div 512
+            div 482.31 
+            div 245.01 
+            div 61.25 
+      div.table_li
+        div 4060ti
+        div 4352
         div 16
         div.width60
           div.line
             div 4
-            div 832
-            div 593.71 
-            div 502.75
-            div 125.69  
+            div 128
+            div 470.35 
+            div 238.94 
+            div 59.74 
+          div.line
+            div 4
+            div 512
+            div 580.07 
+            div 294.67 
+            div 73.67 
+      div.table_li
+        div 4070
+        div 5888
+        div 12
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 472.80 
+            div 240.18 
+            div 60.05 
+          div.line
+            div 4
+            div 512
+            div 582.51 
+            div 295.92 
+            div 73.98 
+      div.table_li
+        div 4070ti
+        div 7680
+        div 12
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 520.57 
+            div 264.45 
+            div 66.11 
+          div.line
+            div 4
+            div 512
+            div 630.29 
+            div 320.19 
+            div 80.05
+      div.table_li
+        div 4080
+        div 9728
+        div 16
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 635.61 
+            div 322.89 
+            div 80.72 
+          div.line
+            div 4
+            div 512
+            div 745.32 
+            div 378.62
+            div 94.66  
+      div.table_li
+        div 4080ti
+        div 14080
+        div 20
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 807.81 
+            div 410.37 
+            div 102.59 
+          div.line
+            div 4
+            div 512
+            div 917.52 
+            div 466.10 
+            div 116.53  
+      div.table_li
+        div 4090
+        div 16384
+        div 24
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 929.76 
+            div 472.32 
+            div 118.08 
+          div.line
+            div 4
+            div 512
+            div 1039.47 
+            div 528.05 
+            div 132.01 
+      div.table_li
+        div 4090ti
+        div 18176
+        div 24
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 972.01 
+            div 493.78 
+            div 123.45 
+          div.line
+            div 4
+            div 512
+            div 1081.72 
+            div 549.52 
+            div 137.38 
     div 地域系数如下：
     div.table1
       div.table_con
@@ -531,6 +721,61 @@ div.rule-wrapper
       div.table_li
         div 越南
         div 1.3
+    div 大模型系数，支持大模型的机器算力值*2
+    div.table2
+      div.table_con
+        div 显卡类型
+        div Cuda core
+        div 显存
+        div 显卡类型
+        div Cuda core
+        div 显存
+      div.table_li
+        div A100 PCIe
+        div 6912
+        div 40
+        div A100 PCIe
+        div 6912
+        div 80
+      div.table_li
+        div A100 SXM4
+        div 6912
+        div 40
+        div A100 SXM4
+        div 6912
+        div 80
+      div.table_li
+        div A800 PCIe
+        div 6912
+        div 40
+        div A800 PCIe
+        div 6912
+        div 80
+      div.table_li
+        div A800 SXM5
+        div 6912
+        div 80
+        div V100
+        div 5120
+        div 16
+      div.table_li
+        div V100
+        div 5120
+        div 32
+        div H100 SXM5
+        div 16896
+        div 80
+      div.table_li
+        div H100 PCIe
+        div 14592
+        div 80
+        div H100 NVL1
+        div 16896
+        div 94
+      div.table_li
+        div H800 SXM5
+        div 16896
+        div 80
   div.rule-title 三、比赛奖励计算规则
   div.rule-content
     div 影响算工DBC奖励的几个因素：
@@ -792,6 +1037,56 @@ div.rule-wrapper
         box-sizing: border-box;
         border-right: 1px solid #333;
         &:nth-child(4n) {
+          border: none;
+        }
+      }
+    }
+  }
+  .table2 {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #333;
+    .table_con {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      justify-content: flex-start;
+      border-bottom: 1px solid #333;
+      div {
+        width: 16.6%;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 30px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:last-child {
+          border: none;
+        }
+      }
+    }
+    .table_li {
+      width: 100%;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid #333;
+      &:last-child {
+        border: none;
+      }
+      div {
+        width: 16.6%;
+        min-height: 40px;
+        text-align: center;
+        line-height: 40px;
+        box-sizing: border-box;
+        border-right: 1px solid #333;
+        &:nth-child(6n) {
           border: none;
         }
       }

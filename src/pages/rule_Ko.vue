@@ -56,7 +56,7 @@ div.rule-wrapper
   div.rule-title 나.컴퓨팅값 계산 규칙
   div.rule-content
     div 이번 모델 수정에서는 서버 기본값 및 메모리도 계산 모델에 포함되며 전체 생태계  클라이언트의 임대 비용도 컴퓨팅값 시스템을 참조하여 가격이 책정됩니다. 임대 수익은 $0.508/C/월 입니다. 시장에서 GPU의 가격 변동에 따라 이 매개변수는 커뮤니티 투표를 통해 변경됩니다.
-    | 계산 모델은 다음과 같습니다:전체 기기의 컴퓨팅값 = (25 * 카드 수 + 메모리/3.5 + (√(쿠다 수) * √(그래픽 메모리/10)) * 그래픽 카드 수) * 계수, 로컬 계수가 1일 때 컴퓨팅값은 다음과 같습니다:
+    | 계산 모델은 다음과 같습니다:전체 기기의 컴퓨팅값 = (25 * 카드 수 + 메모리/3.5 + (√(쿠다 수) * √(그래픽 메모리/10)) * 그래픽 카드 수), 로컬 계수가 1일 때 컴퓨팅값은 다음과 같습니다:
     div.table
       div.table_con
         div GPU유형
@@ -776,7 +776,7 @@ div.rule-wrapper
         div 16896
         div 80
   
-    div 기계 연산력 계산:
+    div 기계 연산력 계산: (25 * 카드 수 + 메모리/3.5 + (√(쿠다 수) * √(그래픽 메모리/10)) * 그래픽 카드 수) * 지역 요인 * 큰 모델 요인
     div.select
       div.topcon
         div.topitem GPU유형: 
@@ -808,7 +808,7 @@ div.rule-wrapper
   //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   div.rule-title.fs16 기계 월 소득 계산
   div.rule-content
-    div 기계의 월 소득 계산 공식: 전체 기계의 컴퓨팅 파워 값 / 전체 네트워크의 총 컴퓨팅 파워 값 * 1,095,890 * DBC 가격 * 지역 계수 * 대형 모델 계수 * 1.3 (임대 컴퓨팅 파워 값은 증가합니다. 30%) * 30 + 전체 시스템의 컴퓨팅 성능 값 *0.508
+    div 머신의 월수입 계산 공식: 전체 머신의 컴퓨팅 파워 값 / 전체 네트워크의 총 컴퓨팅 파워 값 * 1,095,890 * DBC 가격 * 지역 계수 * 대형 모델 계수 * 1.3 (임대 컴퓨팅 파워 값은 증가합니다. 30%로) * 30 + 전체 시스템의 컴퓨팅 파워 값 *지역 계수*대형 모델 계수*0.508
     div.select
       div.topcon
         div.topitem GPU유형: 
@@ -1400,7 +1400,7 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
-        Income.value = Math.round(((machineCalcPoints.value*countLarge_num.value / totalCalcPoints.value)*1095890*dbcPrice.value*countLocal_num.value*countLarge_num.value*1.3*30+machineCalcPoints.value*0.508) * 100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

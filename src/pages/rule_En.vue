@@ -56,7 +56,7 @@ div.rule-wrapper
   div.rule-title Ⅱ. Computing power value calculation rules: 
   div.rule-content
     div In this model modification, the basic server value and memory are also included in the calculation model, and the rental fee of the user side in the entire ecosystem will also be unified with reference to the computing power value system for pricing. The rental income is 0.508 USD/C/month. According to the price change of GPU in the market, this parameter will be changed through community referendum.
-    | The calculation model is as follows: computing power value of the whole machine = (25 * number of cards + memory/3.5 + (√(number of cuda) * √(memory/10)) * number of graphics cards ) * coefficient, when the local coefficient is 1, the computing power value is as follows:
+    | The calculation model is as follows: computing power value of the whole machine = (25 * number of cards + memory/3.5 + (√(number of cuda) * √(memory/10)) * number of graphics cards ), when the local coefficient is 1, the computing power value is as follows:
     div.table
       div.table_con
         div GPU type
@@ -775,7 +775,7 @@ div.rule-wrapper
         div H800 SXM5
         div 16896
         div 80
-    div Computing power value of the whole machine:
+    div Computing power value of the whole machine: (25 * number of cards + memory/3.5 + (√(number of cuda) * √(memory/10)) * number of graphics cards ) * coefficient * large model factor
     div.select
       div.topcon
         div.topitem GPU type: 
@@ -807,7 +807,7 @@ div.rule-wrapper
   //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   div.rule-title.fs16 Machine monthly income calculation
   div.rule-content
-    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 1,095,890 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *0.508
+    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 1,095,890 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *Regional coefficient*Large model coefficient*0.508
     div.select
       div.topcon
         div.topitem GPU type: 
@@ -1399,7 +1399,7 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
-        Income.value = Math.round(((machineCalcPoints.value*countLarge_num.value / totalCalcPoints.value)*1095890*dbcPrice.value*countLocal_num.value*countLarge_num.value*1.3*30+machineCalcPoints.value*0.508) * 100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

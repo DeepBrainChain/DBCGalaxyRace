@@ -57,7 +57,7 @@ div.rule-wrapper
   div.rule-title 二.算力值计算规则
   div.rule-content
     div 本次模型修改将服务器基础值以及内存等也纳入计算模型，整个生态中用户端的租用费用也将统一参考算力值系统定价。租金收益0.508美金/C/月。根据市场GPU的价格变化，这个参数通过社区公投会进行改变。
-    | 计算模型如下：整机算力值=(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量) * 系数，当地域系数为1时算力值如下：
+    | 计算模型如下：整机算力值=(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量)，当地域系数为1时算力值如下：
     div.table
       div.table_con
         div 显卡类型
@@ -776,7 +776,7 @@ div.rule-wrapper
         div H800 SXM5
         div 16896
         div 80
-    div 机器算力值计算：
+    div 机器算力值计算公式：(25 * 卡数 + 内存/3.5 + (√(cuda数量) * √(显存/10)) * 显卡数量)*地域系数*大模型系数
     div.select
       div.topcon
         div.topitem 机器型号: 
@@ -803,7 +803,7 @@ div.rule-wrapper
       li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*109.589万DBC，其中25%立马获得，75%释放150天，每天释放0.5%
   div.rule-title.fs16 机器每月收益计算
   div.rule-content
-    div 机器每月收益计算公式：整机算力值/全网总算力值*1,095,890*DBC价格*地域系数*大模型系数*1.3（被租用算力值增加30%）*30+整机算力值*0.508
+    div 机器每月收益计算公式：整机算力值/全网总算力值*1,095,890*DBC价格*地域系数*大模型系数*1.3（被租用算力值增加30%）*30+整机算力值*地域系数*大模型系数*0.508
     div.select
       div.topcon
         div.topitem 机器型号: 
@@ -1379,6 +1379,7 @@ export default defineComponent({
     const SelectLocal = (val) => {
       const arr = val.split('_')
       countLocal_num.value = arr[0]
+      console.log(val, arr, 'aaa')
       MonthlyIncome()
     }
     const countPoint = (Gpu_Num, Mem, Cuda, M_value, coe) => {
@@ -1391,7 +1392,7 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
-        Income.value = Math.round(((machineCalcPoints.value*countLarge_num.value / totalCalcPoints.value)*1095890*dbcPrice.value*countLocal_num.value*countLarge_num.value*1.3*30+machineCalcPoints.value*0.508) * 100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

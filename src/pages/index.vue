@@ -250,6 +250,7 @@ export default defineComponent({
     }
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
+      total.value = Number(rewardInfo.totalStaker)
       if(rewardInfo.totalGpuNum) {
         localStorage.setItem('totalGpuNum', rewardInfo.totalGpuNum)
       }
@@ -271,24 +272,14 @@ export default defineComponent({
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
       
-      await getNumber().then( res => {
-        total.value = res
-      })
+      // await getNumber().then( res => {
+      //   console.log(res, 'res');
+      //   total.value = res
+      // })
       
       const { list } = await getList();
       set(list, tableData);
       PaDisabled.value = false
-      // total.value = remoteTotal;
-      // setTimeout( async()=>{
-      //   const data = await getStakerInfo(list)
-      //   list.map(
-      //     (s,i) => {
-      //       s.totalReward = getnum1(String(data[i]))
-      //     }
-      //   )
-      //   set(list, tableData);
-      //   PaDisabled.value = false
-      // }, 2000)
     });
 
     return {
@@ -305,70 +296,35 @@ export default defineComponent({
       handleChangePageSize1: async (num: number) => {
         PaDisabled.value = true
         PageSize.value = num
-        // await getNumber().then( res => {
-        //   total.value = res
-        // })
         if(Math.ceil(total.value / num) > currentPage.value ){
           const { list } = await getList(currentPage.value, PageSize.value);
           set(list, tableData);
-          // setTimeout( async()=>{
-          // const data = await getStakerInfo(list)
-          // list.map(
-          //   (s,i) => {
-          //     s.totalReward = getnum1(String(data[i]))
-          //   }
-          // )
-          // set(list, tableData);
           PaDisabled.value = false
-          // }, 2000)
         }else{
+          currentPage.value = 1
+          const { list } = await getList(currentPage.value, PageSize.value);
+          set(list, tableData);
           PaDisabled.value = false
         }
       },
       handleChangePageSize: async (num: number) => {
-        await getNumber().then( res => {
-          total.value = res
-        })
+        // await getNumber().then( res => {
+        //   total.value = res
+        // })
         const { list } = await getList(1, num);
         set(list, tableData);
-        // setTimeout( async()=>{
-        //   const data = await getStakerInfo(list)
-        //   list.map(
-        //     (s,i) => {
-        //       s.totalReward = getnum1(String(data[i]))
-        //     }
-        //   )
-        //   set(list, tableData);
-        // }, 2000)
       },
       handleCurrentChange: async (num: number) => {
         PaDisabled.value = true
         currentPage.value = num
+        console.log(currentPage.value, PageSize.value, 'handleCurrentChange');
         const { list } = await getList(currentPage.value, PageSize.value);
         set(list, tableData);
-        // setTimeout( async()=>{
-          // const data = await getStakerInfo(list)
-          // list.map(
-          //   (s,i) => {
-          //     s.totalReward = getnum1(String(data[i]))
-          //   }
-          // )
-          // set(list, tableData);
-          PaDisabled.value = false
-        // }, 2000)
+        PaDisabled.value = false
       },
       handleJump: async (num: number, size: number) => {
         const { list } = await getList(num, size);
         set(list, tableData);
-        // setTimeout( async()=>{
-        //   const data = await getStakerInfo(list)
-        //   list.map(
-        //     (s,i) => {
-        //       s.totalReward = getnum1(String(data[i]))
-        //     }
-        //   )
-        //   set(list, tableData);
-        // }, 2000)
       }
     };
   }

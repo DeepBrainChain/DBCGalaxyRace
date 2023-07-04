@@ -776,6 +776,22 @@ div.rule-wrapper
         div H800 SXM5
         div 16896
         div 80
+    div 机器算力值计算：
+    div.select
+      div.topcon
+        div.topitem 机器型号: 
+          el-select.select_width210(v-model="gpu_type1", size='mini', placeholder="请选择" @change='SelectGPU1')
+            el-option( v-for="(item, index) in options" , :key="item.value", :label="item.name + '-Mem:' + item.men", :value="item.cuda+'_'+item.men+'_'+item.large+'_'+index")
+        div.topitem 显卡数量: 
+          el-select.select_width100(v-model="gpu_num1", size='mini', placeholder="请选择" @change='SelectGpuNum1')
+            el-option( v-for="item in options1" , :key="item.value", :label="item.label", :value="item.value")
+        div.topitem 内存数量: 
+          el-select.select_width100(v-model="mem_num1", size='mini', placeholder="请选择" @change='SelectMem1')
+            el-option( v-for="(item, index) in options2_1" , :key="item.value", :label="item.name", :value="item.value")
+        div.topitem 地域: 
+          el-select.select_width200(v-model="local1", size='mini', placeholder="请选择" @change='SelectLocal1')
+            el-option( v-for="(item, index) in options3" , :key="index", :label="item.name", :value="item.value +'_'+index")
+    div 当前机器算力值为: {{machinePoints}}
   div.rule-title 三、比赛奖励计算规则
   div.rule-content
     div 影响算工DBC奖励的几个因素：
@@ -785,12 +801,24 @@ div.rule-wrapper
       li 单个钱包拥有的GPU数量，单个钱包每多拥有一个GPU，所有机器点数增加0.01%，一直到增加10%为止
       li GPU是否被租用，被租用的GPU算力值增加30%
       li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*109.589万DBC，其中25%立马获得，75%释放150天，每天释放0.5%
-  //- div.rule-title.fs16 举一个例子
-  //- div.rule-content
-  //-   div 假设DBC每天产出3,333,333个；全网总算力值是80万，算力供给者A用同一个钱包在DBC网络中加入了500个GPU，每个算力值都为99，其中450卡处于被租用状态，50卡闲置状态，则A算工24小时可以获得的DBC奖励为：
-  //-   div A算工总算力值：450*99*(1+5%)*130%+50*99*(1+5%)=66,008.25
-  //-   div 全网总算力值：800,000
-  //-   div A算工获得的24小时奖励为：66,008.25 /800,000*3,333,333= 275,034.3个DBC
+  div.rule-title.fs16 机器每月收益计算
+  div.rule-content
+    div 机器每月收益计算公式：整机算力值/全网总算力值*1,095,890*DBC价格*地域系数*大模型系数*1.3（被租用算力值增加30%）*30+整机算力值*0.508
+    div.select
+      div.topcon
+        div.topitem 机器型号: 
+          el-select.select_width210(v-model="gpu_type", size='mini', placeholder="请选择" @change='SelectGPU')
+            el-option( v-for="(item, index) in options" , :key="item.value", :label="item.name + '-Mem:' + item.men", :value="item.cuda+'_'+item.men+'_'+item.large+'_'+index")
+        div.topitem 显卡数量: 
+          el-select.select_width100(v-model="gpu_num", size='mini', placeholder="请选择" @change='SelectGpuNum')
+            el-option( v-for="item in options1" , :key="item.value", :label="item.label", :value="item.value")
+        div.topitem 内存数量: 
+          el-select.select_width100(v-model="mem_num", size='mini', placeholder="请选择" @change='SelectMem')
+            el-option( v-for="(item, index) in options2" , :key="item.value", :label="item.name", :value="item.value")
+        div.topitem 地域: 
+          el-select.select_width200(v-model="local", size='mini', placeholder="请选择" @change='SelectLocal')
+            el-option( v-for="(item, index) in options3" , :key="index", :label="item.name", :value="item.value +'_'+index")
+    div 当前每月收益为: {{Income}} USD等值DBC
   div.rule-title 四、惩罚机制
   div.rule-content
     div 无论上线机器或者下线机器都需要算工自己主动发送链上通知，如果机器出现问题，不主动发送链上通知，惩罚将会更加严重。机器一旦正式上链成功，则以后不能修改任何硬件配置信息。当机器闲置且同时处于下线状态，可以修改带宽和经纬度信息。当机器收到惩罚只扣除质押币，历史的奖励但是要在未来150天发放的这部分不会被扣除，但是没有新的在线奖励.当机器押金不足90%处于警告状态，当机器押金不足80%，将会没有在线奖励.
@@ -1092,6 +1120,38 @@ div.rule-wrapper
       }
     }
   }
+  .select{
+    width: 100%;
+    padding: 5px 0;
+    box-sizing: border-box;
+    .topcon{
+      // padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      .topitem{
+        color: #333;
+        font-size: 14px;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        &.bold{
+          font-weight: bold;
+        }
+        .select_width210{
+          width: 210px;
+        }
+        .select_width200{
+          width: 200px;
+        }
+        .select_width60 {
+          width: 60px;
+        }
+        .select_width100 {
+          width: 100px;
+        }
+      }
+    }
+  }
 }
 .rule-title {
   font-family: PingFang SC, sans-serif;
@@ -1152,3 +1212,225 @@ div.rule-wrapper
   }
 }
 </style>
+<script>
+import { defineComponent, ref, onMounted } from "vue";
+import { getRewardInfo } from "../apis";
+import { dbcPriceOcw } from '../untils/index'
+export default defineComponent({
+  name: "rule",
+  setup() {
+    const gpu_type = ref('')
+    const gpu_num = ref('')
+    const mem_num = ref('')
+    const local = ref('')
+    const gpu_type1 = ref('')
+    const gpu_num1 = ref('')
+    const mem_num1 = ref('')
+    const local1 = ref('')
+    const numList = ref([])
+    const options = ref([
+      {name: '1080', cuda: '2560', men: '8', large: 1},
+      {name: '1080ti', cuda: '3584', men: '11', large: 1},
+      {name: '1660', cuda: '1408', men: '6', large: 1},
+      {name: '1660ti', cuda: '1536', men: '6', large: 1},
+      {name: '1660s', cuda: '1408', men: '6', large: 1},
+      {name: '2070s', cuda: '2560', men: '8', large: 1},
+      {name: '2080', cuda: '2944', men: '8', large: 1},
+      {name: '2080s', cuda: '3072', men: '8', large: 1},
+      {name: '2080ti', cuda: '4352', men: '11', large: 1},
+      {name: '3060', cuda: '3584', men: '12', large: 1},
+      {name: '3060ti', cuda: '4864', men: '8', large: 1},
+      {name: '3070', cuda: '5888', men: '8', large: 1},
+      {name: '3070ti', cuda: '6144', men: '8', large: 1},
+      {name: '3080', cuda: '8704', men: '10', large: 1},
+      {name: '3080ti', cuda: '10240', men: '12', large: 1},
+      {name: '3090', cuda: '10496', men: '24', large: 1},
+      {name: 'A4000', cuda: '6144', men: '16', large: 1},
+      {name: 'A5000', cuda: '8192', men: '24', large: 1},
+      {name: 'A40', cuda: '10752', men: '48', large: 1},
+      {name: 'A100 PCIe', cuda: '6912', men: '40', large: 2},
+      {name: 'A100 PCIe', cuda: '6912', men: '80', large: 2},
+      {name: 'A100 SXM4', cuda: '6912', men: '40', large: 2},
+      {name: 'A100 SXM4', cuda: '6912', men: '80', large: 2},
+      {name: 'A800 PCIe', cuda: '6912', men: '40', large: 2},
+      {name: 'A800 PCIe', cuda: '6912', men: '80', large: 2},
+      {name: 'A800 SXM5', cuda: '8192', men: '80', large: 2},
+      {name: 'V100', cuda: '5120', men: '16', large: 2},
+      {name: 'V100', cuda: '5120', men: '32', large: 2},
+      {name: 'H100 SXM5', cuda: '16896', men: '80', large: 2},
+      {name: 'H100 PCIe', cuda: '14592', men: '80', large: 2},
+      {name: 'H100 NVL1', cuda: '16896', men: '94', large: 2},
+      {name: 'H800 SXM5', cuda: '16896', men: '80', large: 2},
+      {name: '4060', cuda: '3072', men: '8', large: 1},
+      {name: '4060ti', cuda: '4352', men: '8', large: 1},
+      {name: '4060ti', cuda: '4352', men: '16', large: 1},
+      {name: '4070', cuda: '5888', men: '12', large: 1},
+      {name: '4070ti', cuda: '7680', men: '12', large: 1},
+      {name: '4080', cuda: '9728', men: '16', large: 1},
+      {name: '4080ti', cuda: '14080', men: '20', large: 1},
+      {name: '4090', cuda: '16384', men: '24', large: 1},
+      {name: '4090ti', cuda: '18176', men: '24', large: 1}
+    ])
+    const options1 = ref([
+      {label: 1, value: 1},
+      {label: 2, value: 2},
+      {label: 3, value: 3},
+      {label: 4, value: 4},
+      {label: 5, value: 5},
+      {label: 6, value: 6},
+      {label: 7, value: 7},
+      {label: 8, value: 8}
+    ])
+    const options2 = ref([])
+    const options2_1 = ref([])
+    const options3 = ref([
+      { name: '中国大陆', key: 1, value: 1 },
+      { name: '北美', key: 2, value: 1.2 },
+      { name: '南美', key: 3, value: 1.3 },
+      { name: '欧洲', key: 4, value: 1.5 },
+      { name: '中东', key: 5, value: 1.6 },
+      { name: '韩国', key: 6, value: 1.6 },
+      { name: '日本', key: 7, value: 1.7 },
+      { name: '中国台湾', key: 8, value: 1.3 },
+      { name: '中国香港和澳门', key: 9, value: 1.3 },
+      { name: '马来西亚', key: 10, value: 1.5 },
+      { name: '印尼', key: 11, value: 1.5 },
+      { name: '新加坡', key: 12, value: 1.5 },
+      { name: '越南', key: 13, value: 1.3 }
+    ])
+
+    const Income = ref(0) // 月收益
+    const dbcPrice = ref(0) // dbc价格
+    const countVideo_num = ref(0) // 显存
+    const countGpu_num = ref(0) // 显卡数量
+    const countMem_num = ref(0) // 内存
+    const countLarge_num = ref(1) // 大模型系数
+    const countCuda_core = ref(0) // cuda数量
+    const countLocal_num = ref(0) // 地域系数
+    const totalCalcPoints = ref(0) // 总算力值
+    const machineCalcPoints = ref(0) // 整机算力值
+
+    const machinePoints = ref(0) // 整机算力值
+    const countVideo_num1 = ref(0) // 显存
+    const countGpu_num1 = ref(0) // 显卡数量
+    const countMem_num1 = ref(0) // 内存
+    const countLarge_num1 = ref(1) // 大模型系数
+    const countCuda_core1 = ref(0) // cuda数量
+    const countLocal_num1 = ref(0) // 地域系数
+    
+    const SelectGPU1 = (val) => {
+      const arr = val.split('_')
+      countCuda_core1.value = arr[0]
+      countVideo_num1.value = arr[1]
+      countLarge_num1.value = arr[2]
+      machineCalc()
+    }
+    const SelectGpuNum1 = (val) => {
+      countGpu_num1.value = val
+      options2_1.value = []
+      mem_num1.value = ''
+      for (let i = 0; i < numList.value.length; i ++) {
+        let mem_value = val * numList.value[i]
+        options2_1.value.push({ name: mem_value, value: mem_value })
+      }
+      mem_num1.value = val * numList.value[0]
+      countMem_num1.value = val * numList.value[0]
+      machineCalc()
+    }
+    const SelectMem1 = (val) => {
+      countMem_num1.value = val
+      machineCalc()
+    }
+    const SelectLocal1 = (val) => {
+      const arr = val.split('_')
+      countLocal_num1.value = arr[0]
+      machineCalc()
+    }
+    const machineCalc = () => {
+      if (countCuda_core1.value&&countVideo_num1.value&&countGpu_num1.value
+      &&countMem_num1.value&&countLarge_num1.value&&countLocal_num1.value) {
+        machinePoints.value = countPoint(countGpu_num1.value, countMem_num1.value, countCuda_core1.value, countVideo_num1.value, countLocal_num1.value)*countLarge_num1.value
+      }
+    }
+
+    const SelectGPU = (val) => {
+      const arr = val.split('_')
+      countCuda_core.value = arr[0]
+      countVideo_num.value = arr[1]
+      countLarge_num.value = arr[2]
+      MonthlyIncome()
+    }
+    const SelectGpuNum = (val) => {
+      countGpu_num.value = val
+      options2.value = []
+      mem_num.value = ''
+      for (let i = 0; i < numList.value.length; i ++) {
+        let mem_value = val * numList.value[i]
+        options2.value.push({ name: mem_value, value: mem_value })
+      }
+      mem_num.value = val * numList.value[0]
+      countMem_num.value = val * numList.value[0]
+      MonthlyIncome()
+    }
+    const SelectMem = (val) => {
+      countMem_num.value = val
+      MonthlyIncome()
+    }
+    const SelectLocal = (val) => {
+      const arr = val.split('_')
+      countLocal_num.value = arr[0]
+      MonthlyIncome()
+    }
+    const countPoint = (Gpu_Num, Mem, Cuda, M_value, coe) => {
+      var num = Math.round(((Gpu_Num*25+ Mem/3.5 + Math.sqrt(Cuda) * Math.sqrt(M_value/10)*Gpu_Num)*coe) * 100) / 100
+      return num
+    }
+    const MonthlyIncome = () => {
+      if (countCuda_core.value&&countVideo_num.value
+      &&dbcPrice.value&&countGpu_num.value
+      &&countMem_num.value&&countLarge_num.value
+      &&countLocal_num.value&&totalCalcPoints.value) {
+        machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
+        Income.value = Math.round(((machineCalcPoints.value*countLarge_num.value / totalCalcPoints.value)*1095890*dbcPrice.value*countLocal_num.value*countLarge_num.value*1.3*30+machineCalcPoints.value*0.508) * 100) / 100
+      }
+    }
+    const getPrice = async () => {
+      const priceNum = await dbcPriceOcw()
+      dbcPrice.value = priceNum/1000000
+      const rewardInfo = await getRewardInfo();
+      totalCalcPoints.value = rewardInfo.totalCalcPoints/100
+    }
+    onMounted(() => {
+      for (let i = 1; i < 33; i ++) {
+        numList.value.push(16*i)
+      }
+      getPrice()
+    })
+    return {
+      gpu_type,
+      gpu_num,
+      mem_num,
+      local,
+      gpu_type1,
+      gpu_num1,
+      mem_num1,
+      local1,
+      Income,
+      machinePoints,
+      options,
+      options1,
+      options2,
+      options2_1,
+      options3,
+      SelectGPU,
+      SelectGpuNum,
+      SelectMem,
+      SelectLocal,
+      SelectGPU1,
+      SelectGpuNum1,
+      SelectMem1,
+      SelectLocal1
+    };
+  }
+});
+</script>

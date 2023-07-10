@@ -823,7 +823,7 @@ div.rule-wrapper
         div.topitem 지역 계수: 
           el-select.select_width200(v-model="local", size='mini', placeholder="선택하십시오" @change='SelectLocal')
             el-option( v-for="(item, index) in options3" , :key="index", :label="item.name", :value="item.value +'_'+index")
-    div 현재 월 수입은: {{Income}} 미화 등가 DBC
+    div 현재 월 수입: {{Income}} USD 등가 DBC = 온체인 보상 수입: {{price3}} DBC({{ price1 }} USD 현재 DBC 가격: {{dbcPrice}} USD에 해당)+임대 수입:{{ price2 }} USD 등가 DBC
   div.rule-title 라.패널티 메커니즘 
   div.rule-content
     div 온체인 기기든 오프체인 기기든 컴퓨팅 제공자는 적극적으로 온체인 알림을 보내야 하며, 기기에 문제가 있는 경우 온체인 알림을 사전에 보내지 않으면 패널티는  더 심해집니다. 기기가 공식적으로 온체인에 연결되면 향후 하드웨어 구성 정보를 수정할 수 없습니다. 기기가 유휴 상태인 동시에 오프라인 상태일 경우 대역폭과 위경도 정보를 수정할 수 있습니다. 기기가  페널티를 받으면 스테이킹 코인만 차감됩니다 과거 보상은 향후 150일 동안 차감되지 않지만 새로운 온라인 보상은 없을 것입니다. 기기  스테이킹토큰이 90% 미만일 경우 경고 상태이며, 기계 스테이킹 토큰이 80% 미만인 경우 온라인 보상이 없습니다.
@@ -1310,6 +1310,9 @@ export default defineComponent({
 
     const Income = ref(0) // 月收益
     const dbcPrice = ref(0) // dbc价格
+    const price1 = ref(0)
+    const price2 = ref(0)
+    const price3 = ref(0)
     const countVideo_num = ref(0) // 显存
     const countGpu_num = ref(0) // 显卡数量
     const countMem_num = ref(0) // 内存
@@ -1400,6 +1403,9 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
         Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
@@ -1425,6 +1431,10 @@ export default defineComponent({
       mem_num1,
       local1,
       Income,
+      price1,
+      price2,
+      price3,
+      dbcPrice,
       machinePoints,
       options,
       options1,

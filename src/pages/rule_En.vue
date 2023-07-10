@@ -822,7 +822,7 @@ div.rule-wrapper
         div.topitem Regional coefficient: 
           el-select.select_width280(v-model="local", size='mini', placeholder="choose" @change='SelectLocal')
             el-option( v-for="(item, index) in options3" , :key="index", :label="item.name", :value="item.value +'_'+index")
-    div The current monthly income is: {{Income}} USD equivalent DBC
+    div The current monthly income is: {{Income}} USD equivalent DBC = on-chain reward income: {{price3}} DBC (equivalent to {{ price1 }} USD current DBC price: {{dbcPrice}} USD)+rental income:{{ price2 }} USD equivalent DBC
   div.rule-title IV、Penalty rules
   div.rule-content
     div Regardless of whether the machine is online or offline, computing workers need to actively send on-chain notifications by themselves. If the machine fails to actively send on-chain notifications, the penalty will be more serious. Once the machine is officially on the chain successfully, you cannot modify any hardware configuration information in the future. When the machine is idle and offline at the same time, the bandwidth and latitude and longitude information can be modified. When the machine receives a penalty, only the pledged coins are deducted. The historical rewards that will be issued in the next 150 days will not be deducted, but there is no new online reward. When the machine deposit is less than 90%, it will be in a warning state, when the machine deposit is less than 80%. %, there will be no online rewards.
@@ -1309,6 +1309,9 @@ export default defineComponent({
 
     const Income = ref(0) // 月收益
     const dbcPrice = ref(0) // dbc价格
+    const price1 = ref(0)
+    const price2 = ref(0)
+    const price3 = ref(0)
     const countVideo_num = ref(0) // 显存
     const countGpu_num = ref(0) // 显卡数量
     const countMem_num = ref(0) // 内存
@@ -1399,6 +1402,9 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
         Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
@@ -1424,6 +1430,10 @@ export default defineComponent({
       mem_num1,
       local1,
       Income,
+      price1,
+      price2,
+      price3,
+      dbcPrice,
       machinePoints,
       options,
       options1,

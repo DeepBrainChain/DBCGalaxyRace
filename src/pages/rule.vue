@@ -818,7 +818,7 @@ div.rule-wrapper
         div.topitem 地域: 
           el-select.select_width200(v-model="local", size='mini', placeholder="请选择" @change='SelectLocal')
             el-option( v-for="(item, index) in options3" , :key="index", :label="item.name", :value="item.value +'_'+index")
-    div 当前每月收益为: {{Income}} USD等值DBC
+    div 当前每月收益为: {{Income}} USD等值DBC =  链上奖励收益: {{price3}} DBC(等值 {{ price1 }} USD 当前DBC价格: {{dbcPrice}} USD)+租金收益: {{ price2 }} USD等值DBC
   div.rule-title 四、惩罚机制
   div.rule-content
     div 无论上线机器或者下线机器都需要算工自己主动发送链上通知，如果机器出现问题，不主动发送链上通知，惩罚将会更加严重。机器一旦正式上链成功，则以后不能修改任何硬件配置信息。当机器闲置且同时处于下线状态，可以修改带宽和经纬度信息。当机器收到惩罚只扣除质押币，历史的奖励但是要在未来150天发放的这部分不会被扣除，但是没有新的在线奖励.当机器押金不足90%处于警告状态，当机器押金不足80%，将会没有在线奖励.
@@ -1301,6 +1301,9 @@ export default defineComponent({
 
     const Income = ref(0) // 月收益
     const dbcPrice = ref(0) // dbc价格
+    const price1 = ref(0)
+    const price2 = ref(0)
+    const price3 = ref(0)
     const countVideo_num = ref(0) // 显存
     const countGpu_num = ref(0) // 显卡数量
     const countMem_num = ref(0) // 内存
@@ -1392,6 +1395,10 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
+        
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
         Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
       }
     }
@@ -1417,6 +1424,10 @@ export default defineComponent({
       mem_num1,
       local1,
       Income,
+      price1,
+      price2,
+      price3,
+      dbcPrice,
       machinePoints,
       options,
       options1,

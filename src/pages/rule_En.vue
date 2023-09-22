@@ -3,7 +3,8 @@ div.description
   | The DeepBrain Chain Galaxy Computing Power Race Incentive Program is a collaborative race to stress test the network, it encourages participation from miners around the world, and help prepare miners to operate the world's largest high-performance computing network.
 div.rule-wrapper
   div.rule-title Rules of the Race
-  div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
+  //- div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
+  div.rule-content The DeepBrain Chain computing power mainnet has been launched. When 5,000 GPUs in the entire network are reached, the competition will be automatically activated. After activation, the competition will last for 2 months. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the official activation of the Galaxy Competition, the calculation workers enjoy the double benefits of rental income and online rewards. The total number of online rewards every day is 1.09589 million DBC. The rental destruction is divided into three stages. Phase 1: 1 card to 4999 card rent 30% is destroyed; Phase 2: 70% of rentals from 5,000 cards to 9,999 cards are destroyed; Phase 3: 100% of rentals from 10,000 cards and above are destroyed, and the Galaxy Competition starts when 5,000 cards are reached
   div.rule-title I. Minimum requirements for GPU server parameters: Only when the parameters of the computing power server meet the minimum requirements, can it be reviewed and launched by the validator, otherwise no revenue will be obtained
   div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
@@ -1403,9 +1404,9 @@ export default defineComponent({
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
         price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
-        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
         price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

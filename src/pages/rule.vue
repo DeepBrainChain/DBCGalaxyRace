@@ -3,7 +3,8 @@ div.description
   | 深脑链银河算力竞赛激励计划是一项协作竞赛，目的是对该网络进行压力测试，鼓励全世界的算工参与，并帮助算工为运营世界上最大的高性能算力网络做好准备。
 div.rule-wrapper
   div.rule-title 竞赛规则
-  div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数109.589万DBC,激活后租金100%销毁！
+  //- div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数109.589万DBC,激活后租金100%销毁！
+  div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数109.589万DBC，租金销毁分为三个阶段，阶段一：1卡至4999卡租金销毁30%；阶段二：5000卡至9999卡租金销毁70%；阶段三：10000卡及以上租金销毁100%，当达到5000卡时银河竞赛启动
   div.rule-title 一、GPU服务器参数最低要求：算力服务器各项参数只有满足最低要求，才可以通过验证人审核上线，否则无法获得收益
   ul.rule-content
     li
@@ -1397,9 +1398,9 @@ export default defineComponent({
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
         
         price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
-        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
         price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

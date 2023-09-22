@@ -3,7 +3,8 @@ div.description
   | DeepBrain Chain 갤럭시 컴퓨팅 레이스 보상 프로그램은 협력 레이스 이며,  네트워크에 압력 테스트하고 글로벌 컴퓨팅제공자의 참여를 독려하며 세계 최대의 고성능 컴퓨팅 네트워크 운영을 준비할 수 있도록 돕는 협력 레이스입니다.
 div.rule-wrapper
   div.rule-title 레이스 규칙
-  div.rule-content _x001c_,전체 네트워크에서 5,000 GPU 달성 시 레이스는 자동으로 활성화됩니다.활성화 후 레이스는 2 개월 동안 지속됩니다,레이스 진행 동안 모든 컴퓨팅제공자는 1.33억 DBC 보상을 공동 배분합니다. 상위 5명의 컴퓨팅제공자는 추가로 3,000만 DBC 보상을 얻을 수 있습니다!갤럭시 레이스가 정식으로 활성화되기 전에 컴퓨팅제공자는 임대 수입과 온라인 보상의 두가지 수입을 받을 수 있습니다,일일 온라인 보상의 총 수는 109,589 만DBC입니다,  활성화 후 임대료100%가 소각됩니다!
+  //- div.rule-content _x001c_,전체 네트워크에서 5,000 GPU 달성 시 레이스는 자동으로 활성화됩니다.활성화 후 레이스는 2 개월 동안 지속됩니다,레이스 진행 동안 모든 컴퓨팅제공자는 1.33억 DBC 보상을 공동 배분합니다. 상위 5명의 컴퓨팅제공자는 추가로 3,000만 DBC 보상을 얻을 수 있습니다!갤럭시 레이스가 정식으로 활성화되기 전에 컴퓨팅제공자는 임대 수입과 온라인 보상의 두가지 수입을 받을 수 있습니다,일일 온라인 보상의 총 수는 109,589 만DBC입니다,  활성화 후 임대료100%가 소각됩니다!
+  div.rule-content DeepBrain Chain 컴퓨팅 파워 메인넷이 출시되었습니다. 전체 네트워크의 GPU 5,000개가 충족되면 자동으로 대회가 활성화됩니다. 활성화 후 대회는 2개월 동안 지속됩니다. 대회 기간 동안 모든 컴퓨팅 작업자는 1억 3,300만 DBC를 공유합니다. 전산근로자 상위 5명은 추가로 3000만 DBC 보상을 받을 수 있습니다 갤럭시대회 정식 활성화 전 계산근로자는 임대수입과 온라인 보상의 2배 혜택을 누리게 됩니다 하루 총 온라인 보상 개수는 1.09589개 입니다 렌탈 파기는 3단계로 나누어 1단계: 1장 ~ 4999장 렌탈 30% 파기, 2단계: 5,000장 ~ 9,999장 렌탈 70% 파기, 3단계: 100% 렌탈 10,000장 이상 카드는 소멸되며, 5,000장 도달 시 은하계 경쟁이 시작됩니다.
   div.rule-title 가. GPU 서버 파라미터에 대한 최소 요구사항: 컴퓨팅 서버의 파라미터가 최소 요구사항을 충족하는 경우에만 검증자 심사 후 온체인 등록 가능합니다, 그렇지 않으면 수입을 얻을 수 없습니다.
   ul.rule-content
     li 
@@ -1404,9 +1405,9 @@ export default defineComponent({
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
         price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
-        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
         price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

@@ -5,6 +5,11 @@ ul.list
   li.item(v-for="(item, index) in items")
     div.label {{ t(`lable_one${index+1}`) }}
     div.value {{itemsData[item.key]}}
+    div.desc(v-if='index == 4 || index == 5') DBC
+  li.item
+    div.label {{ t('lable_one7') }}
+    div.value {{DestroyDBC}}
+    div.desc DBC
 table.table(ce)
   thead
     tr.tr
@@ -88,32 +93,40 @@ div.pagination-container
   margin: 32px auto 0;
 }
 .item {
-  width: 189px;
-  min-height: 110px;
+  width: 160px;
+  min-height: 90px;
   background: white;
   border-radius: 12px;
   font-family: PingFang SC, sans-serif;
   text-align: center;
   color: #051174;
-  padding: 20px 0 26px 0;
+  padding: 15px 0 20px 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   .label {
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    min-height: 40px;
+    font-size: 14px;
+    line-height: 16px;
+    min-height: 32px;
     opacity: 0.4;
-    // margin-bottom: 6px;
   }
   .value {
     font-family: PingFang SC;
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 4px;
+  }
+  .desc {
+    opacity: 0.7;
+    font-family: PingFang SC;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
   }
 }
 .description {
@@ -155,6 +168,7 @@ div.pagination-container
 import { defineComponent, computed, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
+import { totalDestroy } from '../untils/index';
 import { getRewardInfo, getList, RewardInfoType, ItemType, compare, getNumber } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
@@ -238,7 +252,7 @@ export default defineComponent({
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
     const getnum = (num: Number):string => {
-      if( num>=100 ){
+      if( Number(num) >= 100 ){
         return '100'
       }
       let num1 = String(num);
@@ -248,6 +262,7 @@ export default defineComponent({
       const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
       return num1.substring(0,num1.indexOf(".")+5);
     }
+    const DestroyDBC = ref(0)
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
       total.value = Number(rewardInfo.totalStaker)
@@ -276,7 +291,9 @@ export default defineComponent({
       //   console.log(res, 'res');
       //   total.value = res
       // })
-      
+
+      DestroyDBC.value = await totalDestroy()
+
       const { list } = await getList();
       set(list, tableData);
       PaDisabled.value = false
@@ -290,6 +307,7 @@ export default defineComponent({
       total,
       currentPage,
       PageSize,
+      DestroyDBC,
       t,
       isWin,
       PaDisabled,

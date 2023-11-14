@@ -808,7 +808,7 @@ div.rule-wrapper
   //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   div.rule-title.fs16 Machine monthly income calculation
   div.rule-content
-    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 1,095,890 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *Regional coefficient*Large model coefficient*0.508
+    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 1,095,890 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *Regional coefficient*Large model coefficient*0.508*70%
     div.select
       div.topcon
         div.topitem GPU type: 

@@ -11,8 +11,8 @@ div.content
         div.topitem {{t('Machine_status')}}: 
           el-select.select(v-model="Machine_status", size='mini', placeholder="请选择" @change='SelectStatus')
             el-option( v-for="item in options" , :key="item.value", :label="item.label", :value="item.value")
-        div.topitem {{t('GPU_Num')}}: 
-          el-select.select(v-model="GPU_Num", size='mini', placeholder="请选择" @change='SelectNum')
+        div.topitem {{t('gpuNum')}}: 
+          el-select.select(v-model="gpuNum", size='mini', placeholder="请选择" @change='SelectNum')
             el-option( v-for="item in options1" , :key="item.value", :label="item.label", :value="item.value")
         div.topitem(v-if="locale == 'zh'") {{t('All_Machine')}}: {{All_Machine}}
         div.topitem(v-if="locale == 'zh'") {{t('Idle_Machine')}}: {{Idle_Machine}}
@@ -26,50 +26,50 @@ div.content
       div.table
         div.tableli(v-for="el in Machine_info" :key="el.machine_id")
           div.li_list1
-            span.Machine_id {{t('Machine_ID')}}: 
+            span.machineId {{t('machineId')}}: 
               i {{el.machine_id}}
-            span(v-if='el.server_room') {{t('Room_number')}}: 
-              i(:title='el.server_room' ) {{String(el.server_room).substring(0,10)+'...'}}
+            span(v-if='el.serverRoom') {{t('Room_number')}}: 
+              i(:title='el.serverRoom' ) {{String(el.serverRoom).substring(0,10)+'...'}}
             span {{t('lable_two2')}}: 
-              i(:title='el.machine_stash' v-if='!el.machine_name') {{String(el.machine_stash).substring(0,10)+'...'}}
-              i(:title='el.machine_stash' v-else) {{el.machine_name}}
+              i(:title='el.machineStash' v-if='!el.machine_name') {{String(el.machineStash).substring(0,10)+'...'}}
+              i(:title='el.machineStash' v-else) {{el.machine_name}}
             span {{t('Machine_sta')}}: 
               i {{el.machine_status == 'rented'?t('Rented'):t('Idle')}}
           div.li_list2
-            span.blod {{t('GPU_Num')}}: 
-              i {{el.gpu_num}}
+            span.blod {{t('gpuNum')}}: 
+              i {{el.gpuNum}}
             span.blod {{t('GPU_memory')}}: 
-              i {{el.gpu_mem}}G
+              i {{el.gpuMem}}G
             span.width30.blod {{t('GPU_type')}}: 
               i {{el.gpuType}}
             span.width30.blod {{t('Daily_Rent')}}: 
-              i.color {{getnum2(Number(el.calc_point)/100*0.016937)}}$≈{{getnum2(Number(el.calc_point)/100*0.016937/dbc_price)}}DBC
+              i.color {{getnum2(Number(el.calcPoint)/100*0.016937)}}$≈{{getnum2(Number(el.calcPoint)/100*0.016937/dbc_price)}}DBC
             span {{t('Country')}}:  
               i {{el.country}}
             span {{t('City')}}:  
               i {{el.city}}
             span {{t('Cumulative_DBC_rent')}}:  
-              i {{getnum1(el.total_rent_fee)}}
+              i {{getnum1(el.totalRentFee)}}
             span.operators {{t('Network_operators')}}:
               span.opera
-                i(v-for="operators in el.telecom_operators") {{operators}}
+                i(v-for="operators in el.telecomOperators") {{operators}}
             span {{t('Online_time')}}:  
               i {{el.online}}
             span {{t('Memory_num')}}:  
-              i {{Math.ceil(Number(el.mem_num))}}G
+              i {{Math.ceil(Number(el.memNum))}}G
             span {{t('System_hd')}}:  
-              i {{el.sys_disk}}G
+              i {{el.sysDisk}}G
             span {{t('Data_hd')}}:  
-              i {{Number(el.data_disk)/1000}}T
+              i {{Number(el.dataDisk)/1000}}T
             span {{t('Bandwidth1')}}:  
-              i {{el.upload_net}}Mbps
+              i {{el.uploadNet}}Mbps
             span {{t('Bandwidth2')}}: 
-              i {{el.download_net}}Mbps
+              i {{el.downloadNet}}Mbps
             span {{t('CPU_cores')}}:  
-              i {{el.cpu_core_num}}
+              i {{el.cpuCoreNum}}
             span {{t('CPU_frequency')}}:  
-              i {{getnum2(Number(el.cpu_rate)/1000)}}Ghz
-            span.width50 {{t('CPU_type')}}:  
+              i {{getnum2(Number(el.cpuRate)/1000)}}Ghz
+            span.width50 {{t('cpuType')}}:  
               i {{el.cpuType}}
       div.pagination-container
         Pagination(v-if='!isWin' :total="total", :onChangePageSize="handleChangePageSize1",:onJumpPage="handleJumpPage")
@@ -208,7 +208,7 @@ div.content
             span{
               margin-bottom: 10px;
               word-break: break-all;
-              &.Machine_id{
+              &.machineId{
                 padding: 10px 5px;
                 box-sizing: border-box;
                 border: 1px solid #999;
@@ -337,7 +337,7 @@ export default defineComponent({
     const active = ref('')
     const dbc_price = ref(0)
     const Machine_status = ref('')
-    const GPU_Num = ref('')
+    const gpuNum = ref('')
     const All_Machine = ref(0)
     const Idle_Machine = ref(0)
     const All_Gpu = ref(0)
@@ -397,25 +397,25 @@ export default defineComponent({
     const tableData = ref([]);
     const Machine_info = ref([{
       number:'',
-      calc_point: "",
+      calcPoint: "",
       city: "",
       country: "",
-      cpu_core_num: "",
-      cpu_rate: "",
-      cpu_type: "",
-      cuda_core: "",
-      data_disk: "",
-      download_net: "",
-      gpu_mem: "",
-      gpu_num: "",
-      gpu_type: "",
+      cpuCoreNum: "",
+      cpuRate: "",
+      cpuType: "",
+      cudaCore: "",
+      dataDisk: "",
+      downloadNet: "",
+      gpuMem: "",
+      gpuNum: "",
+      gpuType: "",
       machine_id: "",
       machine_status: "",
-      mem_num: "",
-      sys_disk: "",
-      telecom_operators: [],
-      total_rent_fee: "",
-      upload_net: "",
+      memNum: "",
+      sysDisk: "",
+      telecomOperators: [],
+      totalRentFee: "",
+      uploadNet: "",
       online:''
     }])
     const isWin = computed(()=>{
@@ -471,7 +471,7 @@ export default defineComponent({
 
         online_block.value = await getBlock();
         Machine_info.value.map( (el) => {
-          el.online = minsToHourMins(Math.floor((online_block.value-el.bonding_height)/2))
+          el.online = minsToHourMins(Math.floor((online_block.value-el.bondingHeight)/2))
         })
         loading.value = false
 
@@ -493,40 +493,40 @@ export default defineComponent({
       Idle_Gpu.value = 0
       Machine_info.value = []
       Machine_status.value = ''
-      GPU_Num.value = ''
-      getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
+      gpuNum.value = ''
+      getList(active.value , Machine_status.value, gpuNum.value, 'first', currentPage.value, PageSize.value)
     }
     const SelectStatus = () => {
       loading.value = true
       currentPage.value = 1
-      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, gpuNum.value, '', currentPage.value, PageSize.value)
     }
     const SelectNum = () => {
       loading.value = true
       currentPage.value = 1
-      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, gpuNum.value, '', currentPage.value, PageSize.value)
     }
     const handleChangePageSize = (num) => {
       loading.value = true
       PageSize.value = num
-      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, gpuNum.value, '', currentPage.value, PageSize.value)
     }
     const handleChangePageSize1 = (num) => {
       loading.value = true
       PageSize.value = num
       currentPage.value = 1
-      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, gpuNum.value, '', currentPage.value, PageSize.value)
     }
     const handleJumpPage = (num, size) => {
       loading.value = true
       PageSize.value = size
       currentPage.value = num
-      getList(active.value , Machine_status.value, GPU_Num.value, '', num, size)
+      getList(active.value , Machine_status.value, gpuNum.value, '', num, size)
     }
     const handleCurrentChang = (num) => {
       loading.value = true
       currentPage.value = num
-      getList(active.value , Machine_status.value, GPU_Num.value, '', currentPage.value, PageSize.value)
+      getList(active.value , Machine_status.value, gpuNum.value, '', currentPage.value, PageSize.value)
     }
     watch(
       () => locale.value,
@@ -562,7 +562,7 @@ export default defineComponent({
       .catch( err => {
         console.log(err);
       })
-      await getList(active.value , Machine_status.value, GPU_Num.value, 'first', currentPage.value, PageSize.value)
+      await getList(active.value , Machine_status.value, gpuNum.value, 'first', currentPage.value, PageSize.value)
     });
     return {
       t,
@@ -586,7 +586,7 @@ export default defineComponent({
       Idle_Gpu,
       options,
       options1,
-      GPU_Num,
+      gpuNum,
       tableData,
       Machine_status,
       Machine_info,

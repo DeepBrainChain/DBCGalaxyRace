@@ -5,11 +5,7 @@ ul.list
   li.item(v-for="(item, index) in items")
     div.label {{ t(`lable_one${index+1}`) }}
     div.value {{itemsData[item.key]}}
-    div.desc(v-if='index == 4 || index == 5') DBC
-  li.item
-    div.label {{ t('lable_one7') }}
-    div.value {{DestroyDBC}}
-    div.desc DBC
+    div.desc(v-if='index == 4 || index == 5 || index == 6') DBC
 table.table(ce)
   thead
     tr.tr
@@ -168,7 +164,8 @@ div.pagination-container
 import { defineComponent, computed, onMounted, reactive, ref } from "vue";
 import Pagination from "../components/pagination.vue";
 import BigNumber from "bignumber.js";
-import { totalDestroy } from '../untils/index';
+import { getBalance } from '../untils/index';
+import axios from '../untils/axios'
 import { getRewardInfo, getList, RewardInfoType, ItemType, compare, getNumber } from "../apis";
 import { useI18n } from "vue-i18n";
 export default defineComponent({
@@ -194,7 +191,7 @@ export default defineComponent({
       { key: "Rent", label: "租用率" },
       { key: "totalRentFee", label: "DBC租金数" },
       { key: "totalStake", label: "算机DBC质押数" },
-      // { key: "totalStakeAll", label: "算机DBC质押总数" }
+      { key: "totalBurnFee", label: "租金销毁数" }
     ];
 
     const columns: Array<{ key: keyof ItemType; label: string }> = [
@@ -235,7 +232,7 @@ export default defineComponent({
       reactiveList.splice(0, reactiveList.length);
       // todo
       serverList.forEach(item => {
-        if (item.totalGpuNum) {
+        if (item.totalGpuNum && item.stakerAccount != '5FEio5dgXeXsASdo3Wh5DQ8zfbRfQJTXYmFkCbSCFk2qsTt6') {
           reactiveList.push(item);
         }
       });
@@ -247,7 +244,8 @@ export default defineComponent({
       totalStaker: "0",
       Rent: "0",
       // totalStakeAll: "loading",
-      totalRentFee: "0"
+      totalRentFee: "0",
+      totalBurnFee: "0"
     });
     let tableData = reactive<Array<ItemType>>([]);
     let total = ref(0);
@@ -262,7 +260,6 @@ export default defineComponent({
       const num1 = new BigNumber(Number(num)/ Math.pow(10,15)).toFormat()
       return num1.substring(0,num1.indexOf(".")+5);
     }
-    const DestroyDBC = ref(0)
     onMounted(async () => {
       const rewardInfo = await getRewardInfo();
       total.value = Number(rewardInfo.totalStaker)
@@ -276,7 +273,7 @@ export default defineComponent({
         if (typeof v !== "undefined") {
           if(key === 'Rent'){
             v = Number(rewardInfo['totalRentedGpu']) != 0 ?(getnum(Number(rewardInfo['totalRentedGpu'])/Number(rewardInfo['totalGpuNum'])*100)+'%') : '0'
-          }else if( key === 'totalStake' || key === 'totalStakeAll' || key === 'totalRentFee'){
+          }else if( key === 'totalStake' || key === 'totalStakeAll' || key === 'totalRentFee' || key === 'totalBurnFee'){
             v = new BigNumber(Math.round(Number(v)/ Math.pow(10,15))).toFormat();
           }else if(key === "totalCalcPoints"){
             v = new BigNumber(Number(v) / 100).toFormat();
@@ -286,17 +283,11 @@ export default defineComponent({
         }
         itemsData[key] = typeof v !== "undefined" ? v : "0";
       });
-      
-      // await getNumber().then( res => {
-      //   console.log(res, 'res');
-      //   total.value = res
-      // })
-
-      DestroyDBC.value = await totalDestroy()
 
       const { list } = await getList();
       set(list, tableData);
       PaDisabled.value = false
+
     });
 
     return {
@@ -307,7 +298,6 @@ export default defineComponent({
       total,
       currentPage,
       PageSize,
-      DestroyDBC,
       t,
       isWin,
       PaDisabled,

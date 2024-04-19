@@ -33,7 +33,7 @@ el-config-provider(:locale="locale")
       span DeepBrain
       | Chain
   h1.title(v-if='countDownactive') {{t('title')}}
-  h1.title(v-else) {{t('title1')}} {{ lastGpuNum }} {{t('piece')}} GPU
+  h1.title(v-else) {{t('title1')}} {{ lastGpuNum }} {{t('piece')}}
   div.time-wrapper
     div.time-title(v-if='countDownactive') {{t('countDown')}}
     div.time-title(v-else) {{t('countDown1')}}
@@ -244,7 +244,7 @@ export default defineComponent({
     const countDownactive = computed(() => (formateIOS("2021-11-22 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
     const totalGpuNum = ref(localStorage.getItem('totalGpuNum') || 0)
-    const lastGpuNum = computed(() => ( 5000 - Number(totalGpuNum.value) ));
+    const lastGpuNum = computed(() => ( Number(totalGpuNum.value) ));
     watch(
       () => lan.value,
       (value, pervalue) => {

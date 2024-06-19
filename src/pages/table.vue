@@ -11,7 +11,7 @@ div.content
         div.topitem {{t('Machine_status')}}: 
           el-select.select(v-model="Machine_status", size='mini', placeholder="请选择" @change='SelectStatus')
             el-option( v-for="item in options" , :key="item.value", :label="item.label", :value="item.value")
-        div.topitem {{t('gpuNum')}}: 
+        div.topitem {{t('GPU_Num')}}: 
           el-select.select(v-model="gpuNum", size='mini', placeholder="请选择" @change='SelectNum')
             el-option( v-for="item in options1" , :key="item.value", :label="item.label", :value="item.value")
         div.topitem(v-if="locale == 'zh'") {{t('All_Machine')}}: {{All_Machine}}
@@ -34,7 +34,7 @@ div.content
               i(:title='el.machineStash' v-if='!el.machine_name') {{String(el.machineStash).substring(0,10)+'...'}}
               i(:title='el.machineStash' v-else) {{el.machine_name}}
             span {{t('Machine_sta')}}: 
-              i {{el.machine_status == 'rented'?t('Rented'):t('Idle')}}
+              i {{el.machineStatus == 'rented'?t('Rented'):t('Idle')}}
           div.li_list2
             span.blod {{t('gpuNum')}}: 
               i {{el.gpuNum}}

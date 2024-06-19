@@ -3,8 +3,7 @@ div.description
   | DeepBrain Chain 갤럭시 컴퓨팅 레이스 보상 프로그램은 협력 레이스 이며,  네트워크에 압력 테스트하고 글로벌 컴퓨팅제공자의 참여를 독려하며 세계 최대의 고성능 컴퓨팅 네트워크 운영을 준비할 수 있도록 돕는 협력 레이스입니다.
 div.rule-wrapper
   div.rule-title 레이스 규칙
-  //- div.rule-content _x001c_,전체 네트워크에서 5,000 GPU 달성 시 레이스는 자동으로 활성화됩니다.활성화 후 레이스는 2 개월 동안 지속됩니다,레이스 진행 동안 모든 컴퓨팅제공자는 1.33억 DBC 보상을 공동 배분합니다. 상위 5명의 컴퓨팅제공자는 추가로 3,000만 DBC 보상을 얻을 수 있습니다!갤럭시 레이스가 정식으로 활성화되기 전에 컴퓨팅제공자는 임대 수입과 온라인 보상의 두가지 수입을 받을 수 있습니다,일일 온라인 보상의 총 수는 109,589 만DBC입니다,  활성화 후 임대료100%가 소각됩니다!
-  div.rule-content DeepBrain Chain 컴퓨팅 파워 메인넷이 출시되었습니다. 전체 네트워크의 GPU 5,000개가 충족되면 자동으로 대회가 활성화됩니다. 활성화 후 대회는 2개월 동안 지속됩니다. 대회 기간 동안 모든 컴퓨팅 작업자는 1억 3,300만 DBC를 공유합니다. 전산근로자 상위 5명은 추가로 3000만 DBC 보상을 받을 수 있습니다 갤럭시대회 정식 활성화 전 계산근로자는 임대수입과 온라인 보상의 2배 혜택을 누리게 됩니다 하루 총 온라인 보상 개수는 1.09589개 입니다 렌탈 파기는 3단계로 나누어 1단계: 1장 ~ 4999장 렌탈 30% 파기, 2단계: 5,000장 ~ 9,999장 렌탈 70% 파기, 3단계: 100% 렌탈 10,000장 이상 카드는 소멸되며, 5,000장 도달 시 은하계 경쟁이 시작됩니다.
+  div.rule-content DeepBrain Chain 컴퓨팅 파워 메인넷이 출시되었습니다. 전체 네트워크의 GPU 5,000개가 충족되면 대회가 자동으로 활성화됩니다. 활성화 후 대회는 2개월 동안 지속됩니다. 대회 기간 동안 모든 컴퓨팅 작업자는 1억 3,300만 DBC를 공유하게 됩니다. 상위 5명의 컴퓨팅 작업자는 추가로 3천만 DBC 보상을 받을 수 있습니다! 갤럭시 대회가 정식 활성화되기 전에 계산 작업자는 일일 온라인 보상의 총 개수가 547,945 DBC입니다. 임대 파기는 3단계로 나누어집니다. 1단계: 카드 1개 ~ 4999개 임대 파기 30%, 2단계: 카드 5,000개 ~ 9,999개까지 임대 70% 파기, 3단계: 카드 10,000개 이상 임대 100% 파기 파괴되며, 카드 5,000장 도달 시 은하계 경쟁이 시작됩니다.
   div.rule-title 가. GPU 서버 파라미터에 대한 최소 요구사항: 컴퓨팅 서버의 파라미터가 최소 요구사항을 충족하는 경우에만 검증자 심사 후 온체인 등록 가능합니다, 그렇지 않으면 수입을 얻을 수 없습니다.
   ul.rule-content
     li 
@@ -801,15 +800,10 @@ div.rule-wrapper
       li 보유하고 있는 GPU수 
       li 단일 지갑이 소유한 GPU의 수 ,단일 지갑이 소유한 GPU가 추가될 때마다 모든 기기의 포인트는 0.01% 증가하여 10% 증가할 때까지 증가합니다.
       li GPU 임대 여부 확인하여 , 임대중인  GPU 컴퓨값은 30% 증가 됩니다 
-      li 매일 컴퓨팅 제공자가 얻는 보상 = 전체 네트워크 컴퓨팅값 대비  컴퓨팅 제공자가 소유한 컴퓨팅값의 비율 * 1,095,890 DBC, 이 중 25%는 즉시 보상, 75%는 150일 동안 분할보상, 즉 매일 0.5% 씩  보상 됩니다.
-  //- div.rule-title.fs16 Example:
-  //- div.rule-content
-  //-   div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
-  //-   div A's Total computing power value: 450*99*(1+5%)*130%+50*99*(1+5%)=66008.25
-  //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
+      li 매일 컴퓨팅 제공자가 얻는 보상 = 전체 네트워크 컴퓨팅값 대비  컴퓨팅 제공자가 소유한 컴퓨팅값의 비율 * 547,945 DBC, 이 중 25%는 즉시 보상, 75%는 150일 동안 분할보상, 즉 매일 0.5% 씩  보상 됩니다.
   div.rule-title.fs16 기계 월 소득 계산
   div.rule-content
-    div 머신의 월수입 계산 공식: 전체 머신의 컴퓨팅 파워 값 / 전체 네트워크의 총 컴퓨팅 파워 값 * 1,095,890 * DBC 가격 * 지역 계수 * 대형 모델 계수 * 1.3 (임대 컴퓨팅 파워 값은 증가합니다. 30%로) * 30 + 전체 시스템의 컴퓨팅 파워 값 *지역 계수*대형 모델 계수*0.508*70%
+    div 머신의 월수입 계산 공식: 전체 머신의 컴퓨팅 파워 값 / 전체 네트워크의 총 컴퓨팅 파워 값 * 547,945 * DBC 가격 * 지역 계수 * 대형 모델 계수 * 1.3 (임대 컴퓨팅 파워 값은 증가합니다. 30%로) * 30 + 전체 시스템의 컴퓨팅 파워 값 *지역 계수*대형 모델 계수*0.508*70%
     div.select
       div.topcon
         div.topitem GPU유형: 
@@ -1404,10 +1398,10 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
-        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
         price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
-        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*1.3*30)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

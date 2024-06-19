@@ -3,8 +3,7 @@ div.description
   | 深脑链银河算力竞赛激励计划是一项协作竞赛，目的是对该网络进行压力测试，鼓励全世界的算工参与，并帮助算工为运营世界上最大的高性能算力网络做好准备。
 div.rule-wrapper
   div.rule-title 竞赛规则
-  //- div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数109.589万DBC,激活后租金100%销毁！
-  div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数109.589万DBC，租金销毁分为三个阶段，阶段一：1卡至4999卡租金销毁30%；阶段二：5000卡至9999卡租金销毁70%；阶段三：10000卡及以上租金销毁100%，当达到5000卡时银河竞赛启动
+  div.rule-content 深脑链算力主网已经启动，当满足全网5000张GPU竞赛自动激活，激活后竞赛将持续2个月时间，竞赛期间所有算工共同瓜分1.33亿DBC奖励，算力前5名算工可以额外获得3000万DBC奖励! 在银河竞赛正式激活之前，算工享有租金收益和在线奖励双收益，每天在线奖励总数547,945DBC，租金销毁分为三个阶段，阶段一：1卡至4999卡租金销毁30%；阶段二：5000卡至9999卡租金销毁70%；阶段三：10000卡及以上租金销毁100%，当达到5000卡时银河竞赛启动
   div.rule-title 一、GPU服务器参数最低要求：算力服务器各项参数只有满足最低要求，才可以通过验证人审核上线，否则无法获得收益
   ul.rule-content
     li
@@ -801,10 +800,10 @@ div.rule-wrapper
       li 拥有的GPU数量
       li 单个钱包拥有的GPU数量，单个钱包每多拥有一个GPU，所有机器点数增加0.01%，一直到增加10%为止
       li GPU是否被租用，被租用的GPU算力值增加30%
-      li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*109.589万DBC，其中25%立马获得，75%释放150天，每天释放0.5%
+      li 算工每日获得的奖励=算工拥有的算力值占全网算力值的比例*547,945DBC，其中25%立马获得，75%释放150天，每天释放0.5%
   div.rule-title.fs16 机器每月收益计算
   div.rule-content
-    div 机器每月收益计算公式：整机算力值/全网总算力值*1,095,890*DBC价格*地域系数*大模型系数*1.3（被租用算力值增加30%）*30+整机算力值*地域系数*大模型系数*0.508*70%
+    div 机器每月收益计算公式：整机算力值/全网总算力值*547,945*DBC价格*地域系数*大模型系数*1.3（被租用算力值增加30%）*30+整机算力值*地域系数*大模型系数*0.508*70%
     div.select
       div.topcon
         div.topitem 机器型号: 
@@ -1397,10 +1396,10 @@ export default defineComponent({
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
         
-        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
         price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
-        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*1.3*30)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

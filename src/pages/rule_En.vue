@@ -4,7 +4,7 @@ div.description
 div.rule-wrapper
   div.rule-title Rules of the Race
   //- div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
-  div.rule-content The DeepBrain Chain computing power mainnet has been launched. When 5,000 GPUs in the entire network are reached, the competition will be automatically activated. After activation, the competition will last for 2 months. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the official activation of the Galaxy Competition, the calculation workers enjoy the double benefits of rental income and online rewards. The total number of online rewards every day is 1.09589 million DBC. The rental destruction is divided into three stages. Phase 1: 1 card to 4999 card rent 30% is destroyed; Phase 2: 70% of rentals from 5,000 cards to 9,999 cards are destroyed; Phase 3: 100% of rentals from 10,000 cards and above are destroyed, and the Galaxy Competition starts when 5,000 cards are reached
+  div.rule-content The DeepBrain Chain computing power mainnet has been launched. When 5,000 GPUs in the entire network are reached, the competition will be automatically activated. After activation, the competition will last for 2 months. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the official activation of the Galaxy Competition, the calculation workers enjoy the double benefits of rental income and online rewards. The total number of online rewards every day is 547,945 DBC. The rental destruction is divided into three stages. Phase 1: 1 card to 4999 card rent 30% is destroyed; Phase 2: 70% of rentals from 5,000 cards to 9,999 cards are destroyed; Phase 3: 100% of rentals from 10,000 cards and above are destroyed, and the Galaxy Competition starts when 5,000 cards are reached
   div.rule-title I. Minimum requirements for GPU server parameters: Only when the parameters of the computing power server meet the minimum requirements, can it be reviewed and launched by the validator, otherwise no revenue will be obtained
   div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
@@ -800,7 +800,7 @@ div.rule-wrapper
       li The number of GPUs owned
       li The number of GPUs owned by a single wallet. For each additional GPU owned by a single wallet, the points of all machines will increase by 0.01% until it increases by 10%.
       li Whether the GPU is rented or not, the computing power value of the rented GPU increases by 30%
-      li Daily rewards obtained by computing workers = the percentage of computing power owned by computing workers in the total network computing power * 1.09589 million DBC, of which 25% are obtained immediately, 75% are released for 150 days, and 0.5% is released every day
+      li Daily rewards obtained by computing workers = the percentage of computing power owned by computing workers in the total network computing power * 547,945 DBC, of which 25% are obtained immediately, 75% are released for 150 days, and 0.5% is released every day
   //- div.rule-title.fs16 Example:
   //- div.rule-content
   //-   div Assume that the amount of DBCs produced is 333,333,333 per day; the total network-wide computing power value is 800,000, and the computing power provider A adds 500 GPUs under the same wallet to the DBC network, each with a computing power value of 99, of which 450 graphic cards are in the leased state and 50 cards are idle, then
@@ -808,7 +808,7 @@ div.rule-wrapper
   //-   div Reward obtained by A in 24 hours is: 66008.25 /800,000*3,333,333= 275,034.3 DBC
   div.rule-title.fs16 Machine monthly income calculation
   div.rule-content
-    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 1,095,890 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *Regional coefficient*Large model coefficient*0.508*70%
+    div The formula for calculating the monthly income of the machine: the computing power value of the whole machine / the total computing power value of the whole network * 547,945 * DBC price * regional coefficient * large model coefficient * 1.3 (the rented computing power value increases by 30%) * 30 + the computing power value of the whole machine *Regional coefficient*Large model coefficient*0.508*70%
     div.select
       div.topcon
         div.topitem GPU type: 
@@ -1403,10 +1403,10 @@ export default defineComponent({
       &&countMem_num.value&&countLarge_num.value
       &&countLocal_num.value&&totalCalcPoints.value) {
         machineCalcPoints.value = countPoint(countGpu_num.value, countMem_num.value, countCuda_core.value, countVideo_num.value, countLocal_num.value)
-        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
+        price1.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30)*countLarge_num.value*100) / 100
         price2.value = Math.round((machineCalcPoints.value*0.508)*countLarge_num.value*100*0.7) / 100
-        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*1.3*30)*countLarge_num.value*100) / 100
-        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*1095890*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
+        price3.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*1.3*30)*countLarge_num.value*100) / 100
+        Income.value = Math.round((machineCalcPoints.value/totalCalcPoints.value*547945*dbcPrice.value*1.3*30+machineCalcPoints.value*0.508*0.7)*countLarge_num.value*100) / 100
       }
     }
     const getPrice = async () => {

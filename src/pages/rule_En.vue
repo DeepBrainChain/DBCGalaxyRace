@@ -3,8 +3,7 @@ div.description
   | The DeepBrain Chain Galaxy Computing Power Race Incentive Program is a collaborative race to stress test the network, it encourages participation from miners around the world, and help prepare miners to operate the world's largest high-performance computing network.
 div.rule-wrapper
   div.rule-title Rules of the Race
-  //- div.rule-content The main network of DeepBrain Chain's computing power has been launched. When the 5,000 GPU competition of the entire network is automatically activated, the competition will last for 2 months after activation. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the Galaxy Contest is officially activated, computing workers enjoy both rental income and online rewards. The total number of online rewards per day is 1,09589 million DBC, and 100% of the rent will be destroyed after activation!
-  div.rule-content The DeepBrain Chain computing power mainnet has been launched. When 5,000 GPUs in the entire network are reached, the competition will be automatically activated. After activation, the competition will last for 2 months. During the competition, all computing workers will share 133 million DBC rewards. The top 5 computing workers can Get an additional 30 million DBC rewards! Before the official activation of the Galaxy Competition, the calculation workers enjoy the double benefits of rental income and online rewards. The total number of online rewards every day is 547,945 DBC. The rental destruction is divided into three stages. Phase 1: 1 card to 4999 card rent 30% is destroyed; Phase 2: 70% of rentals from 5,000 cards to 9,999 cards are destroyed; Phase 3: 100% of rentals from 10,000 cards and above are destroyed, and the Galaxy Competition starts when 5,000 cards are reached
+  div.rule-content The DeepBrain Chain mainnet has been launched. Computing workers with less than 10,000 DBC cards in the entire network enjoy both rental income and online rewards. The total number of online rewards per day is 547,945 DBC. The rental destruction is divided into three stages. Stage 1: 30% of the rent for 1 to 4999 cards is destroyed, and the computing workers get 70% of the rental income; Stage 2: 70% of the rent for 5000 to 9999 cards is destroyed, and the computing workers get 30% of the rental income; Stage 3: 100% of the rent for 10,000 cards and above is destroyed, and the computing workers have no rental income.
   div.rule-title I. Minimum requirements for GPU server parameters: Only when the parameters of the computing power server meet the minimum requirements, can it be reviewed and launched by the validator, otherwise no revenue will be obtained
   div.rule-content.fs16 Computing server configuration requirements for each parameter:
   ul.rule-content
@@ -27,8 +26,6 @@ div.rule-wrapper
       span Network bandwidth:<br>
       | Meet the requirements of cloud games: each GPU machine must have at least 10M bandwidth;<br>
       | Meet the requirements of AI: 4-card GPU machines have a bandwidth of more than 20M uplink and downlink, 2-card GPU machines have a bandwidth of more than 10M uplink and downlink, and the average bandwidth of each GPU is more than 5M; special attention, considering the medium and long-term rental rate, it is recommended that the machine hosting room in mainland China can Support BGP and third-line bandwidth, and other overseas regions support BGP bandwidth;
-    //-   span Graphics Virtualizer:
-    //-   | All on-chain server equipment needs to be equipped with a graphics card virtualizer (also known as a graphics card spoofer) with the corresponding number of graphics cards. New machines recommend 10 Gigabit network cards; machines without a graphics card virtualizer will not be able to pass the on-chain review
     li
       span 10 Gigabit network card:
       | The GPU server is at least configured with a 10 Gigabit network card;
@@ -43,7 +40,7 @@ div.rule-wrapper
       | The access layer needs to support 10G intranet switches, the core layer switches need to be more than twice the bandwidth of the access layer, and need to support 20G intranet bandwidth;
     li 
       span Note: 
-      | Each GPU can pledge up to USD 1,500 worth of DBC, and at least 100,000 DBC. Considering the stability of machine use, online income stability, and penalty mechanism, it is recommended to use a manufacturer’s brand machine instead of an assembled machine.
+      | Each GPU starts with 1,000 DBC pledged, and rental and reward income will be gradually used for pledge, up to a maximum of 100,000 DBC or DBC equivalent to US$300. Considering the stability of machine use, online income stability and penalty mechanism, it is recommended to use manufacturer-branded machines, and assembled machines are not recommended.
     li
       span Recommended switch and network architecture in the computer room: 
       | All GPU machine ETH0 network ports belong to one Vlan, and this network port is configured with server network information. All GPU server ETH1 network ports and storage server ETHx network ports belong to the same new Vlan, network ports do not need any IP configuration, and storage server ETHx network ports need to be configured with vlan information

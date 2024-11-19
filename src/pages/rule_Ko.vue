@@ -592,6 +592,17 @@ div.rule-wrapper
             div 582.51 
             div 295.92 
             div 73.98 
+      div.table_li.height30
+        div 4070 SUPER
+        div 7168
+        div 12
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 507.55
+            div 257.84
+            div 64.46
       div.table_li
         div 4070ti
         div 7680
@@ -609,6 +620,17 @@ div.rule-wrapper
             div 630.29 
             div 320.19 
             div 80.05
+      div.table_li.height30
+        div 4070 Ti Super
+        div 8448
+        div 16
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 601.62
+            div 305.62
+            div 76.41
       div.table_li
         div 4080
         div 9728
@@ -626,6 +648,17 @@ div.rule-wrapper
             div 745.32 
             div 378.62
             div 94.66  
+      div.table_li.height30
+        div 4080 SUPER
+        div 10240
+        div 16
+        div.width60
+          div.line
+            div 4
+            div 128
+            div 648.57
+            div 329.47
+            div 82.37
       div.table_li
         div 4080ti
         div 14080
@@ -1264,13 +1297,16 @@ export default defineComponent({
       {name: 'H800 SXM5', cuda: '16896', men: '80', large: 2},
       {name: '4060', cuda: '3072', men: '8', large: 1},
       {name: '4060ti', cuda: '4352', men: '8', large: 1},
-      {name: '4060ti', cuda: '4352', men: '16', large: 1},
+      {name: '4060Ti', cuda: '4352', men: '16', large: 1},
       {name: '4070', cuda: '5888', men: '12', large: 1},
+      {name: '4070 SUPER', cuda: '7168', men: '12', large: 1},
       {name: '4070ti', cuda: '7680', men: '12', large: 1},
+      {name: '4070 Ti Super', cuda: '8448', men: '16', large: 1},
       {name: '4080', cuda: '9728', men: '16', large: 1},
-      {name: '4080ti', cuda: '14080', men: '20', large: 1},
+      {name: '4080 SUPER', cuda: '10240', men: '16', large: 1},
+      {name: '4080Ti', cuda: '14080', men: '20', large: 1},
       {name: '4090', cuda: '16384', men: '24', large: 1},
-      {name: '4090ti', cuda: '18176', men: '24', large: 1}
+      {name: '4090Ti', cuda: '18176', men: '24', large: 1}
     ])
     const options1 = ref([
       {label: 1, value: 1},

@@ -471,7 +471,7 @@ export default defineComponent({
 
         online_block.value = await getBlock();
         Machine_info.value.map( (el) => {
-          el.online = minsToHourMins(Math.floor((online_block.value-el.bondingHeight)/2))
+          el.online = minsToHourMins(Math.floor((online_block.value-el.bondingHeight)/10))
         })
         loading.value = false
 

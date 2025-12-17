@@ -556,7 +556,14 @@ export default defineComponent({
         console.log(err);
       })
       await axios.get('https://identifier.congtu.cloud/api/select/getgpuType').then(res => {
-        tableData.value = res.content
+        console.log(res.content, 'res.content');
+        // tableData.value = res.content
+        res.content.map(el => {
+          if (el != "NVIDIA H100 80GB HBM3") {
+            tableData.value.push(el)
+          }
+        })
+        console.log(tableData.value, 'tableData.value');
         active.value = tableData.value[0] ? tableData.value[0] : ''
       })
       .catch( err => {

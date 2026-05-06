@@ -88,12 +88,36 @@ class DBCRequest {
     });
   }
   sendUnique<T = any>(method: Methods, params: Array<any> = []) {
-    this.ws = new WebSocket(this.url);
-    this.wsOpened = false;
-    this.ws.onclose = () => {
-      this.wsOpened = false;
-    };
-    return this.send<T>(method, params);
+    // Each call gets its OWN WebSocket so that concurrent callers don't
+    // race over `this.ws` (which used to cause "Failed to execute 'send'
+    // on 'WebSocket': Still in CONNECTING state" when one call's _send
+    // ran against another call's just-created socket).
+    return new Promise<T>((resolve, reject) => {
+      const ws = new WebSocket(this.url);
+      const sendParam = {
+        jsonrpc: "2.0",
+        id: 1,
+        method,
+        params,
+      };
+      ws.onopen = () => ws.send(JSON.stringify(sendParam));
+      ws.onmessage = (evt) => {
+        try {
+          resolve(JSON.parse(evt.data).result);
+        } catch (e) {
+          reject(e);
+        }
+        ws.close();
+      };
+      ws.onerror = (e) => reject(e);
+      // 10s timeout to avoid hanging forever
+      setTimeout(() => {
+        if (ws.readyState !== WebSocket.CLOSED) {
+          try { ws.close(); } catch {}
+          reject(new Error('timeout'));
+        }
+      }, 10000);
+    });
   }
 }
 
@@ -140,9 +164,36 @@ export type RewardInfoType = {
 /**
  *
  * @returns RewardInfo
+ *
+ * Note: chain `onlineProfile.sysInfo` (returned by `onlineProfile_getOpInfo`)
+ * is updated by pallet hooks but has accounting drift — observed
+ * `totalRentedGpu (96) > totalGpuNum (93)` in production. We compute
+ * `totalGpuNum` and `totalRentedGpu` from the per-staker list (which is
+ * the source of truth) and override the sysInfo values.
  */
 export const getRewardInfo = async () => {
-  return request.sendUnique<RewardInfoType>("onlineProfile_getOpInfo");
+  const [opInfo, stakerList] = await Promise.all([
+    request.sendUnique<RewardInfoType>("onlineProfile_getOpInfo"),
+    request.sendUnique<Array<{ totalGpuNum?: number | string; totalRentedGpu?: number | string }>>(
+      "onlineProfile_getStakerListInfo",
+      [0, 1000]
+    ).catch(() => [] as Array<any>),
+  ]);
+  if (Array.isArray(stakerList) && stakerList.length > 0) {
+    const aggregateGpu = stakerList.reduce(
+      (acc, s) => acc + Number(s.totalGpuNum || 0),
+      0
+    );
+    const aggregateRented = stakerList.reduce(
+      (acc, s) => acc + Number(s.totalRentedGpu || 0),
+      0
+    );
+    if (aggregateGpu > 0) {
+      opInfo.totalGpuNum = String(aggregateGpu);
+      opInfo.totalRentedGpu = String(aggregateRented);
+    }
+  }
+  return opInfo;
 };
 
 export type ItemType = {

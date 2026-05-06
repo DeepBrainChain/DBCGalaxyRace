@@ -223,6 +223,7 @@ import { ElConfigProvider } from 'element-plus'
 import ZH from '../src/language/zh'
 import EN from '../src/language/en'
 import KO from '../src/language/ko'
+import { getRewardInfo } from './apis'
 export default defineComponent({
   name: "App",
   components: {
@@ -243,6 +244,8 @@ export default defineComponent({
     const counting = ref(true);
     const countDownactive = computed(() => (formateIOS("2021-11-22 00:00").valueOf() - Date.now()) > 0 );
     let lan = ref(localStorage.getItem('lan') || 'zh')
+    // Initial value falls back to localStorage cache (avoids 0 flash on first paint)
+    // but onMounted refreshes from API immediately and on a 30s interval.
     const totalGpuNum = ref(localStorage.getItem('totalGpuNum') || 0)
     const lastGpuNum = computed(() => ( Number(totalGpuNum.value) ));
     watch(
@@ -266,9 +269,19 @@ export default defineComponent({
       }else{
         locale.value = EN
       }
-      setInterval(() => {
-        totalGpuNum.value =  localStorage.getItem('totalGpuNum') || 0
-      }, 5000)
+      // Refresh totalGpuNum from API directly (was reading localStorage every 5s,
+      // which left the header stuck on stale cached values forever).
+      const refreshGpuNum = async () => {
+        try {
+          const info = await getRewardInfo();
+          if (info && info.totalGpuNum) {
+            totalGpuNum.value = info.totalGpuNum;
+            localStorage.setItem('totalGpuNum', info.totalGpuNum);
+          }
+        } catch (e) { /* keep prior value on transient failure */ }
+      };
+      refreshGpuNum();
+      setInterval(refreshGpuNum, 30000);
     });
     return {
       active,
